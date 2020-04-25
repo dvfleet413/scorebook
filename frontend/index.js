@@ -57,3 +57,22 @@ class AtBat {
 //     .then(function(json){
 //         console.log(json)
 //     })
+
+// const configObj = {
+//     method: 'PATCH',
+//     headers: {
+//         "Content-Type": "application/json",
+//         "Accept": "application/json"
+//     },
+//     body: JSON.stringify({
+//         name: 'Beni'
+//     })
+// }
+
+// fetch('http://localhost:3000/players/1', configObj)
+//     .then(function(response) {
+//         return response.json();
+//     })
+//     .then(function(object) {
+//         console.log(object);
+//     });

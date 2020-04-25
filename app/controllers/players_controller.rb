@@ -4,8 +4,18 @@ class PlayersController < ApplicationController
         render json: PlayerSerializer.new(@player)
     end
 
+    def update
+        set_player
+        @player.update(players_params)
+        render json: PlayerSerializer.new(@player)
+    end
+
     private
         def set_player
             @player = Player.find(params[:id])
+        end
+
+        def players_params
+            params.require(:player).permit(:name, :number, :position)
         end
 end
