@@ -1,5 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Team, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "is instantiated with a name" do
+    bos = Team.new(name: "Boston Red Sox")
+    expect(bos).to be_valid
+    expect(bos.name).to eq("Boston Red Sox")
+  end
 end
