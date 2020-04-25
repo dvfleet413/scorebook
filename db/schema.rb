@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_25_000048) do
+ActiveRecord::Schema.define(version: 2020_04_25_021117) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 2020_04_25_000048) do
     t.integer "out_number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "inning_id", null: false
+    t.index ["inning_id"], name: "index_at_bats_on_inning_id"
     t.index ["player_id"], name: "index_at_bats_on_player_id"
   end
 
@@ -60,6 +62,7 @@ ActiveRecord::Schema.define(version: 2020_04_25_000048) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "at_bats", "innings"
   add_foreign_key "at_bats", "players"
   add_foreign_key "innings", "games"
   add_foreign_key "players", "teams"
