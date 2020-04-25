@@ -28,5 +28,14 @@ nyy.players.build(name: "Greg Bird", number: 33, position: '3').save
 nyy.players.build(name: "Gleyber Torres", number: 25, position: '4').save
 nyy.players.build(name: "Troy Tulowitzki", number: 12, position: '6').save
 
+game = Game.create(home_team: bos, away_team: nyy)
+top_first = game.innings.build(number: 1.0)
+top_first.save
+top_first.at_bats.build(player_id: 10, result: 'K', base_reached: 0, out_number: 1).save
+top_first.at_bats.build(player_id: 11, result: '1B', base_reached: 3).save
+top_first.at_bats.build(player_id: 12, result: '2B', base_reached: 2).save
+top_first.at_bats.build(player_id: 13, result: '6-3', base_reached: 0, out_number: 2).save
+top_first.at_bats.build(player_id: 14, result: 'K', base_reached: 0, out_number: 3).save
+
 
 
