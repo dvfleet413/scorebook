@@ -1,0 +1,2 @@
+class AtBatsController < ApplicationController
+end

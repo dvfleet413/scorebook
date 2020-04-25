@@ -1,0 +1,2 @@
+class InningsController < ApplicationController
+end
