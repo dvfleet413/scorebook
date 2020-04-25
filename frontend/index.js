@@ -41,16 +41,15 @@ class AtBat {
     }
 }
 
-// Returns an Array of team names from a GET request to /teams
-const getTeamDatalist = function(){
+// Renders datalist input with team names as options
+const renderTeamDatalist = function(name, target){
     const url = serverUrl + `teams`
 
-    // Create label and input field
-    const label = document.createElement('label')
-    label.innerText = "Choose a Team"
+    // Create input field
     const teamInput = document.createElement('input')
     teamInput.setAttribute('id', 'team-names')
     teamInput.setAttribute('list', 'teams-list')
+    teamInput.setAttribute('name', name)
     
     // Create datalist element
     const datalist = document.createElement('datalist')
@@ -69,10 +68,8 @@ const getTeamDatalist = function(){
                 option.setAttribute('value', element.attributes.name)
                 datalist.append(option)
             })
-            const container = document.querySelector('div.container')
-            container.appendChild(label)
-            container.appendChild(teamInput)
-            container.appendChild(datalist)
+            target.appendChild(teamInput)
+            target.appendChild(datalist)
         })
 }
 
@@ -106,6 +103,44 @@ const renderTeam = function(id){
                 document.getElementById('players-list').appendChild(playerElement)
             })
         })
+}
+
+const renderNewGameForm = function(){
+    clearMain()
+
+    //Set up form
+    const main = document.querySelector('div.main')
+    const form = document.createElement('form')
+    const formTitle = document.createElement('h4')
+    formTitle.innerText = "Start a New Game"
+    form.appendChild(formTitle)
+
+    // Add home team datalist
+    const homeLabel = document.createElement('p')
+    homeLabel.innerText = "Home Team"
+    form.appendChild(homeLabel)
+    renderTeamDatalist('home-team', homeLabel)
+
+    // Add away team datalist
+    const awayLabel = document.createElement('p')
+    awayLabel.innerText = "Away Team"
+    form.appendChild(awayLabel)
+    renderTeamDatalist('away-team', awayLabel)
+
+    const submitBtn = document.createElement('input')
+    submitBtn.setAttribute('type', 'submit')
+    submitBtn.addEventListener('click', function(e){
+        e.preventDefault();
+        console.log("Submit Btn clicked...in the callback")
+    })
+    form.appendChild(submitBtn)
+
+    // Render form
+    main.appendChild(form)
+}
+
+const clearMain = function(){
+    document.querySelector('div.main').innerHTML = ''
 }
 
 
