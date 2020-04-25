@@ -132,6 +132,9 @@ const renderNewGameForm = function(){
     submitBtn.addEventListener('click', function(e){
         e.preventDefault();
         console.log("Submit Btn clicked...in the callback")
+        const homeTeam = new Team(document.querySelector("input[name='home-team']").value)
+        const awayTeam = new Team(document.querySelector("input[name='away-team']").value)
+        const game = new Game()
     })
     form.appendChild(submitBtn)
 
