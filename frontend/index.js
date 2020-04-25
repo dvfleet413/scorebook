@@ -38,3 +38,22 @@ class AtBat {
         this.baseReached = 4;
     }
 }
+
+
+// // Sample GET Request to /teams/:id
+//     fetch('http://localhost:3000/teams/1')
+//     .then(function(response){
+//         return response.json();
+//     })
+//     .then(function(json){
+//         console.log(json)
+//     })
+
+// // Sample GET Request to /games/:id
+//     fetch('http://localhost:3000/games/1')
+//     .then(function(response){
+//         return response.json();
+//     })
+//     .then(function(json){
+//         console.log(json)
+//     })
