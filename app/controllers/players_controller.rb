@@ -7,6 +7,7 @@ class PlayersController < ApplicationController
     def update
         set_player
         @player.update(players_params)
+        # Send the updated object back to the client
         render json: PlayerSerializer.new(@player)
     end
 
