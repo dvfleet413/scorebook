@@ -142,7 +142,33 @@ const renderNewGameForm = function(){
     main.appendChild(form)
 }
 
+const renderAtBatBox = function(){
+    const element = document.createElement('div')
+    const atBat = new AtBat()
+    element.setAttribute('class', 'at-bat')
+    element.innerHTML = 
+    `<table>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class='out-code'></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="out"><span></span></td>
+            <td></td>
+            <td class='result'></td>
+        </tr>
+    </table>
 
+    <div class='diamond'></div><br /><br />`
+    document.querySelector('.main').appendChild(element)
+    debugger
+}
 
 const clearMain = function(){
     document.querySelector('div.main').innerHTML = ''
