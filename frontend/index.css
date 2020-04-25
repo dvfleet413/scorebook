@@ -1,3 +1,97 @@
 .bg-light {
     background-color: white !important;
 }
+
+.at-bat {
+    width: 6em;
+    height: 6em;
+    position: relative;
+    border: 1px solid;
+}
+
+.at-bat table {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.at-bat td {
+    width: 2em;
+    height: 2em;
+    text-align: center;
+}
+
+.at-bat .diamond {
+    width: 3em;
+    height: 3em;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    border-right: 1px solid gray;
+    border-left: 1px solid gray;
+    transform: rotateY(0deg) rotate(45deg);
+    position: absolute;
+    left: 50%;
+    margin-left: -1.5em;
+    top: 50%;
+    margin-top: -1.5em;
+}
+
+.at-bat .reach-first {
+    border-right: 3px solid black;
+}
+
+.at-bat .reach-second {
+    border-right: 3px solid black;
+    border-top: 3px solid black;
+}
+
+.at-bat .reach-third {
+    border-right: 3px solid black;
+    border-top: 3px solid black;
+    border-left: 3px solid black;
+}
+
+.at-bat .reach-home {
+    border-right: 3px solid black;
+    border-top: 3px solid black;
+    border-left: 3px solid black;
+    border-bottom: 3px solid black;
+    background-color: gray;
+}
+
+.at-bat .out-code {
+    height: 6em;
+    width: 6em;
+    position: absolute;
+    top: 0;
+    left:0;
+}
+
+.out-code span {
+    position: absolute;
+    width: 100%;
+    line-height: 6em;
+    top: 50%;
+    margin-top: -3em;
+    vertical-align: center;
+    text-align: center;
+}
+
+.out-code span {
+    font-size: 0.5em;
+}
+
+span.out-number {
+    display: block;
+    height: 1.4em;
+    width: 1.4em;
+    line-height: 1.4em;
+
+    -moz-border-radius: 0.7em; /* or 50% */
+    border-radius: 0.7em; /* or 50% */
+
+    background-color: black;
+    color: white;
+    text-align: center;
+    margin: auto;
+}

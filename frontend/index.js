@@ -142,6 +142,8 @@ const renderNewGameForm = function(){
     main.appendChild(form)
 }
 
+
+
 const clearMain = function(){
     document.querySelector('div.main').innerHTML = ''
 }
