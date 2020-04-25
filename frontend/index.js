@@ -41,6 +41,42 @@ class AtBat {
     }
 }
 
+// Returns an Array of team names from a GET request to /teams
+const getTeamDatalist = function(){
+    const url = serverUrl + `teams`
+
+    // Create label and input field
+    const label = document.createElement('label')
+    label.innerText = "Choose a Team"
+    const teamInput = document.createElement('input')
+    teamInput.setAttribute('id', 'team-names')
+    teamInput.setAttribute('list', 'teams-list')
+    
+    // Create datalist element
+    const datalist = document.createElement('datalist')
+    datalist.setAttribute('id', 'teams-list')
+
+    // GET /teams, use Promise to add option elements to datalist, then add entire input to DOM
+    fetch(url)
+        .then(function(response){
+            return response.json()
+        })
+        .then(function(json){
+            console.log(json)
+            json.data.forEach(function(element){
+                console.log(element.attributes)
+                let option = document.createElement('option')
+                option.setAttribute('value', element.attributes.name)
+                datalist.append(option)
+            })
+            const container = document.querySelector('div.container')
+            container.appendChild(label)
+            container.appendChild(teamInput)
+            container.appendChild(datalist)
+        })
+}
+
+// Renders an h1 of team name and list of players
 const renderTeam = function(id){
     const url = serverUrl + `teams/${id}`
     // Send GET Request to /teams/:id
