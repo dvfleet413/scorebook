@@ -1,9 +1,6 @@
 const serverUrl = 'http://localhost:3000/'
 
-
-
 // Class Definitions
-
 class Team {
     constructor(name){
         this._name = name;
@@ -103,9 +100,7 @@ class AtBat {
     }
 }
 
-
 // Create and Load elements for start of app
-
 let currentGame = new Game()
 
 const main = document.querySelector('div.main')
@@ -119,9 +114,6 @@ newGameBtn.addEventListener('click', (e) => {
     renderNewGameForm()
 })
 main.appendChild(newGameBtn)
-
-
-
 
 
 // Renders datalist input with team names as options
@@ -157,10 +149,7 @@ const renderTeamDatalist = function(name, target){
 }
 
 
-
-
 // Form to Start a New Game
-
 const renderNewGameForm = function(){
     clearMain()
 
@@ -202,10 +191,6 @@ const renderNewGameForm = function(){
     main.appendChild(form)
 }
 
-
-
-
-
 // Within a game, call renderInningInterface() to add AtBats/keep score
 // Should be called with execution context of an Inning
 
@@ -217,9 +202,7 @@ const renderInningInterface = function(){
     renderAtBatInterface.call(new AtBat())
 }
 
-
 // Loads scoring box and form to modify AtBat instance
-
 const renderAtBatInterface = function(){
     console.log(this)
 
