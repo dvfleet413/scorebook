@@ -8,27 +8,16 @@ class AtBat {
     }
 
     htmlRepresentation(){
-        return `<table id='current-at-bat'>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td class='out-code'></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td class="out"><span></span></td>
-                        <td></td>
-                        <td class='result'></td>
-                    </tr>
-                </table>
-
-                <div class='diamond'></div>
-                <div class='out-code'><span></span></div><br />
-                <br />`
+        let result = `<table><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td class="out"><span>`
+        if (this._outNumber){ result += this._outNumber}
+        result += `</span></td><td></td><td class='result'>`
+        if (this._result){ result += this._result}
+        result += `</td></tr></table><div class='diamond`
+        if (this.baseReached){ result += ` reach-${this.baseReached}`}
+        result += `'></div><div class='out-code'><span>`
+        if (this.outCode){ result += this.outCode}
+        result += `</span></div><br /><br />`
+        return result
     }
 
     set result(result){
@@ -52,6 +41,30 @@ class AtBat {
 
     score(){
         this.advanceToBase(4);
+    }
+
+    static newHTML(){
+        return `<table id='current-at-bat'>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class='out-code'></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="out"><span></span></td>
+                        <td></td>
+                        <td class='result'></td>
+                    </tr>
+                </table>
+
+                <div class='diamond'></div>
+                <div class='out-code'><span></span></div><br />
+                <br />`
     }
 
     static renderAtBatInterface(currentGame){

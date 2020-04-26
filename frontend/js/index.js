@@ -17,26 +17,20 @@ const run = function(){
     newGameBtn.addEventListener('click', (e) => {
         e.preventDefault()
         Game.renderNewGameForm(currentGame)
-        // const submitBtn = document.getElementById('start-new-game-btn')
-        // submitBtn.addEventListener('click', function(e){
-        //     e.preventDefault();
-        //     console.log("Submit Btn clicked...in the callback")
-        //     const homeTeam = new Team(document.querySelector("input[name='home-team']").value)
-        //     const awayTeam = new Team(document.querySelector("input[name='away-team']").value)
-        //     currentGame.homeTeam = homeTeam;
-        //     currentGame.awayTeam = awayTeam;
-        //     let currentInning = new Inning(1.0, currentGame.awayTeam)
-        //     currentGame.innings.push(currentInning)
-        //     Inning.renderInningInterface.call(currentInning)
-        //     AtBat.renderAtBatInterface.call(new AtBat(), currentGame)
-        // })
     })
     main.appendChild(newGameBtn)
 }
 
 run()
+clearMain()
+const test = new AtBat(undefined, '1B', 2)
+console.log(test)
+const atBatSquare = document.createElement('div')
+atBatSquare.setAttribute('class', 'at-bat')
+atBatSquare.innerHTML = test.htmlRepresentation();
+document.querySelector('.main').appendChild(atBatSquare)
 
 
-const clearMain = function(){
+function clearMain(){
     main.innerHTML = ''
 }
