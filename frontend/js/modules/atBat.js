@@ -72,7 +72,7 @@ class AtBat {
         hitBtn.setAttribute('value', 'Record a Hit')
         hitBtn.addEventListener('click', (e) => {
             e.preventDefault()
-            AtBat.renderHitForm()
+            AtBat.renderHitForm.call(this)
         })
         main.appendChild(hitBtn)
 
@@ -82,7 +82,7 @@ class AtBat {
         outBtn.setAttribute('value', 'Record an Out')
         outBtn.addEventListener('click', (e) => {
             e.preventDefault()
-            renderOutForm.call(this)
+            AtBat.renderOutForm.call(this)
         })
         main.appendChild(outBtn)
     
@@ -102,31 +102,11 @@ class AtBat {
         hitSelection.setAttribute('id', 'hit-options')
         hitSelection.innerHTML = `<option value='1'>Single</option><option value='2'>Double</option><option value='3'>Triple</option><option value='4'>Home Run</option>`
         form.appendChild(hitSelection)
-    
-        // const single = document.createElement('option')
-        // single.setAttribute('value', '1')
-        // single.innerText = 'Single'
-        // hitSelection.appendChild(single)
-    
-        // const double = document.createElement('option')
-        // double.setAttribute('value', '2')
-        // double.innerText = 'Double'
-        // hitSelection.appendChild(double)
-    
-        // const triple = document.createElement('option')
-        // triple.setAttribute('value', '3')
-        // triple.innerText = 'Triple'
-        // hitSelection.appendChild(triple)
-    
-        // const homeRun = document.createElement('option')
-        // homeRun.setAttribute('value', '4')
-        // homeRun.innerText = 'Home Run'
-        // hitSelection.appendChild(homeRun)
-    
         // Submit Button
         const atBatSubmitBtn = document.createElement('input')
         atBatSubmitBtn.setAttribute('type', 'submit')
         atBatSubmitBtn.addEventListener('click', (e) => {
+            debugger
             e.preventDefault()
             this.advanceToBase(parseInt(document.getElementById('hit-options').value, 10))
             this.result = document.getElementById('hit-options').value
@@ -143,6 +123,31 @@ class AtBat {
             atBatSubmitBtn.parentNode.removeChild(atBatSubmitBtn)
             container.parentNode.removeChild(container)
             renderAtBatInterface.call(new AtBat())
+        })
+        form.appendChild(atBatSubmitBtn)
+    
+        container.appendChild(form)
+    }
+
+    static renderOutForm = function(){
+        const container = document.getElementById('at-bat-submit')
+        container.innerHTML = ''
+        const form = document.createElement('form')
+        form.setAttribute('class', 'out-code-form')
+        // Text input for out code
+        const outCodeInput = document.createElement('input')
+        outCodeInput.setAttribute('type', 'text')
+        outCodeInput.setAttribute('id', 'out-code-text')
+        outCodeInput.value = 'Out Code'
+        form.appendChild(outCodeInput)
+    
+        // Submit Button
+        const atBatSubmitBtn = document.createElement('input')
+        atBatSubmitBtn.setAttribute('type', 'submit')
+        atBatSubmitBtn.addEventListener('click', (e) => {
+            e.preventDefault()
+            currentGame.innings.slice(-1)[0].atBats.push(this)
+            console.log(currentGame.innings.slice(-1)[0].atBats)
         })
         form.appendChild(atBatSubmitBtn)
     
