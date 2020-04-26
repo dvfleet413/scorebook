@@ -192,9 +192,9 @@ const renderNewGameForm = function(){
         const awayTeam = new Team(document.querySelector("input[name='away-team']").value)
         currentGame.homeTeam = homeTeam;
         currentGame.awayTeam = awayTeam;
-        const topFirst = new Inning(1.0)
-        currentGame.innings.push(topFirst)
-        renderInningInterface.call(topFirst)
+        let currentInning = new Inning(1.0)
+        currentGame.innings.push(currentInning)
+        renderInningInterface.call(currentInning)
     })
     form.appendChild(submitBtn)
 
@@ -273,8 +273,12 @@ const renderAtBatInterface = function(){
     // Submit Button
     const atBatSubmitBtn = document.createElement('input')
     atBatSubmitBtn.setAttribute('type', 'submit')
+    atBatSubmitBtn.addEventListener('click', (e) => {
+        e.preventDefault()
+        currentGame.innings.slice(-1)[0].atBats.push(this)
+        console.log(currentGame.innings.slice(-1)[0].atBats)
+    })
     form.appendChild(atBatSubmitBtn)
-
 
     main.appendChild(form)
 }
