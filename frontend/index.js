@@ -231,15 +231,15 @@ const renderAtBatInterface = function(){
     document.querySelector('.main').appendChild(atBatSquare)
 
     // Buttons to Select Hit or Out
-    const outBtn = document.createElement('input')
-    outBtn.setAttribute('type', 'submit')
-    outBtn.setAttribute('value', 'Record an Out')
-    outBtn.addEventListener('click', function(e){
-        e.preventDefault()
-        renderOutForm()
-    })
-    main.appendChild(outBtn)
+    renderHitBtn()
+    renderOutBtn()
 
+    const atBatFormContainer = document.createElement('div')
+    atBatFormContainer.setAttribute('id', 'at-bat-submit')
+    main.appendChild(atBatFormContainer)
+}
+
+const renderHitBtn = function(){
     const hitBtn = document.createElement('input')
     hitBtn.setAttribute('type', 'submit')
     hitBtn.setAttribute('value', 'Record a Hit')
@@ -248,10 +248,17 @@ const renderAtBatInterface = function(){
         renderHitForm()
     })
     main.appendChild(hitBtn)
+}
 
-    const atBatFormContainer = document.createElement('div')
-    atBatFormContainer.setAttribute('id', 'at-bat-submit')
-    main.appendChild(atBatFormContainer)
+const renderOutBtn = function(){
+    const outBtn = document.createElement('input')
+    outBtn.setAttribute('type', 'submit')
+    outBtn.setAttribute('value', 'Record an Out')
+    outBtn.addEventListener('click', function(e){
+        e.preventDefault()
+        renderOutForm()
+    })
+    main.appendChild(outBtn)
 }
 
 const renderHitForm = function(){
