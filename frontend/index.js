@@ -230,6 +230,33 @@ const renderAtBatInterface = function(){
     atBatSquare.innerHTML = this.htmlRepresentation();
     document.querySelector('.main').appendChild(atBatSquare)
 
+    // Buttons to Select Hit or Out
+    const outBtn = document.createElement('input')
+    outBtn.setAttribute('type', 'submit')
+    outBtn.setAttribute('value', 'Record an Out')
+    outBtn.addEventListener('click', function(e){
+        e.preventDefault()
+        renderOutForm()
+    })
+    main.appendChild(outBtn)
+
+    const hitBtn = document.createElement('input')
+    hitBtn.setAttribute('type', 'submit')
+    hitBtn.setAttribute('value', 'Record a Hit')
+    hitBtn.addEventListener('click', function(e){
+        e.preventDefault()
+        renderHitForm()
+    })
+    main.appendChild(hitBtn)
+
+    const atBatFormContainer = document.createElement('div')
+    atBatFormContainer.setAttribute('id', 'at-bat-submit')
+    main.appendChild(atBatFormContainer)
+}
+
+const renderHitForm = function(){
+    const container = document.getElementById('at-bat-submit')
+    container.innerHTML = ''
     // Build Form for AtBat Result
     const form = document.createElement('form')
     form.setAttribute('class', 'at-bat-form')
@@ -237,11 +264,6 @@ const renderAtBatInterface = function(){
     const hitSelection = document.createElement('select')
     hitSelection.setAttribute('id', 'hit-options')
     form.appendChild(hitSelection)
-
-    const placeHolder = document.createElement('option')
-    placeHolder.setAttribute('value', '')
-    placeHolder.innerText = 'Select a Hit'
-    hitSelection.appendChild(placeHolder)
 
     const single = document.createElement('option')
     single.setAttribute('value', 'single')
@@ -263,6 +285,24 @@ const renderAtBatInterface = function(){
     homeRun.innerText = 'Home Run'
     hitSelection.appendChild(homeRun)
 
+    // Submit Button
+    const atBatSubmitBtn = document.createElement('input')
+    atBatSubmitBtn.setAttribute('type', 'submit')
+    atBatSubmitBtn.addEventListener('click', (e) => {
+        e.preventDefault()
+        currentGame.innings.slice(-1)[0].atBats.push(this)
+        console.log(currentGame.innings.slice(-1)[0].atBats)
+    })
+    form.appendChild(atBatSubmitBtn)
+
+    container.appendChild(form)
+}
+
+const renderOutForm = function(){
+    const container = document.getElementById('at-bat-submit')
+    container.innerHTML = ''
+    const form = document.createElement('form')
+    form.setAttribute('class', 'out-code-form')
     // Text input for out code
     const outCodeInput = document.createElement('input')
     outCodeInput.setAttribute('type', 'text')
@@ -280,22 +320,9 @@ const renderAtBatInterface = function(){
     })
     form.appendChild(atBatSubmitBtn)
 
-    main.appendChild(form)
+    container.appendChild(form)
 }
 
 const clearMain = function(){
     main.innerHTML = ''
 }
-
-// Add Next At Bat Button to .main
-// const nextAtBatBtn = document.createElement('button')
-// nextAtBatBtn.setAttribute('id', 'new-at-bat')
-// nextAtBatBtn.setAttribute('type', 'button')
-// nextAtBatBtn.innerText = 'Next At Bat'
-// nextAtBatBtn.addEventListener('click', (e) => {
-//     e.preventDefault();
-//     const atBat = new AtBat()
-//     renderAtBatInterface.call(atBat);
-//     nextAtBatBtn.disabled = true;
-// })
-// main.appendChild(nextAtBatBtn)
