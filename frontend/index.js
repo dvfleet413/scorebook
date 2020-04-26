@@ -85,8 +85,22 @@ class AtBat {
                     </tr>
                 </table>
 
-                <div class='diamond'></div><br />
+                <div class='diamond'></div>
+                <div class='out-code'><span></span></div><br />
                 <br />`
+    }
+
+    set result(result){
+        this._result = parseInt(result, 10)
+    }
+
+    get result(){
+        if (this._result && this._result < 4){
+            return `${this._result}B`
+        }
+        else if (this._result == 4){
+            return 'HR'
+        }
     }
 
     advanceToBase(baseReached){
@@ -281,6 +295,8 @@ const renderHitForm = function(){
     atBatSubmitBtn.addEventListener('click', (e) => {
         e.preventDefault()
         this.advanceToBase(parseInt(document.getElementById('hit-options').value, 10))
+        this.result = document.getElementById('hit-options').value
+        document.querySelector('#current-at-bat .result').innerText = this.result
         currentGame.innings.slice(-1)[0].atBats.push(this)
         console.log(currentGame.innings.slice(-1)[0].atBats)
     })
