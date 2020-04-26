@@ -1,3 +1,5 @@
+import { AtBat } from './atBat.js'
+
 class Inning {
     constructor(number, team, atBats = []){
         this._number = number;
@@ -22,7 +24,7 @@ class Inning {
         let title = document.createElement('h1')
         title.innerText = `${this.number} - ${this.team.name} At Bat`
         main.appendChild(title)
-        renderAtBatInterface.call(new AtBat())
+        AtBat.renderAtBatInterface.call(new AtBat())
     }
 }
 
