@@ -285,17 +285,7 @@ const renderHitForm = function(){
     homeRun.innerText = 'Home Run'
     hitSelection.appendChild(homeRun)
 
-    // Submit Button
-    const atBatSubmitBtn = document.createElement('input')
-    atBatSubmitBtn.setAttribute('type', 'submit')
-    atBatSubmitBtn.addEventListener('click', (e) => {
-        e.preventDefault()
-        currentGame.innings.slice(-1)[0].atBats.push(this)
-        console.log(currentGame.innings.slice(-1)[0].atBats)
-    })
-    form.appendChild(atBatSubmitBtn)
-
-    container.appendChild(form)
+    renderSubmitBtn(form, container)
 }
 
 const renderOutForm = function(){
@@ -310,6 +300,10 @@ const renderOutForm = function(){
     outCodeInput.value = 'Out Code'
     form.appendChild(outCodeInput)
 
+    renderSubmitBtn(form, container)
+}
+
+const renderSubmitBtn = function(form, container){
     // Submit Button
     const atBatSubmitBtn = document.createElement('input')
     atBatSubmitBtn.setAttribute('type', 'submit')
