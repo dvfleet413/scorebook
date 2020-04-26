@@ -1,121 +1,15 @@
+import { Team } from './modules/team.js'
+import { Player } from './modules/player.js'
+import { Game } from './modules/game.js'
+import { Inning } from './modules/inning.js'
+import { AtBat } from './modules/atBat.js'
+
+
 const serverUrl = 'http://localhost:3000/'
-
-// Class Definitions
-class Team {
-    constructor(name){
-        this._name = name;
-    }
-
-    get name(){
-        return this._name;
-    }
-}
-
-class Player {
-    constructor(name, number, position){
-        this._name = name;
-        this._number = number;
-        this._position = position;
-    }
-}
-
-class Game {
-    constructor(currentInning = 1.0, homeTeam, awayTeam, innings = []){
-        this._currentInning = currentInning;
-        this.homeTeam = homeTeam;
-        this.awayTeam = awayTeam;
-        this.innings = innings;
-    }
-
-    changeSides(){
-        this._currentInning += 0.5;
-    }
-}
-
-class Inning {
-    constructor(number, atBats = []){
-        this._number = number;
-        this.atBats = atBats;
-    }
-
-    get number(){
-        if(this._number % 1 === 0){
-            return `Top ${Math.floor(this._number)}`
-        }
-        else{
-            return `Bottom ${Math.floor(this._number)}`
-        }
-    }
-
-    get teamAtBat(){
-        if(this._number % 1 === 0){
-            return currentGame.awayTeam.name
-        }
-        else {
-            return currentGame.homeTeam.name
-        }
-    }
-}
-
-class AtBat {
-    constructor(batter, result, baseReached, outNumber, outCode){
-        this._batter = batter;
-        this._result = result;
-        this.baseReached = baseReached;
-        this._outNumber = outNumber;
-        this.outCode = outCode;
-    }
-
-    htmlRepresentation(){
-        return `<table id='current-at-bat'>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td class='out-code'></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td class="out"><span></span></td>
-                        <td></td>
-                        <td class='result'></td>
-                    </tr>
-                </table>
-
-                <div class='diamond'></div>
-                <div class='out-code'><span></span></div><br />
-                <br />`
-    }
-
-    set result(result){
-        this._result = parseInt(result, 10)
-    }
-
-    get result(){
-        if (this._result && this._result < 4){
-            return `${this._result}B`
-        }
-        else if (this._result == 4){
-            return 'HR'
-        }
-    }
-
-    advanceToBase(baseReached){
-        const diamond = document.querySelector('#current-at-bat~.diamond')
-        this.baseReached = baseReached;
-        diamond.classList.add(`reach-${this.baseReached}`)
-    }
-
-    score(){
-        this.advanceToBase(4);
-    }
-}
 
 // Create and Load elements for start of app
 let currentGame = new Game()
+console.log(currentGame)
 
 const main = document.querySelector('div.main')
 
@@ -125,69 +19,9 @@ newGameBtn.setAttribute('type', 'button')
 newGameBtn.innerText = 'New Scorebook'
 newGameBtn.addEventListener('click', (e) => {
     e.preventDefault()
-    renderNewGameForm()
-})
-main.appendChild(newGameBtn)
-
-
-// Renders datalist input with team names as options
-const renderTeamDatalist = function(name, target){
-    const url = serverUrl + `teams`
-
-    // Create input field
-    const teamInput = document.createElement('input')
-    teamInput.setAttribute('id', 'team-names')
-    teamInput.setAttribute('list', 'teams-list')
-    teamInput.setAttribute('name', name)
-    
-    // Create datalist element
-    const datalist = document.createElement('datalist')
-    datalist.setAttribute('id', 'teams-list')
-
-    // GET /teams, use Promise to add option elements to datalist, then add entire input to DOM
-    fetch(url)
-        .then(function(response){
-            return response.json()
-        })
-        .then(function(json){
-            console.log(json)
-            json.data.forEach(function(element){
-                console.log(element.attributes)
-                let option = document.createElement('option')
-                option.setAttribute('value', element.attributes.name)
-                datalist.append(option)
-            })
-            target.appendChild(teamInput)
-            target.appendChild(datalist)
-        })
-}
-
-
-// Form to Start a New Game
-const renderNewGameForm = function(){
-    clearMain()
-
-    //Set up form
-    const form = document.createElement('form')
-    const formTitle = document.createElement('h4')
-    formTitle.innerText = "Start a New Game"
-    form.appendChild(formTitle)
-
-    // Add home team datalist
-    const homeLabel = document.createElement('p')
-    homeLabel.innerText = "Home Team"
-    form.appendChild(homeLabel)
-    renderTeamDatalist('home-team', homeLabel)
-
-    // Add away team datalist
-    const awayLabel = document.createElement('p')
-    awayLabel.innerText = "Away Team"
-    form.appendChild(awayLabel)
-    renderTeamDatalist('away-team', awayLabel)
-
-    // Add Start Button
-    const submitBtn = document.createElement('input')
-    submitBtn.setAttribute('type', 'submit')
+    // renderNewGameForm()
+    Game.renderNewGameForm(currentGame)
+    const submitBtn = document.getElementById('start-new-game-btn')
     submitBtn.addEventListener('click', function(e){
         e.preventDefault();
         console.log("Submit Btn clicked...in the callback")
@@ -195,26 +29,12 @@ const renderNewGameForm = function(){
         const awayTeam = new Team(document.querySelector("input[name='away-team']").value)
         currentGame.homeTeam = homeTeam;
         currentGame.awayTeam = awayTeam;
-        let currentInning = new Inning(1.0)
+        let currentInning = new Inning(1.0, currentGame.awayTeam)
         currentGame.innings.push(currentInning)
-        renderInningInterface.call(currentInning)
+        Inning.renderInningInterface.call(currentInning)
     })
-    form.appendChild(submitBtn)
-
-    // Render form
-    main.appendChild(form)
-}
-
-// Within a game, call renderInningInterface() to add AtBats/keep score
-// Should be called with execution context of an Inning
-
-const renderInningInterface = function(){
-    clearMain()
-    let title = document.createElement('h1')
-    title.innerText = `${this.number} - ${this.teamAtBat} At Bat`
-    main.appendChild(title)
-    renderAtBatInterface.call(new AtBat())
-}
+})
+main.appendChild(newGameBtn)
 
 // Loads scoring box and form to modify AtBat instance
 const renderAtBatInterface = function(){
