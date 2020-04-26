@@ -309,6 +309,7 @@ const renderHitForm = function(){
         hitBtn.parentNode.removeChild(hitBtn)
         hitSelection.parentNode.removeChild(hitSelection)
         atBatSubmitBtn.parentNode.removeChild(atBatSubmitBtn)
+        container.parentNode.removeChild(container)
         renderAtBatInterface.call(new AtBat())
     })
     form.appendChild(atBatSubmitBtn)
