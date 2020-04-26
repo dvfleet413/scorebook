@@ -32,6 +32,7 @@ newGameBtn.addEventListener('click', (e) => {
         let currentInning = new Inning(1.0, currentGame.awayTeam)
         currentGame.innings.push(currentInning)
         Inning.renderInningInterface.call(currentInning)
+        AtBat.renderAtBatInterface.call(new AtBat(), currentGame)
     })
 })
 main.appendChild(newGameBtn)

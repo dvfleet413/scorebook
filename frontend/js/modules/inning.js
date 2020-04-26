@@ -24,7 +24,7 @@ class Inning {
         let title = document.createElement('h1')
         title.innerText = `${this.number} - ${this.team.name} At Bat`
         main.appendChild(title)
-        AtBat.renderAtBatInterface.call(new AtBat())
+        
     }
 }
 

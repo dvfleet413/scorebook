@@ -54,7 +54,7 @@ class AtBat {
         this.advanceToBase(4);
     }
 
-    static renderAtBatInterface = function(){
+    static renderAtBatInterface(currentGame){
         const main = document.querySelector('div.main')
         main.innerHTML = ''
     
@@ -72,7 +72,7 @@ class AtBat {
         hitBtn.setAttribute('value', 'Record a Hit')
         hitBtn.addEventListener('click', (e) => {
             e.preventDefault()
-            AtBat.renderHitForm.call(this)
+            AtBat.renderHitForm.call(this, currentGame)
         })
         main.appendChild(hitBtn)
 
@@ -82,7 +82,7 @@ class AtBat {
         outBtn.setAttribute('value', 'Record an Out')
         outBtn.addEventListener('click', (e) => {
             e.preventDefault()
-            AtBat.renderOutForm.call(this)
+            AtBat.renderOutForm.call(this, currentGame)
         })
         main.appendChild(outBtn)
     
@@ -91,7 +91,7 @@ class AtBat {
         main.appendChild(atBatFormContainer)
     }
 
-    static renderHitForm = function(){
+    static renderHitForm(currentGame){
         const container = document.getElementById('at-bat-submit')
         container.innerHTML = ''
         // Build Form for AtBat Result
@@ -122,7 +122,7 @@ class AtBat {
             hitSelection.parentNode.removeChild(hitSelection)
             atBatSubmitBtn.parentNode.removeChild(atBatSubmitBtn)
             container.parentNode.removeChild(container)
-            renderAtBatInterface.call(new AtBat())
+            AtBat.renderAtBatInterface.call(new AtBat(), currentGame)
         })
         form.appendChild(atBatSubmitBtn)
     
