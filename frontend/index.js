@@ -238,6 +238,7 @@ const renderAtBatInterface = function(){
 const renderHitBtn = function(){
     const hitBtn = document.createElement('input')
     hitBtn.setAttribute('type', 'submit')
+    hitBtn.setAttribute('id', 'hit-btn')
     hitBtn.setAttribute('value', 'Record a Hit')
     hitBtn.addEventListener('click', (e) => {
         e.preventDefault()
@@ -249,6 +250,7 @@ const renderHitBtn = function(){
 const renderOutBtn = function(){
     const outBtn = document.createElement('input')
     outBtn.setAttribute('type', 'submit')
+    outBtn.setAttribute('id', 'out-btn')
     outBtn.setAttribute('value', 'Record an Out')
     outBtn.addEventListener('click', (e) => {
         e.preventDefault()
@@ -299,6 +301,12 @@ const renderHitForm = function(){
         document.querySelector('#current-at-bat')
         currentGame.innings.slice(-1)[0].atBats.push(this)
         console.log(currentGame.innings.slice(-1)[0].atBats)
+        const outBtn = document.querySelector('#out-btn')
+        outBtn.parentNode.removeChild(outBtn)
+        const hitBtn = document.querySelector('#hit-btn')
+        hitBtn.parentNode.removeChild(hitBtn)
+        hitSelection.parentNode.removeChild(hitSelection)
+        atBatSubmitBtn.parentNode.removeChild(atBatSubmitBtn)
     })
     form.appendChild(atBatSubmitBtn)
 
