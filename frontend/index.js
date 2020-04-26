@@ -223,6 +223,7 @@ const renderAtBatInterface = function(){
     // Build AtBat Square
     const atBatSquare = document.createElement('div')
     atBatSquare.setAttribute('class', 'at-bat')
+    atBatSquare.setAttribute('id', 'current-at-bat')
     atBatSquare.innerHTML = this.htmlRepresentation();
     document.querySelector('.main').appendChild(atBatSquare)
 
@@ -298,7 +299,8 @@ const renderHitForm = function(){
         this.advanceToBase(parseInt(document.getElementById('hit-options').value, 10))
         this.result = document.getElementById('hit-options').value
         document.querySelector('#current-at-bat .result').innerText = this.result
-        document.querySelector('#current-at-bat')
+        document.querySelector('div#current-at-bat').removeAttribute('id')
+        document.querySelector('table#current-at-bat').removeAttribute('id')
         currentGame.innings.slice(-1)[0].atBats.push(this)
         console.log(currentGame.innings.slice(-1)[0].atBats)
         const outBtn = document.querySelector('#out-btn')
@@ -307,6 +309,7 @@ const renderHitForm = function(){
         hitBtn.parentNode.removeChild(hitBtn)
         hitSelection.parentNode.removeChild(hitSelection)
         atBatSubmitBtn.parentNode.removeChild(atBatSubmitBtn)
+        renderAtBatInterface.call(new AtBat())
     })
     form.appendChild(atBatSubmitBtn)
 
