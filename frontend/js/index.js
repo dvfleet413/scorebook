@@ -36,50 +36,6 @@ newGameBtn.addEventListener('click', (e) => {
 })
 main.appendChild(newGameBtn)
 
-// Loads scoring box and form to modify AtBat instance
-const renderAtBatInterface = function(){
-    console.log(this)
-
-    // Build AtBat Square
-    const atBatSquare = document.createElement('div')
-    atBatSquare.setAttribute('class', 'at-bat')
-    atBatSquare.setAttribute('id', 'current-at-bat')
-    atBatSquare.innerHTML = this.htmlRepresentation();
-    document.querySelector('.main').appendChild(atBatSquare)
-
-    // Buttons to Select Hit or Out
-    renderHitBtn.call(this)
-    renderOutBtn.call(this)
-
-    const atBatFormContainer = document.createElement('div')
-    atBatFormContainer.setAttribute('id', 'at-bat-submit')
-    main.appendChild(atBatFormContainer)
-}
-
-const renderHitBtn = function(){
-    const hitBtn = document.createElement('input')
-    hitBtn.setAttribute('type', 'submit')
-    hitBtn.setAttribute('id', 'hit-btn')
-    hitBtn.setAttribute('value', 'Record a Hit')
-    hitBtn.addEventListener('click', (e) => {
-        e.preventDefault()
-        renderHitForm.call(this)
-    })
-    main.appendChild(hitBtn)
-}
-
-const renderOutBtn = function(){
-    const outBtn = document.createElement('input')
-    outBtn.setAttribute('type', 'submit')
-    outBtn.setAttribute('id', 'out-btn')
-    outBtn.setAttribute('value', 'Record an Out')
-    outBtn.addEventListener('click', (e) => {
-        e.preventDefault()
-        renderOutForm.call(this)
-    })
-    main.appendChild(outBtn)
-}
-
 const renderHitForm = function(){
     const container = document.getElementById('at-bat-submit')
     container.innerHTML = ''
