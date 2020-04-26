@@ -38,22 +38,22 @@
     margin-top: -1.5em;
 }
 
-.at-bat .reach-first {
+.at-bat .reach-1 {
     border-right: 3px solid black;
 }
 
-.at-bat .reach-second {
+.at-bat .reach-2 {
     border-right: 3px solid black;
     border-top: 3px solid black;
 }
 
-.at-bat .reach-third {
+.at-bat .reach-3 {
     border-right: 3px solid black;
     border-top: 3px solid black;
     border-left: 3px solid black;
 }
 
-.at-bat .reach-home {
+.at-bat .reach-4 {
     border-right: 3px solid black;
     border-top: 3px solid black;
     border-left: 3px solid black;
