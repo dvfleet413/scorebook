@@ -56,7 +56,6 @@ class AtBat {
 
     static renderAtBatInterface(currentGame){
         const main = document.querySelector('div.main')
-        main.innerHTML = ''
     
         // Build AtBat Square
         const atBatSquare = document.createElement('div')
@@ -106,7 +105,6 @@ class AtBat {
         const atBatSubmitBtn = document.createElement('input')
         atBatSubmitBtn.setAttribute('type', 'submit')
         atBatSubmitBtn.addEventListener('click', (e) => {
-            debugger
             e.preventDefault()
             this.advanceToBase(parseInt(document.getElementById('hit-options').value, 10))
             this.result = document.getElementById('hit-options').value
@@ -129,7 +127,7 @@ class AtBat {
         container.appendChild(form)
     }
 
-    static renderOutForm = function(){
+    static renderOutForm(currentGame){
         const container = document.getElementById('at-bat-submit')
         container.innerHTML = ''
         const form = document.createElement('form')
