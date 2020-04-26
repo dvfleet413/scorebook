@@ -61,7 +61,7 @@ class AtBat {
     constructor(batter, result, baseReached, outNumber, outCode){
         this._batter = batter;
         this._result = result;
-        this._baseReached = baseReached;
+        this.baseReached = baseReached;
         this._outNumber = outNumber;
         this.outCode = outCode;
     }
@@ -91,8 +91,8 @@ class AtBat {
 
     advanceToBase(baseReached){
         const diamond = document.querySelector('#current-at-bat~.diamond')
-        this._baseReached = baseReached;
-        diamond.classList.add(`reach-${this._baseReached}`)
+        this.baseReached = baseReached;
+        diamond.classList.add(`reach-${this.baseReached}`)
     }
 
     score(){
@@ -214,8 +214,8 @@ const renderAtBatInterface = function(){
     document.querySelector('.main').appendChild(atBatSquare)
 
     // Buttons to Select Hit or Out
-    renderHitBtn()
-    renderOutBtn()
+    renderHitBtn.call(this)
+    renderOutBtn.call(this)
 
     const atBatFormContainer = document.createElement('div')
     atBatFormContainer.setAttribute('id', 'at-bat-submit')
@@ -226,9 +226,9 @@ const renderHitBtn = function(){
     const hitBtn = document.createElement('input')
     hitBtn.setAttribute('type', 'submit')
     hitBtn.setAttribute('value', 'Record a Hit')
-    hitBtn.addEventListener('click', function(e){
+    hitBtn.addEventListener('click', (e) => {
         e.preventDefault()
-        renderHitForm()
+        renderHitForm.call(this)
     })
     main.appendChild(hitBtn)
 }
@@ -237,9 +237,9 @@ const renderOutBtn = function(){
     const outBtn = document.createElement('input')
     outBtn.setAttribute('type', 'submit')
     outBtn.setAttribute('value', 'Record an Out')
-    outBtn.addEventListener('click', function(e){
+    outBtn.addEventListener('click', (e) => {
         e.preventDefault()
-        renderOutForm()
+        renderOutForm.call(this)
     })
     main.appendChild(outBtn)
 }
@@ -256,26 +256,37 @@ const renderHitForm = function(){
     form.appendChild(hitSelection)
 
     const single = document.createElement('option')
-    single.setAttribute('value', 'single')
+    single.setAttribute('value', '1')
     single.innerText = 'Single'
     hitSelection.appendChild(single)
 
     const double = document.createElement('option')
-    double.setAttribute('value', 'double')
+    double.setAttribute('value', '2')
     double.innerText = 'Double'
     hitSelection.appendChild(double)
 
     const triple = document.createElement('option')
-    triple.setAttribute('value', 'triple')
+    triple.setAttribute('value', '3')
     triple.innerText = 'Triple'
     hitSelection.appendChild(triple)
 
     const homeRun = document.createElement('option')
-    homeRun.setAttribute('value', 'home-run')
+    homeRun.setAttribute('value', '4')
     homeRun.innerText = 'Home Run'
     hitSelection.appendChild(homeRun)
 
-    renderSubmitBtn(form, container)
+    // Submit Button
+    const atBatSubmitBtn = document.createElement('input')
+    atBatSubmitBtn.setAttribute('type', 'submit')
+    atBatSubmitBtn.addEventListener('click', (e) => {
+        e.preventDefault()
+        this.advanceToBase(parseInt(document.getElementById('hit-options').value, 10))
+        currentGame.innings.slice(-1)[0].atBats.push(this)
+        console.log(currentGame.innings.slice(-1)[0].atBats)
+    })
+    form.appendChild(atBatSubmitBtn)
+
+    container.appendChild(form)
 }
 
 const renderOutForm = function(){
