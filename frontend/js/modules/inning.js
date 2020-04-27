@@ -22,7 +22,6 @@ class Inning {
         const atBatSquares = document.querySelectorAll('.main .at-bat')
         for (let i = 0; i < runners.length; i++){
             console.log(`in forEach loop, i = ${i}`)
-            console.log(Inning.renderCheckRunnerForm(runners[i]))
             await Inning.renderCheckRunnerForm(runners[i])
         }
     }

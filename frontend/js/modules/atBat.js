@@ -107,9 +107,9 @@ class AtBat {
             e.preventDefault()
             this.baseReached = parseInt(document.getElementById('hit-options').value, 10)
             this.result = document.getElementById('hit-options').value
-            currentGame.currentInning().atBats.push(this)
             await currentGame.currentInning().checkRunners(currentGame)
-            document.querySelector('div.main').innerHTML = ''
+            currentGame.currentInning().atBats.push(this)
+            document.querySelector('div.main').innerHTML = '' 
             AtBat.renderAtBatInterface.call(new AtBat(), currentGame)
         })
         form.appendChild(atBatSubmitBtn)
