@@ -103,8 +103,7 @@ class AtBat {
         console.log(currentGame)
     }
 
-    static async renderHitForm(currentGame){
-        // const currentAtBat = document.querySelector('div#current-at-bat')
+    static renderHitForm(currentGame){
         const container = document.getElementById('at-bat-submit')
         container.innerHTML = ''
         // Build Form for AtBat Result
@@ -149,12 +148,12 @@ class AtBat {
         // Submit Button
         const outSubmitBtn = document.createElement('input')
         outSubmitBtn.setAttribute('type', 'submit')
-        outSubmitBtn.addEventListener('click', (e) => {
+        outSubmitBtn.addEventListener('click', async (e) => {
             e.preventDefault()
             this.outCode = document.getElementById('out-code-text').value
             currentGame.currentInning.outs += 1
             this._outNumber = currentGame.currentInning.outs
-            currentGame.currentInning.checkRunners(currentGame)
+            await currentGame.currentInning.checkRunners(currentGame)
             currentGame.currentInning.atBats.push(this)
             currentGame.teamAtBat.currentBatterIndex += 1;
             document.querySelector('div.main').innerHTML = '' 
