@@ -1,6 +1,7 @@
 import { Inning } from "./inning.js";
 import { App } from "./app.js";
 
+
 class AtBat {
     constructor(batter, result, baseReached, outNumber, outCode){
         this._batter = batter;
@@ -13,7 +14,6 @@ class AtBat {
     get runnerName(){
         return this._batter._name
     }
-
 
     htmlRepresentation(){
         let result = `<table><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td class="out">`
@@ -49,11 +49,7 @@ class AtBat {
         App.renderAtBatSquares(currentGame.currentInning.atBats)
         App.renderCurrentAtBatSquare(currentGame)
         App.renderAtBatButtons(currentGame)
-
-        const table = document.querySelector('table.at-bat')
-        const atBatFormContainer = document.createElement('div')
-        atBatFormContainer.setAttribute('id', 'at-bat-submit')
-        table.appendChild(atBatFormContainer)
+        App.renderAtBatFormContainer()
         console.log(currentGame)
     }
 
@@ -72,7 +68,6 @@ class AtBat {
         const atBatSubmitBtn = document.createElement('input')
         atBatSubmitBtn.setAttribute('type', 'submit')
         atBatSubmitBtn.addEventListener('click', async (e) => {
-            debugger
             e.preventDefault()
             currentGame.teamAtBat.currentBatterIndex += 1;
             this.baseReached = parseInt(document.getElementById('hit-options').value, 10)

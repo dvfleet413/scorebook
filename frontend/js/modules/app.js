@@ -76,6 +76,13 @@ class App {
         table.appendChild(outBtn)
     }
 
+    static renderAtBatFormContainer(){
+        const table = document.querySelector('table.at-bat')
+        const atBatFormContainer = document.createElement('div')
+        atBatFormContainer.setAttribute('id', 'at-bat-submit')
+        table.appendChild(atBatFormContainer)
+    }
+
 }
 
 export { App }
