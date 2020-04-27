@@ -22,14 +22,6 @@ const run = function(){
 }
 
 run()
-// clearMain()
-// const test = new AtBat(undefined, '1B', 2)
-// console.log(test)
-// const atBatSquare = document.createElement('div')
-// atBatSquare.setAttribute('class', 'at-bat')
-// atBatSquare.innerHTML = test.htmlRepresentation();
-// document.querySelector('.main').appendChild(atBatSquare)
-
 
 function clearMain(){
     main.innerHTML = ''

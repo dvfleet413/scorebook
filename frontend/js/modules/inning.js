@@ -21,10 +21,9 @@ class Inning {
     static renderInningInterface(){
         const main = document.querySelector('div.main')
         main.innerHTML = ''
-        let title = document.createElement('h1')
-        title.innerText = `${this.number} - ${this.team.name} At Bat`
-        main.appendChild(title)
-        
+        let title = document.getElementById('title')
+        title.innerHTML = `<h1>${this.number} - ${this.team.name} At Bat</h1>`
+        debugger
     }
 }
 

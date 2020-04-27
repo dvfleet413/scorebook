@@ -132,19 +132,7 @@ class AtBat {
             e.preventDefault()
             this.advanceToBase(parseInt(document.getElementById('hit-options').value, 10))
             this.result = document.getElementById('hit-options').value
-            // document.querySelector('#current-at-bat .result').innerText = this.result
-            // document.querySelector('div#current-at-bat').removeAttribute('id')
-            // document.querySelector('table#current-at-bat').removeAttribute('id')
             currentGame.innings.slice(-1)[0].atBats.push(this)
-            // const outBtn = document.querySelector('#out-btn')
-            // outBtn.parentNode.removeChild(outBtn)
-            // const hitBtn = document.querySelector('#hit-btn')
-            // hitBtn.parentNode.removeChild(hitBtn)
-            // hitSelection.parentNode.removeChild(hitSelection)
-            // atBatSubmitBtn.parentNode.removeChild(atBatSubmitBtn)
-            // const atBats = document.querySelectorAll('div.at-bat')
-            // atBats.forEach(atBat => {atBat.parentNode.removeChild(atBat)})
-            // container.parentNode.removeChild(container)
             document.querySelector('div.main').innerHTML = ''
             AtBat.renderAtBatInterface.call(new AtBat(), currentGame)
         })
