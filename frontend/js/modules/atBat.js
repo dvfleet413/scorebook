@@ -145,6 +145,7 @@ class AtBat {
             atBatSubmitBtn.parentNode.removeChild(atBatSubmitBtn)
             const atBats = document.querySelectorAll('div.at-bat')
             atBats.forEach(atBat => {atBat.parentNode.removeChild(atBat)})
+            container.parentNode.removeChild(container)
             AtBat.renderAtBatInterface.call(new AtBat(), currentGame)
         })
         form.appendChild(atBatSubmitBtn)
