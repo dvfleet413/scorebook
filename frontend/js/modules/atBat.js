@@ -16,7 +16,7 @@ class AtBat {
         if (this.baseReached){ result += ` reach-${this.baseReached}`}
         result += `'></div><div class='out-code'><span>`
         if (this.outCode){ result += this.outCode}
-        result += `</span></div><br /><br />`
+        result += `</span></div>`
         return result
     }
 
@@ -44,38 +44,19 @@ class AtBat {
     }
 
     static newHTML(){
-        return `<table id='current-at-bat'>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td class='out-code'></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td class="out"><span></span></td>
-                        <td></td>
-                        <td class='result'></td>
-                    </tr>
-                </table>
-
-                <div class='diamond'></div>
-                <div class='out-code'><span></span></div><br />
-                <br />`
+        return `<table id='current-at-bat'><tr><td></td><td></td><td></td></tr><tr><td></td><td class='out-code'></td><td></td></tr><tr><td class="out"><span></span></td><td></td><td class='result'></td></tr></table><div class='diamond'></div><div class='out-code'><span></span></div><br><br>`
     }
 
     static renderAtBatInterface(currentGame){
         const main = document.querySelector('div.main')
         const currentInningAtBats = currentGame.innings.slice(-1)[0].atBats
         currentInningAtBats.forEach(atBat => {
-            // Add stuff to render html here when you get back
             const atBatSquare = document.createElement('div')
             atBatSquare.setAttribute('class', 'at-bat')
             atBatSquare.innerHTML = atBat.htmlRepresentation()
             main.appendChild(atBatSquare)
+            const br = document.createElement('br')
+            main.appendChild(br)
         })
         console.log(currentGame.innings.slice(-1)[0])
         console.log(currentInningAtBats)
