@@ -1,3 +1,5 @@
+import { Inning } from "./inning.js";
+
 class AtBat {
     constructor(batter, result, baseReached, outNumber, outCode){
         this._batter = batter;
@@ -52,8 +54,6 @@ class AtBat {
             const br = document.createElement('br')
             main.appendChild(br)
         })
-        console.log(currentGame.innings.slice(-1)[0])
-        console.log(currentInningAtBats)
     
         // Build AtBat Square
         const atBatSquare = document.createElement('div')
@@ -86,6 +86,7 @@ class AtBat {
         const atBatFormContainer = document.createElement('div')
         atBatFormContainer.setAttribute('id', 'at-bat-submit')
         main.appendChild(atBatFormContainer)
+        console.log(currentGame)
     }
 
     static async renderHitForm(currentGame){
@@ -107,10 +108,12 @@ class AtBat {
             e.preventDefault()
             this.baseReached = parseInt(document.getElementById('hit-options').value, 10)
             this.result = document.getElementById('hit-options').value
-            await currentGame.currentInning().checkRunners(currentGame)
-            currentGame.currentInning().atBats.push(this)
+            await currentGame.currentInning.checkRunners(currentGame)
+            currentGame.currentInning.atBats.push(this)
+            currentGame.teamAtBat.currentBatterIndex += 1;
             document.querySelector('div.main').innerHTML = '' 
-            AtBat.renderAtBatInterface.call(new AtBat(), currentGame)
+            Inning.renderInningInterface.call(currentGame)
+            AtBat.renderAtBatInterface.call(new AtBat(currentGame.currentBatter), currentGame)
         })
         form.appendChild(atBatSubmitBtn)
     
@@ -135,7 +138,6 @@ class AtBat {
         atBatSubmitBtn.addEventListener('click', (e) => {
             e.preventDefault()
             currentGame.innings.slice(-1)[0].atBats.push(this)
-            console.log(currentGame.innings.slice(-1)[0].atBats)
         })
         form.appendChild(atBatSubmitBtn)
     

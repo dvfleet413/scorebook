@@ -8,20 +8,13 @@ class Inning {
     }
 
     get number(){
-        if(this._number % 1 === 0){
-            return `Top ${Math.floor(this._number)}`
-        }
-        else{
-            return `Bottom ${Math.floor(this._number)}`
-        }
+        if(this._number % 1 === 0){ return `Top ${Math.floor(this._number)}` }
+        else{ return `Bottom ${Math.floor(this._number)}` }
     }
 
-
     async checkRunners(currentGame){
-        const runners = currentGame.currentInning().atBats.filter(runner => runner.baseReached > 0 && runner.baseReached < 4)
-        const atBatSquares = document.querySelectorAll('.main .at-bat')
+        const runners = currentGame.currentInning.atBats.filter(runner => runner.baseReached > 0 && runner.baseReached < 4)
         for (let i = 0; i < runners.length; i++){
-            console.log(`in forEach loop, i = ${i}`)
             await Inning.renderCheckRunnerForm(runners[i])
         }
     }
@@ -54,7 +47,7 @@ class Inning {
         const main = document.querySelector('div.main')
         main.innerHTML = ''
         let title = document.getElementById('title')
-        title.innerHTML = `<h1>${this.number} - ${this.team.name} At Bat</h1>`
+        title.innerHTML = `<h1>${this.currentInning.number} - ${this.currentInning.team.name}</h1><h2>${this.currentBatter._name} is Up`
     }
 }
 

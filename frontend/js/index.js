@@ -6,7 +6,6 @@ import { AtBat } from './modules/atBat.js'
 
 // Create and Load elements for start of app
 let currentGame = new Game()
-console.log(currentGame)
 const main = document.querySelector('div.main')
 
 const run = function(){
@@ -22,7 +21,3 @@ const run = function(){
 }
 
 run()
-
-function clearMain(){
-    main.innerHTML = ''
-}

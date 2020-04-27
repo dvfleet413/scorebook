@@ -1,10 +1,30 @@
+import { Player } from "./player.js";
+
 class Team {
-    constructor(name){
-        this._name = name;
+    constructor(name, players = [], currentBatterIndex = 0){
+        this.name = name;
+        this.players = players
+        this.currentBatterIndex = currentBatterIndex
     }
 
-    get name(){
-        return this._name;
+    getPlayers(){
+        console.log('in getPlayers()')
+        const url = 'http://localhost:3000/teams'
+        return fetch(url)
+            .then(response => {
+                return response.json()
+            })
+            .then(json => {
+                const team = json.data.filter(element => element.attributes.name == this.name)[0]
+                const playerIds = team.relationships.players.data.map(element => element.id)
+                json.included.forEach(player => {
+                    if (playerIds.includes(player.id)){
+                        this.players.push(new Player(player.attributes.name, player.attributes.number, player.attributes.position))
+                    }
+                })
+                console.log('in getPlayers() fetch')
+                console.log(this)
+            })
     }
 
     static renderTeamDatalist(name, target){
@@ -26,9 +46,7 @@ class Team {
                 return response.json()
             })
             .then(function(json){
-                console.log(json)
                 json.data.forEach(function(element){
-                    console.log(element.attributes)
                     let option = document.createElement('option')
                     option.setAttribute('value', element.attributes.name)
                     datalist.append(option)
