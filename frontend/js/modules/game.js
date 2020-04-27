@@ -11,17 +11,6 @@ class Game {
         this.isOver = isOver
     }
 
-    get currentBatter(){
-        if (this.currentInning._number % 1 == 0){
-            let index = this.awayTeam.currentBatterIndex
-            return this.awayTeam.players[index]
-        }
-        else {
-            let index = this.homeTeam.currentBatterIndex
-            return this.homeTeam.players[index]
-        }
-    }
-
     get currentInning(){
         return this.innings.slice(-1)[0]
     }
@@ -32,6 +21,17 @@ class Game {
         }
         else {
             return this.homeTeam
+        }
+    }
+
+    get currentBatter(){
+        if (this.currentInning._number % 1 == 0){
+            let index = this.awayTeam.currentBatterIndex
+            return this.awayTeam.players[index]
+        }
+        else {
+            let index = this.homeTeam.currentBatterIndex
+            return this.homeTeam.players[index]
         }
     }
 
@@ -54,7 +54,8 @@ class Game {
     }
 
     changeSides(){
-        if (this._currentInning < 1.5 || this._currentInning % 1 == 0){
+        // Change sides if before the bottom of the ninth, always after top of inning, always when tied
+        if (this._currentInning < 9.5 || this._currentInning % 1 == 0 || this.homeTeamRuns == this.awayTeamRuns){
             this._currentInning += 0.5;
             if (this.currentInning.team == this.homeTeam){
                 this.innings.push(new Inning(this._currentInning, this.awayTeam))
