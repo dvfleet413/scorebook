@@ -44,15 +44,21 @@ class AtBat {
     }
 
     static renderAtBatInterface(currentGame){
-        const main = document.querySelector('div.main')
+        const table = document.querySelector('table.at-bat')
         const currentInningAtBats = currentGame.innings.slice(-1)[0].atBats
-        currentInningAtBats.forEach(atBat => {
+        currentInningAtBats.forEach((atBat, index) => {
             const atBatSquare = document.createElement('div')
             atBatSquare.setAttribute('class', 'at-bat')
             atBatSquare.innerHTML = atBat.htmlRepresentation()
-            main.appendChild(atBatSquare)
-            const br = document.createElement('br')
-            main.appendChild(br)
+            const tableRow = document.createElement('tr')
+            tableRow.setAttribute('id', `batter-${index}`)
+            const nameTd = document.createElement('td')
+            nameTd.innerText = atBat.runnerName
+            tableRow.appendChild(nameTd)
+            const atBatTd = document.createElement('td')
+            tableRow.appendChild(atBatTd)
+            atBatTd.append(atBatSquare)
+            table.appendChild(tableRow)
         })
     
         // Build AtBat Square
@@ -60,7 +66,14 @@ class AtBat {
         atBatSquare.setAttribute('class', 'at-bat')
         atBatSquare.setAttribute('id', 'current-at-bat')
         atBatSquare.innerHTML = AtBat.newHTML();
-        main.appendChild(atBatSquare)
+        const tableRow = document.createElement('tr')
+        const nameTd = document.createElement('td')
+        nameTd.innerText = currentGame.currentBatter._name
+        tableRow.appendChild(nameTd)
+        const atBatTd = document.createElement('td')
+        tableRow.appendChild(atBatTd)
+        atBatTd.append(atBatSquare)
+        table.appendChild(tableRow)
     
         // Buttons to Select Hit or Out
         const hitBtn = document.createElement('input')
@@ -71,7 +84,7 @@ class AtBat {
             e.preventDefault()
             AtBat.renderHitForm.call(this, currentGame)
         })
-        main.appendChild(hitBtn)
+        table.appendChild(hitBtn)
 
         const outBtn = document.createElement('input')
         outBtn.setAttribute('type', 'submit')
@@ -81,11 +94,11 @@ class AtBat {
             e.preventDefault()
             AtBat.renderOutForm.call(this, currentGame)
         })
-        main.appendChild(outBtn)
+        table.appendChild(outBtn)
     
         const atBatFormContainer = document.createElement('div')
         atBatFormContainer.setAttribute('id', 'at-bat-submit')
-        main.appendChild(atBatFormContainer)
+        table.appendChild(atBatFormContainer)
         console.log(currentGame)
     }
 

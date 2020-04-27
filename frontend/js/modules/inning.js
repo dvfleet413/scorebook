@@ -48,6 +48,9 @@ class Inning {
         main.innerHTML = ''
         let title = document.getElementById('title')
         title.innerHTML = `<h1>${this.currentInning.number} - ${this.currentInning.team.name}</h1><h2>${this.currentBatter._name} is Up`
+        const table = document.createElement('table')
+        table.setAttribute('class', 'at-bat')
+        main.appendChild(table)
     }
 }
 
