@@ -25,6 +25,11 @@ class Game {
         }
     }
 
+    get currentAtBat(){
+        if (this.currentInning.atBats.length > 0){ return this.currentInning.atBats.slice(-1)[0] }
+        else { return new AtBat(this.currentBatter) }
+    }
+
     get currentBatter(){
         if (this.currentInning._number % 1 == 0){
             let index = this.awayTeam.currentBatterIndex
@@ -84,7 +89,6 @@ class Game {
     static renderNewGameForm(currentGame){
         App.assignH1AndTitle('Start a New Game', 'Scorebook - New Game')
         App.clearMain()
-        const main = document.querySelector('div.main')
     
         //Set up form
         const form = document.createElement('form')
@@ -122,7 +126,7 @@ class Game {
         form.appendChild(submitBtn)
     
         // Render form
-        main.appendChild(form)
+        App.appendToMain(form)
     }
 }
 

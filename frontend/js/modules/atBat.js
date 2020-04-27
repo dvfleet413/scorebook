@@ -1,4 +1,5 @@
 import { Inning } from "./inning.js";
+import { App } from "./app.js";
 
 class AtBat {
     constructor(batter, result, baseReached, outNumber, outCode){
@@ -45,58 +46,11 @@ class AtBat {
     }
 
     static renderAtBatInterface(currentGame){
-        const table = document.querySelector('table.at-bat')
-        const currentInningAtBats = currentGame.innings.slice(-1)[0].atBats
-        currentInningAtBats.forEach((atBat, index) => {
-            const atBatSquare = document.createElement('div')
-            atBatSquare.setAttribute('class', 'at-bat')
-            atBatSquare.innerHTML = atBat.htmlRepresentation()
-            const tableRow = document.createElement('tr')
-            tableRow.setAttribute('id', `batter-${index}`)
-            const nameTd = document.createElement('td')
-            nameTd.innerText = atBat.runnerName
-            tableRow.appendChild(nameTd)
-            const atBatTd = document.createElement('td')
-            tableRow.appendChild(atBatTd)
-            atBatTd.append(atBatSquare)
-            table.appendChild(tableRow)
-        })
-    
-        // Build AtBat Square
-        const atBatSquare = document.createElement('div')
-        atBatSquare.setAttribute('class', 'at-bat')
-        atBatSquare.setAttribute('id', 'current-at-bat')
-        atBatSquare.innerHTML = AtBat.newHTML();
-        const tableRow = document.createElement('tr')
-        const nameTd = document.createElement('td')
-        nameTd.innerText = currentGame.currentBatter._name
-        tableRow.appendChild(nameTd)
-        const atBatTd = document.createElement('td')
-        tableRow.appendChild(atBatTd)
-        atBatTd.append(atBatSquare)
-        table.appendChild(tableRow)
-    
-        // Buttons to Select Hit or Out
-        const hitBtn = document.createElement('input')
-        hitBtn.setAttribute('type', 'submit')
-        hitBtn.setAttribute('id', 'hit-btn')
-        hitBtn.setAttribute('value', 'Record a Hit')
-        hitBtn.addEventListener('click', (e) => {
-            e.preventDefault()
-            AtBat.renderHitForm.call(this, currentGame)
-        })
-        table.appendChild(hitBtn)
+        App.renderAtBatSquares(currentGame.currentInning.atBats)
+        App.renderCurrentAtBatSquare(currentGame)
+        App.renderAtBatButtons(currentGame)
 
-        const outBtn = document.createElement('input')
-        outBtn.setAttribute('type', 'submit')
-        outBtn.setAttribute('id', 'out-btn')
-        outBtn.setAttribute('value', 'Record an Out')
-        outBtn.addEventListener('click', (e) => {
-            e.preventDefault()
-            AtBat.renderOutForm.call(this, currentGame)
-        })
-        table.appendChild(outBtn)
-    
+        const table = document.querySelector('table.at-bat')
         const atBatFormContainer = document.createElement('div')
         atBatFormContainer.setAttribute('id', 'at-bat-submit')
         table.appendChild(atBatFormContainer)
@@ -118,13 +72,14 @@ class AtBat {
         const atBatSubmitBtn = document.createElement('input')
         atBatSubmitBtn.setAttribute('type', 'submit')
         atBatSubmitBtn.addEventListener('click', async (e) => {
+            debugger
             e.preventDefault()
             currentGame.teamAtBat.currentBatterIndex += 1;
             this.baseReached = parseInt(document.getElementById('hit-options').value, 10)
             this.result = document.getElementById('hit-options').value
             await currentGame.currentInning.checkRunners(currentGame)
             currentGame.currentInning.atBats.push(this)
-            document.querySelector('div.main').innerHTML = '' 
+            App.clearMain()
             Inning.renderInningInterface.call(currentGame)
             AtBat.renderAtBatInterface.call(new AtBat(currentGame.currentBatter), currentGame)
         })
@@ -165,7 +120,7 @@ class AtBat {
                 currentGame.summarize()
             }
             else {
-                document.querySelector('div.main').innerHTML = '' 
+                App.clearMain()
                 Inning.renderInningInterface.call(currentGame)
                 AtBat.renderAtBatInterface.call(new AtBat(currentGame.currentBatter), currentGame)
                 console.log(currentGame)

@@ -3,10 +3,10 @@ import { Player } from './modules/player.js'
 import { Game } from './modules/game.js'
 import { Inning } from './modules/inning.js'
 import { AtBat } from './modules/atBat.js'
+import { App } from './modules/app.js'
 
 // Create and Load elements for start of app
 let currentGame = new Game()
-const main = document.querySelector('div.main')
 
 const run = function(){
     const newGameBtn = document.createElement('button')
@@ -17,7 +17,7 @@ const run = function(){
         e.preventDefault()
         Game.renderNewGameForm(currentGame)
     })
-    main.appendChild(newGameBtn)
+    App.appendToMain(newGameBtn)
 }
 
 run()
