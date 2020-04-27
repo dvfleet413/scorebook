@@ -33,15 +33,15 @@ class AtBat {
         }
     }
 
-    advanceToBase(baseReached){
-        const diamond = document.querySelector('#current-at-bat~.diamond')
-        this.baseReached = baseReached;
-        diamond.classList.add(`reach-${this.baseReached}`)
-    }
+    // reachBase(baseReached){
+    //     const diamond = document.querySelector('#current-at-bat~.diamond')
+    //     this.baseReached = baseReached;
+    //     diamond.classList.add(`reach-${this.baseReached}`)
+    // }
 
-    score(){
-        this.advanceToBase(4);
-    }
+    // score(){
+    //     this.reachBase(4);
+    // }
 
     static newHTML(){
         return `<table id='current-at-bat'><tr><td></td><td></td><td></td></tr><tr><td></td><td class='out-code'></td><td></td></tr><tr><td class="out"><span></span></td><td></td><td class='result'></td></tr></table><div class='diamond'></div><div class='out-code'><span></span></div><br><br>`
@@ -111,9 +111,10 @@ class AtBat {
         atBatSubmitBtn.setAttribute('type', 'submit')
         atBatSubmitBtn.addEventListener('click', (e) => {
             e.preventDefault()
-            this.advanceToBase(parseInt(document.getElementById('hit-options').value, 10))
+            this.baseReached = parseInt(document.getElementById('hit-options').value, 10)
             this.result = document.getElementById('hit-options').value
-            currentGame.innings.slice(-1)[0].atBats.push(this)
+            currentGame.currentInning().atBats.push(this)
+            currentGame.currentInning().checkRunners(currentGame)
             document.querySelector('div.main').innerHTML = ''
             AtBat.renderAtBatInterface.call(new AtBat(), currentGame)
         })

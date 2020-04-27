@@ -16,6 +16,10 @@ class Inning {
         }
     }
 
+    checkRunners(currentGame){
+        const runners = currentGame.currentInning().atBats.filter(runner => runner.baseReached > 0 && runner.baseReached < 4)
+    }
+
     // Within a game, call renderInningInterface() to add AtBats/keep score
     // Should be called with execution context of an Inning and the current Game
     static renderInningInterface(){

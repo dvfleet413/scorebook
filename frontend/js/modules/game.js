@@ -10,6 +10,10 @@ class Game {
         this.innings = innings;
     }
 
+    currentInning(){
+        return this.innings.slice(-1)[0]
+    }
+
     changeSides(){
         this._currentInning += 0.5;
     }
