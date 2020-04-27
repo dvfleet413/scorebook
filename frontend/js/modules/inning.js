@@ -17,32 +17,36 @@ class Inning {
     }
 
 
-    checkRunners(currentGame){
+    async checkRunners(currentGame){
         const runners = currentGame.currentInning().atBats.filter(runner => runner.baseReached > 0 && runner.baseReached < 4)
         const atBatSquares = document.querySelectorAll('.main .at-bat')
         for (let i = 0; i < runners.length; i++){
-            Inning.renderCheckRunnerForm(runners[i])
-            debugger
+            console.log(`in forEach loop, i = ${i}`)
+            console.log(Inning.renderCheckRunnerForm(runners[i]))
+            await Inning.renderCheckRunnerForm(runners[i])
         }
     }
 
     static renderCheckRunnerForm(runner){
-        const form = document.createElement('form')
-        const formTitle = document.createElement('h4')
-        formTitle.innerText = runner.runnerName
-        form.appendChild(formTitle)
-        const selectField = document.createElement('select')
-        selectField.innerHTML = `<option value='1'>First</option><option value='2'>Second</option><option value='3'>Third</option><option value='4'>Home</option>`
-        form.appendChild(selectField)
-        const submitBtn = document.createElement('button')
-        submitBtn.setAttribute('type', 'button')
-        submitBtn.innerText = "Advance Runner"
-        submitBtn.addEventListener('click', (e) => {
-            e.preventDefault()
-            runner.baseReached = selectField.value;
+        return new Promise((resolve, reject) => {
+            const form = document.createElement('form')
+            const formTitle = document.createElement('h4')
+            formTitle.innerText = runner.runnerName
+            form.appendChild(formTitle)
+            const selectField = document.createElement('select')
+            selectField.innerHTML = `<option value='1'>First</option><option value='2'>Second</option><option value='3'>Third</option><option value='4'>Home</option>`
+            form.appendChild(selectField)
+            const submitBtn = document.createElement('button')
+            submitBtn.setAttribute('type', 'button')
+            submitBtn.innerText = "Advance Runner"
+            form.appendChild(submitBtn)
+            document.querySelector('.main').appendChild(form)
+            submitBtn.addEventListener('click', (e) => {
+                e.preventDefault()
+                runner.baseReached = selectField.value;
+                resolve("Runner Updated")
+            })
         })
-        form.appendChild(submitBtn)
-        document.querySelector('.main').appendChild(form)
     }
 
     // Within a game, call renderInningInterface() to add AtBats/keep score

@@ -88,7 +88,7 @@ class AtBat {
         main.appendChild(atBatFormContainer)
     }
 
-    static renderHitForm(currentGame){
+    static async renderHitForm(currentGame){
         const currentAtBat = document.querySelector('div#current-at-bat')
         const container = document.getElementById('at-bat-submit')
         container.innerHTML = ''
@@ -103,12 +103,12 @@ class AtBat {
         // Submit Button
         const atBatSubmitBtn = document.createElement('input')
         atBatSubmitBtn.setAttribute('type', 'submit')
-        atBatSubmitBtn.addEventListener('click', (e) => {
+        atBatSubmitBtn.addEventListener('click', async (e) => {
             e.preventDefault()
             this.baseReached = parseInt(document.getElementById('hit-options').value, 10)
             this.result = document.getElementById('hit-options').value
             currentGame.currentInning().atBats.push(this)
-            currentGame.currentInning().checkRunners(currentGame)
+            await currentGame.currentInning().checkRunners(currentGame)
             document.querySelector('div.main').innerHTML = ''
             AtBat.renderAtBatInterface.call(new AtBat(), currentGame)
         })
