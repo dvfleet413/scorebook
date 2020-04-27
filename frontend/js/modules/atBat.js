@@ -10,7 +10,7 @@ class AtBat {
     }
 
     get runnerName(){
-        return this._batter
+        return this._batter._name
     }
 
     htmlRepresentation(){
