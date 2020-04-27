@@ -119,11 +119,11 @@ class AtBat {
         atBatSubmitBtn.setAttribute('type', 'submit')
         atBatSubmitBtn.addEventListener('click', async (e) => {
             e.preventDefault()
+            currentGame.teamAtBat.currentBatterIndex += 1;
             this.baseReached = parseInt(document.getElementById('hit-options').value, 10)
             this.result = document.getElementById('hit-options').value
             await currentGame.currentInning.checkRunners(currentGame)
             currentGame.currentInning.atBats.push(this)
-            currentGame.teamAtBat.currentBatterIndex += 1;
             document.querySelector('div.main').innerHTML = '' 
             Inning.renderInningInterface.call(currentGame)
             AtBat.renderAtBatInterface.call(new AtBat(currentGame.currentBatter), currentGame)
@@ -150,6 +150,7 @@ class AtBat {
         outSubmitBtn.setAttribute('type', 'submit')
         outSubmitBtn.addEventListener('click', async (e) => {
             e.preventDefault()
+            currentGame.teamAtBat.currentBatterIndex += 1; 
             this.outCode = document.getElementById('out-code-text').value
             currentGame.currentInning.outs += 1
             this._outNumber = currentGame.currentInning.outs
@@ -157,7 +158,6 @@ class AtBat {
             if (currentGame.currentInning.outs == 3){ currentGame.changeSides();}
             else{ 
                 await currentGame.currentInning.checkRunners(currentGame)
-                currentGame.teamAtBat.currentBatterIndex += 1; 
             }
             document.querySelector('div.main').innerHTML = '' 
             Inning.renderInningInterface.call(currentGame)
