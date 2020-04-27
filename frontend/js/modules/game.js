@@ -15,14 +15,12 @@ class Game {
     }
 
     static renderNewGameForm(currentGame){
+        document.getElementById('title').innerHTML = `<h1>Start a New Game</h1>`
         const main = document.querySelector('div.main')
         main.innerHTML = ''
     
         //Set up form
         const form = document.createElement('form')
-        const formTitle = document.createElement('h4')
-        formTitle.innerText = "Start a New Game"
-        form.appendChild(formTitle)
     
         // Add home team datalist
         const homeLabel = document.createElement('p')

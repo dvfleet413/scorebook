@@ -23,7 +23,6 @@ class Inning {
         main.innerHTML = ''
         let title = document.getElementById('title')
         title.innerHTML = `<h1>${this.number} - ${this.team.name} At Bat</h1>`
-        debugger
     }
 }
 
