@@ -73,16 +73,12 @@ class Game {
         // If none of above conditions are met, game is over
         else {
             this.isOver = true;
-            console.log(`Game is Over -`)
-            console.log(`${this.homeTeam.name} - ${this.homeTeamRuns}`)
-            console.log(`${this.awayTeam.name} - ${this.awayTeamRuns}`)
         }
     }
 
     summarize(){
         App.assignH1AndTitle('Game is Over', 'Scorebook - Game Complete')
-        const main = document.querySelector('div.main')
-        main.innerHTML = `<p>${this.awayTeam.name} - ${this.awayTeamRuns}</p><p>${this.homeTeam.name} - ${this.homeTeamRuns}</p>`
+        App.renderGameSummary(this)
     }
 
 

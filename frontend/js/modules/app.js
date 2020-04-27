@@ -1,8 +1,13 @@
 import { AtBat } from './atBat.js'
 import { Inning } from "./inning.js";
 
+
+// This Class contains the functions that primarily deal with DOM manipulation 
+// such as clearing pages, rendering tables, rendering forms and buttons, 
+// adding event listeners, etc.
 class App {
 
+    // General DOM Manipulation
     static assignH1AndTitle(heading, title = 'Scorebook'){
         document.getElementById('title').innerHTML = `<h1>${heading}</h1>`
         document.querySelector('title').innerText = title
@@ -18,6 +23,13 @@ class App {
         main.appendChild(element)
     }
 
+    //DOM manipulation related to Game Class
+    static renderGameSummary(currentGame){
+        const main = document.querySelector('div.main')
+        main.innerHTML = `<p>${currentGame.awayTeam.name} - ${currentGame.awayTeamRuns}</p><p>${currentGame.homeTeam.name} - ${currentGame.homeTeamRuns}</p>`
+    }
+
+    // DOM manipulation related to the AtBat Class
     static renderAtBatSquares(atBats){
         const table = document.querySelector('table.at-bat')
         atBats.forEach((atBat, index) => {
@@ -149,14 +161,11 @@ class App {
                 App.clearMain()
                 Inning.renderInningInterface.call(currentGame)
                 AtBat.renderAtBatInterface.call(new AtBat(currentGame.currentBatter), currentGame)
-                console.log(currentGame)
             }
         })
         form.appendChild(outSubmitBtn)
-    
         container.appendChild(form)
     }
-
 }
 
 export { App }

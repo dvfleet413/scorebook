@@ -43,8 +43,6 @@ class Inning {
         })
     }
 
-    // Within a game, call renderInningInterface() to add AtBats/keep score
-    // Should be called with execution context of an Inning and the current Game
     static renderInningInterface(){
         App.clearMain()
         App.assignH1AndTitle(`${this.currentInning.number} - ${this.currentInning.team.name}`, `Scorebook`)
