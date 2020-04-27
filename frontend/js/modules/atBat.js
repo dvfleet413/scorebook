@@ -13,10 +13,11 @@ class AtBat {
         return this._batter._name
     }
 
+
     htmlRepresentation(){
-        let result = `<table><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td class="out"><span>`
-        if (this._outNumber){ result += this._outNumber}
-        result += `</span></td><td></td><td class='result'>`
+        let result = `<table><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td class="out">`
+        if (this._outNumber){ result += `<span class='out-number'>${this._outNumber}</span>`}
+        result += `</td><td></td><td class='result'>`
         if (this._result){ result += this.result}
         result += `</td></tr></table><div class='diamond`
         if (this.baseReached){ result += ` reach-${this.baseReached}`}
@@ -103,7 +104,7 @@ class AtBat {
     }
 
     static async renderHitForm(currentGame){
-        const currentAtBat = document.querySelector('div#current-at-bat')
+        // const currentAtBat = document.querySelector('div#current-at-bat')
         const container = document.getElementById('at-bat-submit')
         container.innerHTML = ''
         // Build Form for AtBat Result
@@ -136,6 +137,7 @@ class AtBat {
     static renderOutForm(currentGame){
         const container = document.getElementById('at-bat-submit')
         container.innerHTML = ''
+        // Build Form for AtBat Result
         const form = document.createElement('form')
         form.setAttribute('class', 'out-code-form')
         // Text input for out code
@@ -144,15 +146,23 @@ class AtBat {
         outCodeInput.setAttribute('id', 'out-code-text')
         outCodeInput.value = 'Out Code'
         form.appendChild(outCodeInput)
-    
         // Submit Button
-        const atBatSubmitBtn = document.createElement('input')
-        atBatSubmitBtn.setAttribute('type', 'submit')
-        atBatSubmitBtn.addEventListener('click', (e) => {
+        const outSubmitBtn = document.createElement('input')
+        outSubmitBtn.setAttribute('type', 'submit')
+        outSubmitBtn.addEventListener('click', (e) => {
             e.preventDefault()
-            currentGame.innings.slice(-1)[0].atBats.push(this)
+            this.outCode = document.getElementById('out-code-text').value
+            currentGame.currentInning.outs += 1
+            this._outNumber = currentGame.currentInning.outs
+            currentGame.currentInning.checkRunners(currentGame)
+            currentGame.currentInning.atBats.push(this)
+            currentGame.teamAtBat.currentBatterIndex += 1;
+            document.querySelector('div.main').innerHTML = '' 
+            Inning.renderInningInterface.call(currentGame)
+            AtBat.renderAtBatInterface.call(new AtBat(currentGame.currentBatter), currentGame)
+            console.log(currentGame)
         })
-        form.appendChild(atBatSubmitBtn)
+        form.appendChild(outSubmitBtn)
     
         container.appendChild(form)
     }

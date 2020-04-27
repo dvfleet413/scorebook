@@ -1,10 +1,11 @@
 import { AtBat } from './atBat.js'
 
 class Inning {
-    constructor(number, team, atBats = []){
+    constructor(number, team, atBats = [], outs = 0){
         this._number = number;
         this.team = team;
         this.atBats = atBats;
+        this.outs = outs;
     }
 
     get number(){
