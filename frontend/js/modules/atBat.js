@@ -69,13 +69,23 @@ class AtBat {
 
     static renderAtBatInterface(currentGame){
         const main = document.querySelector('div.main')
+        const currentInningAtBats = currentGame.innings.slice(-1)[0].atBats
+        currentInningAtBats.forEach(atBat => {
+            // Add stuff to render html here when you get back
+            const atBatSquare = document.createElement('div')
+            atBatSquare.setAttribute('class', 'at-bat')
+            atBatSquare.innerHTML = atBat.htmlRepresentation()
+            main.appendChild(atBatSquare)
+        })
+        console.log(currentGame.innings.slice(-1)[0])
+        console.log(currentInningAtBats)
     
         // Build AtBat Square
         const atBatSquare = document.createElement('div')
         atBatSquare.setAttribute('class', 'at-bat')
         atBatSquare.setAttribute('id', 'current-at-bat')
-        atBatSquare.innerHTML = this.htmlRepresentation();
-        document.querySelector('.main').appendChild(atBatSquare)
+        atBatSquare.innerHTML = AtBat.newHTML();
+        main.appendChild(atBatSquare)
     
         // Buttons to Select Hit or Out
         const hitBtn = document.createElement('input')
@@ -104,6 +114,7 @@ class AtBat {
     }
 
     static renderHitForm(currentGame){
+        const currentAtBat = document.querySelector('div#current-at-bat')
         const container = document.getElementById('at-bat-submit')
         container.innerHTML = ''
         // Build Form for AtBat Result
@@ -133,6 +144,7 @@ class AtBat {
             hitSelection.parentNode.removeChild(hitSelection)
             atBatSubmitBtn.parentNode.removeChild(atBatSubmitBtn)
             container.parentNode.removeChild(container)
+            currentAtBat.parentNode.removeChild(currentAtBat)
             AtBat.renderAtBatInterface.call(new AtBat(), currentGame)
         })
         form.appendChild(atBatSubmitBtn)
