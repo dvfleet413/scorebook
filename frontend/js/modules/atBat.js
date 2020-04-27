@@ -21,9 +21,9 @@ class AtBat {
         if (this._result){ result += this.result}
         result += `</td></tr></table><div class='diamond`
         if (this.baseReached){ result += ` reach-${this.baseReached}`}
-        result += `'></div><div class='out-code'><span>`
+        result += `'></div><br /><div class='out-code'><span>`
         if (this.outCode){ result += this.outCode}
-        result += `</span></div>`
+        result += `</span></div><br />`
         return result
     }
 

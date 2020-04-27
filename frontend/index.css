@@ -78,8 +78,7 @@ div.at-bat {
     line-height: 6em;
     top: 50%;
     margin-top: -3em;
-    vertical-align: center;
-    text-align: center;
+    margin-left: -6em;
 }
 
 .out-code span {
