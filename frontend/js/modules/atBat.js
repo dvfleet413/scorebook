@@ -7,6 +7,10 @@ class AtBat {
         this.outCode = outCode;
     }
 
+    get runnerName(){
+        return this._batter
+    }
+
     htmlRepresentation(){
         let result = `<table><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td class="out"><span>`
         if (this._outNumber){ result += this._outNumber}
@@ -32,16 +36,6 @@ class AtBat {
             return 'HR'
         }
     }
-
-    // reachBase(baseReached){
-    //     const diamond = document.querySelector('#current-at-bat~.diamond')
-    //     this.baseReached = baseReached;
-    //     diamond.classList.add(`reach-${this.baseReached}`)
-    // }
-
-    // score(){
-    //     this.reachBase(4);
-    // }
 
     static newHTML(){
         return `<table id='current-at-bat'><tr><td></td><td></td><td></td></tr><tr><td></td><td class='out-code'></td><td></td></tr><tr><td class="out"><span></span></td><td></td><td class='result'></td></tr></table><div class='diamond'></div><div class='out-code'><span></span></div><br><br>`
