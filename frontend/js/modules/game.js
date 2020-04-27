@@ -64,6 +64,7 @@ class Game {
                 this.innings.push(new Inning(this._currentInning, this.homeTeam))
             }
         }
+        // If none of above conditions are met, game is over
         else {
             this.isOver = true;
             console.log(`Game is Over -`)
@@ -75,7 +76,7 @@ class Game {
     summarize(){
         document.getElementById('title').innerHTML = `<h1>Game is Over</h1>`
         const main = document.querySelector('div.main')
-        main.innerHTML = ''
+        main.innerHTML = `<p>${this.awayTeam.name} - ${this.awayTeamRuns}</p><p>${this.homeTeam.name} - ${this.homeTeamRuns}</p>`
     }
 
 
