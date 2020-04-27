@@ -155,14 +155,21 @@ class AtBat {
             currentGame.currentInning.outs += 1
             this._outNumber = currentGame.currentInning.outs
             currentGame.currentInning.atBats.push(this)
-            if (currentGame.currentInning.outs == 3){ currentGame.changeSides();}
+            if (currentGame.currentInning.outs == 3){ 
+                currentGame.changeSides()
+            }
             else{ 
                 await currentGame.currentInning.checkRunners(currentGame)
             }
-            document.querySelector('div.main').innerHTML = '' 
-            Inning.renderInningInterface.call(currentGame)
-            AtBat.renderAtBatInterface.call(new AtBat(currentGame.currentBatter), currentGame)
-            console.log(currentGame)
+            if (currentGame.isOver){
+                currentGame.summarize()
+            }
+            else {
+                document.querySelector('div.main').innerHTML = '' 
+                Inning.renderInningInterface.call(currentGame)
+                AtBat.renderAtBatInterface.call(new AtBat(currentGame.currentBatter), currentGame)
+                console.log(currentGame)
+            }
         })
         form.appendChild(outSubmitBtn)
     

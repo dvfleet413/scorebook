@@ -3,11 +3,14 @@ import { Inning } from './inning.js'
 import { AtBat } from './atBat.js'
 
 class Game {
-    constructor(currentInning = 1.0, homeTeam, awayTeam, innings = []){
+    constructor(currentInning = 1.0, homeTeam, awayTeam, innings = [], homeTeamRuns = 0, awayTeamRuns = 0, isOver = false){
         this._currentInning = currentInning;
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.innings = innings;
+        this.homeTeamRuns = homeTeamRuns;
+        this.awayTeamRuns = awayTeamRuns;
+        this.isOver = isOver
     }
 
     get currentBatter(){
@@ -35,13 +38,27 @@ class Game {
     }
 
     changeSides(){
-        this._currentInning += 0.5;
-        if (this.currentInning.team == this.homeTeam){
-            this.innings.push(new Inning(this._currentInning, this.awayTeam))
+        if (this._currentInning < 9.5 || this._currentInning % 1 == 0){
+            this._currentInning += 0.5;
+            if (this.currentInning.team == this.homeTeam){
+                this.innings.push(new Inning(this._currentInning, this.awayTeam))
+            }
+            else{
+                this.innings.push(new Inning(this._currentInning, this.homeTeam))
+            }
         }
-        else{
-            this.innings.push(new Inning(this._currentInning, this.homeTeam))
+        else {
+            this.isOver = true;
+            console.log(`Game is Over -`)
+            console.log(`${this.homeTeam.name} - ${this.homeTeamRuns}`)
+            console.log(`${this.awayTeam.name} - ${this.awayTeamRuns}`)
         }
+    }
+
+    summarize(){
+        document.getElementById('title').innerHTML = `<h1>Game is Over</h1>`
+        const main = document.querySelector('div.main')
+        main.innerHTML = ''
     }
 
 
