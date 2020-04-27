@@ -1,6 +1,7 @@
 import { Team } from './team.js'
 import { Inning } from './inning.js'
 import { AtBat } from './atBat.js'
+import { App } from './app.js';
 
 class Game {
     constructor(currentInning = 1.0, homeTeam, awayTeam, innings = [], isOver = false){
@@ -74,16 +75,16 @@ class Game {
     }
 
     summarize(){
-        document.getElementById('title').innerHTML = `<h1>Game is Over</h1>`
+        App.assignH1AndTitle('Game is Over', 'Scorebook - Game Complete')
         const main = document.querySelector('div.main')
         main.innerHTML = `<p>${this.awayTeam.name} - ${this.awayTeamRuns}</p><p>${this.homeTeam.name} - ${this.homeTeamRuns}</p>`
     }
 
 
     static renderNewGameForm(currentGame){
-        document.getElementById('title').innerHTML = `<h1>Start a New Game</h1>`
+        App.assignH1AndTitle('Start a New Game', 'Scorebook - New Game')
+        App.clearMain()
         const main = document.querySelector('div.main')
-        main.innerHTML = ''
     
         //Set up form
         const form = document.createElement('form')
@@ -109,17 +110,12 @@ class Game {
             e.preventDefault();
             const homeTeam = new Team(document.querySelector("input[name='home-team']").value)
             await homeTeam.getPlayers()
-            console.log('after homeTeam.getPlayers()')
-            console.log(homeTeam)
             const awayTeam = new Team(document.querySelector("input[name='away-team']").value)
             await awayTeam.getPlayers()
-            console.log('after awayTeam.getPlayers()')
-            console.log(awayTeam)
             currentGame.homeTeam = homeTeam;
             currentGame.awayTeam = awayTeam;
             let currentInning = new Inning(1.0, currentGame.awayTeam)
             currentGame.innings.push(currentInning)
-            console.log(currentGame)
             Inning.renderInningInterface.call(currentGame)
             AtBat.renderAtBatInterface.call(new AtBat(currentGame.currentBatter), currentGame)
         })

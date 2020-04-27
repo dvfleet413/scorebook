@@ -1,4 +1,5 @@
 import { AtBat } from './atBat.js'
+import { App } from './app.js';
 
 class Inning {
     constructor(number, team, atBats = [], outs = 0){
@@ -45,13 +46,11 @@ class Inning {
     // Within a game, call renderInningInterface() to add AtBats/keep score
     // Should be called with execution context of an Inning and the current Game
     static renderInningInterface(){
-        const main = document.querySelector('div.main')
-        main.innerHTML = ''
-        let title = document.getElementById('title')
-        title.innerHTML = `<h1>${this.currentInning.number} - ${this.currentInning.team.name}</h1><h2>${this.currentBatter._name} is Up`
+        App.clearMain()
+        App.assignH1AndTitle(`${this.currentInning.number} - ${this.currentInning.team.name}`, `Scorebook`)
         const table = document.createElement('table')
         table.setAttribute('class', 'at-bat')
-        main.appendChild(table)
+        App.appendToMain(table)
     }
 }
 
