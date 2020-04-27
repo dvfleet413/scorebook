@@ -36,6 +36,12 @@ class Game {
 
     changeSides(){
         this._currentInning += 0.5;
+        if (this.currentInning.team == this.homeTeam){
+            this.innings.push(new Inning(this._currentInning, this.awayTeam))
+        }
+        else{
+            this.innings.push(new Inning(this._currentInning, this.homeTeam))
+        }
     }
 
 

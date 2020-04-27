@@ -153,9 +153,12 @@ class AtBat {
             this.outCode = document.getElementById('out-code-text').value
             currentGame.currentInning.outs += 1
             this._outNumber = currentGame.currentInning.outs
-            await currentGame.currentInning.checkRunners(currentGame)
             currentGame.currentInning.atBats.push(this)
-            currentGame.teamAtBat.currentBatterIndex += 1;
+            if (currentGame.currentInning.outs == 3){ currentGame.changeSides();}
+            else{ 
+                await currentGame.currentInning.checkRunners(currentGame)
+                currentGame.teamAtBat.currentBatterIndex += 1; 
+            }
             document.querySelector('div.main').innerHTML = '' 
             Inning.renderInningInterface.call(currentGame)
             AtBat.renderAtBatInterface.call(new AtBat(currentGame.currentBatter), currentGame)
