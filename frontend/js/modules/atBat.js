@@ -11,7 +11,7 @@ class AtBat {
         let result = `<table><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td class="out"><span>`
         if (this._outNumber){ result += this._outNumber}
         result += `</span></td><td></td><td class='result'>`
-        if (this._result){ result += this._result}
+        if (this._result){ result += this.result}
         result += `</td></tr></table><div class='diamond`
         if (this.baseReached){ result += ` reach-${this.baseReached}`}
         result += `'></div><div class='out-code'><span>`
