@@ -3,13 +3,11 @@ import { Inning } from './inning.js'
 import { AtBat } from './atBat.js'
 
 class Game {
-    constructor(currentInning = 1.0, homeTeam, awayTeam, innings = [], homeTeamRuns = 0, awayTeamRuns = 0, isOver = false){
+    constructor(currentInning = 1.0, homeTeam, awayTeam, innings = [], isOver = false){
         this._currentInning = currentInning;
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.innings = innings;
-        this.homeTeamRuns = homeTeamRuns;
-        this.awayTeamRuns = awayTeamRuns;
         this.isOver = isOver
     }
 
@@ -37,8 +35,26 @@ class Game {
         }
     }
 
+    get homeTeamRuns(){
+        let result = 0;
+        const homeInnings = this.innings.filter((inning) => inning.team == this.homeTeam)
+        homeInnings.forEach((inning) => {
+            result += inning.atBats.filter((atBat) => atBat.baseReached == 4).length
+        })
+        return result
+    }
+
+    get awayTeamRuns(){
+        let result = 0;
+        const awayInnings = this.innings.filter((inning) => inning.team == this.awayTeam)
+        awayInnings.forEach((inning) => {
+            result += inning.atBats.filter((atBat) => atBat.baseReached == 4).length
+        })
+        return result
+    }
+
     changeSides(){
-        if (this._currentInning < 9.5 || this._currentInning % 1 == 0){
+        if (this._currentInning < 1.5 || this._currentInning % 1 == 0){
             this._currentInning += 0.5;
             if (this.currentInning.team == this.homeTeam){
                 this.innings.push(new Inning(this._currentInning, this.awayTeam))
