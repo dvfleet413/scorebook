@@ -82,7 +82,7 @@ class Game {
     }
 
 
-    static renderNewGameForm(currentGame){
+    start(){
         App.assignH1AndTitle('Start a New Game', 'Scorebook - New Game')
         App.clearMain()
     
@@ -106,18 +106,18 @@ class Game {
         submitBtn.setAttribute('type', 'submit')
         submitBtn.setAttribute('id', 'start-new-game-btn')
         
-        submitBtn.addEventListener('click', async function(e){
+        submitBtn.addEventListener('click', async (e) => {
             e.preventDefault();
             const homeTeam = new Team(document.querySelector("input[name='home-team']").value)
             await homeTeam.getPlayers()
             const awayTeam = new Team(document.querySelector("input[name='away-team']").value)
             await awayTeam.getPlayers()
-            currentGame.homeTeam = homeTeam;
-            currentGame.awayTeam = awayTeam;
-            let currentInning = new Inning(1.0, currentGame.awayTeam)
-            currentGame.innings.push(currentInning)
-            Inning.renderInningInterface.call(currentGame)
-            AtBat.renderAtBatInterface.call(new AtBat(currentGame.currentBatter), currentGame)
+            this.homeTeam = homeTeam;
+            this.awayTeam = awayTeam;
+            let topFirst = new Inning(1.0, this.awayTeam)
+            this.innings.push(topFirst)
+            Inning.renderInningInterface.call(this)
+            AtBat.renderAtBatInterface.call(new AtBat(this.currentBatter), this)
         })
         form.appendChild(submitBtn)
     

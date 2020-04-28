@@ -15,7 +15,7 @@ const run = function(){
     newGameBtn.innerText = 'New Scorebook'
     newGameBtn.addEventListener('click', (e) => {
         e.preventDefault()
-        Game.renderNewGameForm(currentGame)
+        currentGame.start()
     })
     App.appendToMain(newGameBtn)
 }
