@@ -24,10 +24,22 @@ class App {
     }
 
     //DOM manipulation related to Game Class
-    static renderGameSummaryTable(id){
+    static renderGameSummaryTable(id, title){
+        const tableTitle = document.createElement('h2')
+        tableTitle.innerText = title;
+        App.appendToMain(tableTitle)
         const table = document.createElement('table')
         table.setAttribute('id', id)
         table.setAttribute('class', 'at-bat')
+        const headerRow = document.createElement('tr')
+        for (let i = 0; i < 10; i++){
+            const th = document.createElement('th')
+            if (i == 0){th.innerText = 'Batter'}
+            else {th.innerText = `Inning ${i}`}
+            headerRow.appendChild(th)
+        }
+        table.appendChild(headerRow)
+
         for (let rowCounter = 0; rowCounter < 9; rowCounter++){
             const row = document.createElement('tr')
             row.setAttribute('id', `batter-${rowCounter}`)

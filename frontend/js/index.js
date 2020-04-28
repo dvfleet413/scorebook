@@ -21,4 +21,3 @@ const run = function(){
 }
 
 run()
-App.renderGameSummaryTable('home-team')

@@ -77,9 +77,10 @@ class Game {
     }
 
     summarize(){
+        App.clearMain()
         App.assignH1AndTitle('Game is Over', 'Scorebook - Game Complete')
-        App.renderGameSummaryTable('away-team')
-        App.renderGameSummaryTable('home-team')
+        App.renderGameSummaryTable('away-team', this.awayTeam.name)
+        App.renderGameSummaryTable('home-team', this.homeTeam.name)
 
         // Away Team
         const awayNameBoxes = document.querySelectorAll('#away-team td.batter-name')

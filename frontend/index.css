@@ -30,6 +30,10 @@ div.at-bat {
    white-space: nowrap;
 }
 
+th {
+    white-space: nowrap;
+}
+
 .at-bat .diamond {
     width: 3em;
     height: 3em;
