@@ -24,9 +24,23 @@ class App {
     }
 
     //DOM manipulation related to Game Class
-    static renderGameSummary(currentGame){
-        const main = document.querySelector('div.main')
-        main.innerHTML = `<p>${currentGame.awayTeam.name} - ${currentGame.awayTeamRuns}</p><p>${currentGame.homeTeam.name} - ${currentGame.homeTeamRuns}</p>`
+    static renderGameSummaryTable(id){
+        const table = document.createElement('table')
+        table.setAttribute('id', id)
+        table.setAttribute('class', 'at-bat')
+        for (let rowCounter = 0; rowCounter < 9; rowCounter++){
+            const row = document.createElement('tr')
+            row.setAttribute('id', `batter-${rowCounter}`)
+            for (let columnCounter = 0; columnCounter < 10; columnCounter++){
+                const cell = document.createElement('td')
+                if (columnCounter == 0){cell.setAttribute('class', 'batter-name')}
+                else {cell.setAttribute('class', `inning-${columnCounter}-at-bat`)}
+                cell.setAttribute('id', `batter-${rowCounter}-inning-${columnCounter}`)
+                row.appendChild(cell)
+            }
+            table.appendChild(row)
+        }
+        App.appendToMain(table)
     }
 
     // DOM manipulation related to Inning Class
@@ -96,7 +110,6 @@ class App {
     }
 
     static renderAtBatButtons(currentGame){
-        const table = document.querySelector('table.at-bat')
         const hitBtn = document.createElement('input')
         hitBtn.setAttribute('type', 'submit')
         hitBtn.setAttribute('id', 'hit-btn')
@@ -107,7 +120,7 @@ class App {
             console.log(this)
             App.renderHitForm.call(new AtBat(currentGame.currentBatter), currentGame)
         })
-        table.appendChild(hitBtn)
+        App.appendToMain(hitBtn)
 
         const outBtn = document.createElement('input')
         outBtn.setAttribute('type', 'submit')
@@ -117,14 +130,13 @@ class App {
             e.preventDefault()
             App.renderOutForm.call(new AtBat(currentGame.currentBatter), currentGame)
         })
-        table.appendChild(outBtn)
+        App.appendToMain(outBtn)
     }
 
     static renderAtBatFormContainer(){
-        const table = document.querySelector('table.at-bat')
         const atBatFormContainer = document.createElement('div')
         atBatFormContainer.setAttribute('id', 'at-bat-submit')
-        table.appendChild(atBatFormContainer)
+        App.appendToMain(atBatFormContainer)
     }
 
     static renderHitForm(currentGame){

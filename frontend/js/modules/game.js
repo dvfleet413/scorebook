@@ -61,7 +61,7 @@ class Game {
 
     changeSides(){
         // Change sides if before the bottom of the ninth, always after top of inning, always when tied
-        if (this._currentInning < 9.5 || this._currentInning % 1 == 0 || this.homeTeamRuns == this.awayTeamRuns){
+        if (this._currentInning < 1.5 || this._currentInning % 1 == 0 || this.homeTeamRuns == this.awayTeamRuns){
             this._currentInning += 0.5;
             if (this.currentInning.team == this.homeTeam){
                 this.innings.push(new Inning(this._currentInning, this.awayTeam))
@@ -78,7 +78,24 @@ class Game {
 
     summarize(){
         App.assignH1AndTitle('Game is Over', 'Scorebook - Game Complete')
-        App.renderGameSummary(this)
+        App.renderGameSummaryTable('away-team')
+        App.renderGameSummaryTable('home-team')
+        const nameBoxes = document.querySelectorAll('#away-team td.batter-name')
+        for (let i = 0; i < nameBoxes.length; i++){
+            nameBoxes[i].innerText = this.awayTeam.players[i]._name
+        }
+        const awayTeamInnings = this.innings.filter(inning => inning.team == this.awayTeam)
+        awayTeamInnings.forEach(inning => {
+            inning.atBats.forEach(atBat => {
+                const battingOrderIndex = this.awayTeam.players.findIndex(player => player == atBat._batter)
+                const target = document.getElementById(`batter-${battingOrderIndex}-inning-${inning._number}`)
+                const atBatSquare = document.createElement('div')
+                atBatSquare.setAttribute('class', 'at-bat')
+                atBatSquare.innerHTML = atBat.htmlRepresentation()
+                target.appendChild(atBatSquare)
+            })
+        })
+
     }
 
 
