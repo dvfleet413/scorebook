@@ -1,5 +1,4 @@
 import { AtBat } from './atBat.js'
-import { Inning } from "./inning.js";
 
 // This Class contains the functions that primarily deal with DOM manipulation 
 // such as clearing pages, rendering tables, rendering forms and buttons, 

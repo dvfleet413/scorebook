@@ -59,66 +59,6 @@ class Game {
         return result
     }
 
-    changeSides(){
-        // Change sides if before the bottom of the ninth, always after top of inning, always when tied
-        if (this._currentInning < 1.5 || this._currentInning % 1 == 0 || this.homeTeamRuns == this.awayTeamRuns){
-            this._currentInning += 0.5;
-            if (this.currentInning.team == this.homeTeam){
-                this.innings.push(new Inning(this._currentInning, this.awayTeam))
-            }
-            else{
-                this.innings.push(new Inning(this._currentInning, this.homeTeam))
-            }
-        }
-        // If none of above conditions are met, game is over
-        else {
-            this.isOver = true;
-        }
-    }
-
-    summarize(){
-        App.clearMain()
-        App.assignH1AndTitle('Game is Over', 'Scorebook - Game Complete')
-        App.renderGameSummaryTable('away-team', this.awayTeam.name)
-        App.renderGameSummaryTable('home-team', this.homeTeam.name)
-
-        // Away Team
-        const awayNameBoxes = document.querySelectorAll('#away-team td.batter-name')
-        for (let i = 0; i < awayNameBoxes.length; i++){
-            awayNameBoxes[i].innerText = this.awayTeam.players[i]._name
-        }
-        const awayTeamInnings = this.innings.filter(inning => inning.team == this.awayTeam)
-        awayTeamInnings.forEach(inning => {
-            inning.atBats.forEach(atBat => {
-                const battingOrderIndex = this.awayTeam.players.findIndex(player => player == atBat._batter)
-                const target = document.getElementById(`away-team-batter-${battingOrderIndex}-inning-${inning._number}`)
-                const atBatSquare = document.createElement('div')
-                atBatSquare.setAttribute('class', 'at-bat')
-                atBatSquare.innerHTML = atBat.htmlRepresentation()
-                target.appendChild(atBatSquare)
-            })
-        })
-
-        // Home Team
-        const homeNameBoxes = document.querySelectorAll('#home-team td.batter-name')
-        for (let i = 0; i < homeNameBoxes.length; i++){
-            homeNameBoxes[i].innerText = this.homeTeam.players[i]._name
-        }
-        const homeTeamInnings = this.innings.filter(inning => inning.team == this.homeTeam)
-        homeTeamInnings.forEach(inning => {
-            inning.atBats.forEach(atBat => {
-                const battingOrderIndex = this.homeTeam.players.findIndex(player => player == atBat._batter)
-                const target = document.getElementById(`home-team-batter-${battingOrderIndex}-inning-${Math.floor(inning._number)}`)
-                const atBatSquare = document.createElement('div')
-                atBatSquare.setAttribute('class', 'at-bat')
-                atBatSquare.innerHTML = atBat.htmlRepresentation()
-                target.appendChild(atBatSquare)
-            })
-        })
-
-    }
-
-
     start(){
         App.assignH1AndTitle('Start a New Game', 'Scorebook - New Game')
         App.clearMain()
@@ -160,6 +100,93 @@ class Game {
     
         // Render form
         App.appendToMain(form)
+    }
+
+    changeSides(){
+        // Change sides if before the bottom of the ninth, always after top of inning, always when tied
+        if (this._currentInning < 1.5 || this._currentInning % 1 == 0 || this.homeTeamRuns == this.awayTeamRuns){
+            this._currentInning += 0.5;
+            if (this.currentInning.team == this.homeTeam){
+                this.innings.push(new Inning(this._currentInning, this.awayTeam))
+            }
+            else{
+                this.innings.push(new Inning(this._currentInning, this.homeTeam))
+            }
+        }
+        // If none of above conditions are met, game is over
+        else {
+            this.isOver = true;
+        }
+    }
+
+    summarize(){
+        this.save()
+        App.clearMain()
+        App.assignH1AndTitle('Game is Over', 'Scorebook - Game Complete')
+        App.renderGameSummaryTable('away-team', this.awayTeam.name)
+        App.renderGameSummaryTable('home-team', this.homeTeam.name)
+
+        // Away Team
+        const awayNameBoxes = document.querySelectorAll('#away-team td.batter-name')
+        for (let i = 0; i < awayNameBoxes.length; i++){
+            awayNameBoxes[i].innerText = this.awayTeam.players[i]._name
+        }
+        const awayTeamInnings = this.innings.filter(inning => inning.team == this.awayTeam)
+        awayTeamInnings.forEach(inning => {
+            inning.atBats.forEach(atBat => {
+                const battingOrderIndex = this.awayTeam.players.findIndex(player => player == atBat._batter)
+                const target = document.getElementById(`away-team-batter-${battingOrderIndex}-inning-${inning._number}`)
+                const atBatSquare = document.createElement('div')
+                atBatSquare.setAttribute('class', 'at-bat')
+                atBatSquare.innerHTML = atBat.htmlRepresentation()
+                target.appendChild(atBatSquare)
+            })
+        })
+
+        // Home Team
+        const homeNameBoxes = document.querySelectorAll('#home-team td.batter-name')
+        for (let i = 0; i < homeNameBoxes.length; i++){
+            homeNameBoxes[i].innerText = this.homeTeam.players[i]._name
+        }
+        const homeTeamInnings = this.innings.filter(inning => inning.team == this.homeTeam)
+        homeTeamInnings.forEach(inning => {
+            inning.atBats.forEach(atBat => {
+                const battingOrderIndex = this.homeTeam.players.findIndex(player => player == atBat._batter)
+                const target = document.getElementById(`home-team-batter-${battingOrderIndex}-inning-${Math.floor(inning._number)}`)
+                const atBatSquare = document.createElement('div')
+                atBatSquare.setAttribute('class', 'at-bat')
+                atBatSquare.innerHTML = atBat.htmlRepresentation()
+                target.appendChild(atBatSquare)
+            })
+        })
+    }
+
+    save(){
+        // make AJAX POST call with current game to save it to the database, along with all associated records
+        const url = 'http://localhost:3000/games'
+        const configObj = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accepts': 'application/json'
+            },
+            body: JSON.stringify(this)
+        }
+        fetch(url, configObj)
+            .then(function(response){
+                return response.json()
+            })
+            .then(function(json){
+                console.log(json)
+            })
+            .catch(function(error){
+                console.log(error.message)
+            })
+    }
+
+    static requestSavedGame(){
+        // make AJAX GET call to get a game
+        // create new game object from response and call summarize() to render scorecard
     }
 }
 
