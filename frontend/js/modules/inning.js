@@ -17,30 +17,8 @@ class Inning {
     async checkRunners(currentGame){
         const runners = currentGame.currentInning.atBats.filter(runner => runner.baseReached > 0 && runner.baseReached < 4)
         for (let i = 0; i < runners.length; i++){
-            await Inning.renderCheckRunnerForm(runners[i])
+            await App.renderCheckRunnerForm(runners[i])
         }
-    }
-
-    static renderCheckRunnerForm(runner){
-        return new Promise((resolve, reject) => {
-            const form = document.createElement('form')
-            const formTitle = document.createElement('h4')
-            formTitle.innerText = runner.runnerName
-            form.appendChild(formTitle)
-            const selectField = document.createElement('select')
-            selectField.innerHTML = `<option value='1'>First</option><option value='2'>Second</option><option value='3'>Third</option><option value='4'>Home</option>`
-            form.appendChild(selectField)
-            const submitBtn = document.createElement('button')
-            submitBtn.setAttribute('type', 'button')
-            submitBtn.innerText = "Advance Runner"
-            form.appendChild(submitBtn)
-            document.querySelector('.main').appendChild(form)
-            submitBtn.addEventListener('click', (e) => {
-                e.preventDefault()
-                runner.baseReached = selectField.value;
-                resolve("Runner Updated")
-            })
-        })
     }
 
     static renderInningInterface(){
