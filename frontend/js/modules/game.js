@@ -80,15 +80,34 @@ class Game {
         App.assignH1AndTitle('Game is Over', 'Scorebook - Game Complete')
         App.renderGameSummaryTable('away-team')
         App.renderGameSummaryTable('home-team')
-        const nameBoxes = document.querySelectorAll('#away-team td.batter-name')
-        for (let i = 0; i < nameBoxes.length; i++){
-            nameBoxes[i].innerText = this.awayTeam.players[i]._name
+
+        // Away Team
+        const awayNameBoxes = document.querySelectorAll('#away-team td.batter-name')
+        for (let i = 0; i < awayNameBoxes.length; i++){
+            awayNameBoxes[i].innerText = this.awayTeam.players[i]._name
         }
         const awayTeamInnings = this.innings.filter(inning => inning.team == this.awayTeam)
         awayTeamInnings.forEach(inning => {
             inning.atBats.forEach(atBat => {
                 const battingOrderIndex = this.awayTeam.players.findIndex(player => player == atBat._batter)
-                const target = document.getElementById(`batter-${battingOrderIndex}-inning-${inning._number}`)
+                const target = document.getElementById(`away-team-batter-${battingOrderIndex}-inning-${inning._number}`)
+                const atBatSquare = document.createElement('div')
+                atBatSquare.setAttribute('class', 'at-bat')
+                atBatSquare.innerHTML = atBat.htmlRepresentation()
+                target.appendChild(atBatSquare)
+            })
+        })
+
+        // Home Team
+        const homeNameBoxes = document.querySelectorAll('#home-team td.batter-name')
+        for (let i = 0; i < homeNameBoxes.length; i++){
+            homeNameBoxes[i].innerText = this.homeTeam.players[i]._name
+        }
+        const homeTeamInnings = this.innings.filter(inning => inning.team == this.homeTeam)
+        homeTeamInnings.forEach(inning => {
+            inning.atBats.forEach(atBat => {
+                const battingOrderIndex = this.homeTeam.players.findIndex(player => player == atBat._batter)
+                const target = document.getElementById(`home-team-batter-${battingOrderIndex}-inning-${Math.floor(inning._number)}`)
                 const atBatSquare = document.createElement('div')
                 atBatSquare.setAttribute('class', 'at-bat')
                 atBatSquare.innerHTML = atBat.htmlRepresentation()

@@ -35,7 +35,7 @@ class App {
                 const cell = document.createElement('td')
                 if (columnCounter == 0){cell.setAttribute('class', 'batter-name')}
                 else {cell.setAttribute('class', `inning-${columnCounter}-at-bat`)}
-                cell.setAttribute('id', `batter-${rowCounter}-inning-${columnCounter}`)
+                cell.setAttribute('id', `${id}-batter-${rowCounter}-inning-${columnCounter}`)
                 row.appendChild(cell)
             }
             table.appendChild(row)
