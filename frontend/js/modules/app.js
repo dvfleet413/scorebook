@@ -168,7 +168,7 @@ class App {
             e.preventDefault()
             currentGame.teamAtBat.currentBatterIndex += 1;
             this.baseReached = parseInt(document.getElementById('hit-options').value, 10)
-            this.result = document.getElementById('hit-options').value
+            this.result = parseInt(document.getElementById('hit-options').value, 10)
             await currentGame.currentInning.checkRunners(currentGame)
             currentGame.currentInning.atBats.push(this)
             App.clearMain()

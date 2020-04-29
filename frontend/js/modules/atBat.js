@@ -5,7 +5,7 @@ class AtBat {
     constructor(batter, result, baseReached, outNumber, outCode){
         this.batter = batter;
         this.name = batter._name
-        this._result = result;
+        this.result = result;
         this.baseReached = baseReached;
         this._outNumber = outNumber;
         this.outCode = outCode;
@@ -19,7 +19,7 @@ class AtBat {
         let result = `<table><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td class="out">`
         if (this._outNumber){ result += `<span class='out-number'>${this._outNumber}</span>`}
         result += `</td><td></td><td class='result'>`
-        if (this._result){ result += this.result}
+        if (this.result){ result += this.hitDescription}
         result += `</td></tr></table><div class='diamond`
         if (this.baseReached){ result += ` reach-${this.baseReached}`}
         result += `'></div><br /><div class='out-code'><span>`
@@ -28,15 +28,11 @@ class AtBat {
         return result
     }
 
-    set result(result){
-        this._result = parseInt(result, 10)
-    }
-
-    get result(){
-        if (this._result && this._result < 4){
-            return `${this._result}B`
+    get hitDescription(){
+        if (this.result && this.result < 4){
+            return `${this.result}B`
         }
-        else if (this._result == 4){
+        else if (this.result == 4){
             return 'HR'
         }
     }
