@@ -4,10 +4,12 @@ import { AtBat } from './atBat.js'
 import { App } from './app.js';
 
 class Game {
-    constructor(currentInning = 1.0, homeTeam, awayTeam, innings = [], isOver = false){
+    constructor(currentInning = 1.0, homeTeam, awayTeam, homeTeamRuns = 0, awayTeamRuns = 0, innings = [], isOver = false){
         this._currentInning = currentInning;
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
+        this.homeTeamRuns = homeTeamRuns;
+        this.awayTeamRuns = awayTeamRuns;
         this.innings = innings;
         this.isOver = isOver
     }
@@ -41,21 +43,23 @@ class Game {
         }
     }
 
-    get homeTeamRuns(){
+    calculateHomeTeamRuns(){
         let result = 0;
         const homeInnings = this.innings.filter((inning) => inning.team == this.homeTeam)
         homeInnings.forEach((inning) => {
             result += inning.atBats.filter((atBat) => atBat.baseReached == 4).length
         })
+        this.homeTeamRuns = result
         return result
     }
 
-    get awayTeamRuns(){
+    calculateAwayTeamRuns(){
         let result = 0;
         const awayInnings = this.innings.filter((inning) => inning.team == this.awayTeam)
         awayInnings.forEach((inning) => {
             result += inning.atBats.filter((atBat) => atBat.baseReached == 4).length
         })
+        this.awayTeamRuns = result
         return result
     }
 
@@ -104,7 +108,7 @@ class Game {
 
     changeSides(){
         // Change sides if before the bottom of the ninth, always after top of inning, always when tied
-        if (this._currentInning < 1.5 || this._currentInning % 1 == 0 || this.homeTeamRuns == this.awayTeamRuns){
+        if (this._currentInning < 1.5 || this._currentInning % 1 == 0 || this.calculateHomeTeamRuns == this.calculateAwayTeamRuns){
             this._currentInning += 0.5;
             if (this.currentInning.team == this.homeTeam){
                 this.innings.push(new Inning(this._currentInning, this.awayTeam))
@@ -115,6 +119,9 @@ class Game {
         }
         // If none of above conditions are met, game is over
         else {
+            console.log(this)
+            this.calculateAwayTeamRuns()
+            this.calculateHomeTeamRuns()
             this.isOver = true;
         }
     }
@@ -170,7 +177,7 @@ class Game {
                 'Content-Type': 'application/json',
                 'Accepts': 'application/json'
             },
-            body: JSON.stringify(this)
+            body: JSON.stringify({game: this})
         }
         fetch(url, configObj)
             .then(function(response){
