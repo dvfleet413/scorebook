@@ -4,6 +4,7 @@ import { App } from "./app.js";
 class AtBat {
     constructor(batter, result, baseReached, outNumber, outCode){
         this.batter = batter;
+        this.name = batter._name
         this._result = result;
         this.baseReached = baseReached;
         this._outNumber = outNumber;

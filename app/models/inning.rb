@@ -5,6 +5,11 @@ class Inning < ApplicationRecord
   accepts_nested_attributes_for :at_bats
 
   def at_bats_attributes=(at_bats)
-    binding.pry
+    at_bats.each do |at_bat|
+      binding.pry
+      new_at_bat = AtBat.new(base_reached: at_bat[:base_reached])
+      new_at_bat.player = Player.find(name: at_bat[:name])
+      self.at_bats << new_at_bat
+    end
   end
 end
