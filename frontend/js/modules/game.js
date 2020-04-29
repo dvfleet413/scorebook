@@ -10,12 +10,16 @@ class Game {
         this.awayTeam = awayTeam;
         this.homeTeamRuns = homeTeamRuns;
         this.awayTeamRuns = awayTeamRuns;
-        this.innings = innings;
+        this.inningsAttributes = innings;
         this.isOver = isOver
     }
 
+    get innings(){
+        return this.inningsAttributes
+    }
+
     get currentInning(){
-        return this.innings.slice(-1)[0]
+        return this.inningsAttributes.slice(-1)[0]
     }
 
     get teamAtBat(){
