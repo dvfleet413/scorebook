@@ -9,7 +9,7 @@ class GamesController < ApplicationController
 
     def create
         game = Game.new(games_params)
-        # binding.pry
+        binding.pry
     end
 
 

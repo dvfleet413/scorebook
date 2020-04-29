@@ -7,7 +7,7 @@ class AtBat {
         this.name = batter._name
         this.result = result;
         this.baseReached = baseReached;
-        this._outNumber = outNumber;
+        this.outNumber = outNumber;
         this.outCode = outCode;
     }
 
@@ -17,7 +17,7 @@ class AtBat {
 
     htmlRepresentation(){
         let result = `<table><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td class="out">`
-        if (this._outNumber){ result += `<span class='out-number'>${this._outNumber}</span>`}
+        if (this.outNumber){ result += `<span class='out-number'>${this.outNumber}</span>`}
         result += `</td><td></td><td class='result'>`
         if (this.result){ result += this.hitDescription}
         result += `</td></tr></table><div class='diamond`

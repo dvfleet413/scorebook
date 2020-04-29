@@ -200,7 +200,7 @@ class App {
             currentGame.teamAtBat.currentBatterIndex += 1; 
             this.outCode = document.getElementById('out-code-text').value
             currentGame.currentInning.outs += 1
-            this._outNumber = currentGame.currentInning.outs
+            this.outNumber = currentGame.currentInning.outs
             currentGame.currentInning.atBats.push(this)
             if (currentGame.currentInning.outs == 3){ 
                 currentGame.changeSides()
