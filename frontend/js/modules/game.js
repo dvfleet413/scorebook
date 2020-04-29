@@ -145,7 +145,7 @@ class Game {
         const awayTeamInnings = this.innings.filter(inning => inning.team == this.awayTeam)
         awayTeamInnings.forEach(inning => {
             inning.atBats.forEach(atBat => {
-                const battingOrderIndex = this.awayTeam.players.findIndex(player => player == atBat._batter)
+                const battingOrderIndex = this.awayTeam.players.findIndex(player => player == atBat.batter)
                 const target = document.getElementById(`away-team-batter-${battingOrderIndex}-inning-${inning.number}`)
                 const atBatSquare = document.createElement('div')
                 atBatSquare.setAttribute('class', 'at-bat')
@@ -162,7 +162,7 @@ class Game {
         const homeTeamInnings = this.innings.filter(inning => inning.team == this.homeTeam)
         homeTeamInnings.forEach(inning => {
             inning.atBats.forEach(atBat => {
-                const battingOrderIndex = this.homeTeam.players.findIndex(player => player == atBat._batter)
+                const battingOrderIndex = this.homeTeam.players.findIndex(player => player == atBat.batter)
                 const target = document.getElementById(`home-team-batter-${battingOrderIndex}-inning-${Math.floor(inning.number)}`)
                 const atBatSquare = document.createElement('div')
                 atBatSquare.setAttribute('class', 'at-bat')

@@ -3,4 +3,5 @@ class Game < ApplicationRecord
     belongs_to :away_team, class_name: "Team", foreign_key: :away_team_id
     has_many :innings
     accepts_nested_attributes_for :innings
+
 end

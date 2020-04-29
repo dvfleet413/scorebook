@@ -3,7 +3,7 @@ import { App } from "./app.js";
 
 class AtBat {
     constructor(batter, result, baseReached, outNumber, outCode){
-        this._batter = batter;
+        this.batter = batter;
         this._result = result;
         this.baseReached = baseReached;
         this._outNumber = outNumber;
@@ -11,7 +11,7 @@ class AtBat {
     }
 
     get runnerName(){
-        return this._batter._name
+        return this.batter._name
     }
 
     htmlRepresentation(){
