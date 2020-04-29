@@ -149,7 +149,7 @@ class Game {
     }
 
     summarize(){
-        this.save()
+        // this.save()
         App.clearMain()
         App.assignH1AndTitle('Game is Over', 'Scorebook - Game Complete')
         App.renderGameSummaryTable('away-team', this.awayTeam.name)
@@ -229,8 +229,25 @@ class Game {
                 .then((json) => {
                     console.log(json)
                     currentGame = new Game()
+                    const homeTeamId = json['data']['relationships']['home_team']['data']['id']
+                    const homeTeamData = json['included'].find((element) => element.type == 'team' && element.id == homeTeamId)
+                    console.log(homeTeamData)
+                    currentGame.homeTeam = new Team (homeTeamData['attributes']['name'])
+                    const awayTeamId = json['data']['relationships']['away_team']['data']['id']
+                    const awayTeamData = json['included'].find((element) => element.type == 'team' && element.id == awayTeamId)
+                    currentGame.awayTeam = new Team (awayTeamData['attributes']['name'])
                     currentGame.homeTeamRuns = json['data']['attributes']['home_team_runs']
                     currentGame.awayTeamRuns = json['data']['attributes']['away_team_runs']
+                    const inningsArray = json['included'].filter(element => element.type == 'inning')
+                    console.log(inningsArray)
+                    inningsArray.forEach(inning => {
+                        const newInning = new Inning(inning['attributes']['number'])
+                        if (newInning.number % 1 == 0){newInning.team = currentGame.awayTeam}
+                        else {newInning.team = currentGame.homeTeam }
+                        currentGame.innings.push(newInning)
+                    })
+                    console.log(currentGame)
+                    currentGame.isOver = true
                     resolve(currentGame)
                 })
                 .catch((error) => {

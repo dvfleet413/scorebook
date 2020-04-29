@@ -22,5 +22,8 @@ Game.requestSavedGame(currentGame, 2)
     .then((response) => {
         currentGame = response
     })
+    .catch((error) => {
+        console.log(error.message)
+    })
 
 
