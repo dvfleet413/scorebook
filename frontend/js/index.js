@@ -17,3 +17,12 @@ const run = function(){
 }
 
 run()
+
+Game.requestSavedGame(currentGame, 2)
+    .then((response) => {
+        console.log(response)
+        currentGame = response
+        console.log(currentGame)
+    })
+
+

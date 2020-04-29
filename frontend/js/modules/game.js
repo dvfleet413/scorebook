@@ -130,6 +130,8 @@ class Game {
         // Change sides if before the bottom of the ninth, always after top of inning, always when tied
         if (this._currentInning < 9.5 || this._currentInning % 1 == 0 || this.calculateHomeTeamRuns == this.calculateAwayTeamRuns){
             this._currentInning += 0.5;
+            this.calculateHomeTeamRuns()
+            this.calculateAwayTeamRuns()
             if (this.currentInning.team == this.homeTeam){
                 this.innings.push(new Inning(this._currentInning, this.awayTeam))
             }
@@ -211,9 +213,31 @@ class Game {
             })
     }
 
-    static requestSavedGame(){
-        // make AJAX GET call to get a game
-        // create new game object from response and call summarize() to render scorecard
+    static requestGameIndex(){
+
+    }
+
+    static requestSavedGame(currentGame, id){
+        return new Promise((resolve, reject) => {
+            // make AJAX GET call to get a game
+            // create new game object from response and call summarize() to render scorecard
+            const url = `http://localhost:3000/games/${id}`
+            fetch(url)
+                .then((response) => {
+                    return response.json()
+                })
+                .then((json) => {
+                    console.log(json)
+                    currentGame = new Game()
+                    currentGame.homeTeamRuns = json['data']['attributes']['home_team_runs']
+                    currentGame.awayTeamRuns = json['data']['attributes']['away_team_runs']
+                    resolve(currentGame)
+                })
+                .catch((error) => {
+                    console.log(error.message)
+                    reject(`you don't got game`)
+                })
+        })
     }
 }
 
