@@ -1,4 +1,9 @@
 class GamesController < ApplicationController
+    def index
+        games = Game.all
+        render json: GameSerializer.new(games)
+    end
+
     def show 
         set_game 
         options = {
@@ -8,8 +13,7 @@ class GamesController < ApplicationController
     end
 
     def create
-        game = Game.new(games_params)
-        binding.pry
+        game = Game.create!(games_params)
     end
 
 

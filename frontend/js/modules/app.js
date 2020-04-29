@@ -166,7 +166,12 @@ class App {
         atBatSubmitBtn.setAttribute('type', 'submit')
         atBatSubmitBtn.addEventListener('click', async (e) => {
             e.preventDefault()
-            currentGame.teamAtBat.currentBatterIndex += 1;
+            if (currentGame.teamAtBat.currentBatterIndex < 8){
+                currentGame.teamAtBat.currentBatterIndex += 1;
+            }
+            else {
+                currentGame.teamAtBat.currentBatterIndex = 0;
+            }
             this.baseReached = parseInt(document.getElementById('hit-options').value, 10)
             this.result = parseInt(document.getElementById('hit-options').value, 10)
             await currentGame.currentInning.checkRunners(currentGame)
@@ -197,7 +202,12 @@ class App {
         outSubmitBtn.setAttribute('type', 'submit')
         outSubmitBtn.addEventListener('click', async (e) => {
             e.preventDefault()
-            currentGame.teamAtBat.currentBatterIndex += 1; 
+            if (currentGame.teamAtBat.currentBatterIndex < 8){
+                currentGame.teamAtBat.currentBatterIndex += 1;
+            }
+            else {
+                currentGame.teamAtBat.currentBatterIndex = 0;
+            }
             this.outCode = document.getElementById('out-code-text').value
             currentGame.currentInning.outs += 1
             this.outNumber = currentGame.currentInning.outs

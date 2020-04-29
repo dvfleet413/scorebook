@@ -128,7 +128,7 @@ class Game {
 
     changeSides(){
         // Change sides if before the bottom of the ninth, always after top of inning, always when tied
-        if (this._currentInning < 1.5 || this._currentInning % 1 == 0 || this.calculateHomeTeamRuns == this.calculateAwayTeamRuns){
+        if (this._currentInning < 9.5 || this._currentInning % 1 == 0 || this.calculateHomeTeamRuns == this.calculateAwayTeamRuns){
             this._currentInning += 0.5;
             if (this.currentInning.team == this.homeTeam){
                 this.innings.push(new Inning(this._currentInning, this.awayTeam))
