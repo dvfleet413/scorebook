@@ -5,6 +5,7 @@ class Inning {
         this.number = number;
         this.team = team;
         this.atBats = atBats;
+        this.atBatsAttributes = this.atBats;
         this.outs = outs;
     }
 
