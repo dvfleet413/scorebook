@@ -19,7 +19,7 @@ class Game {
     }
 
     get teamAtBat(){
-        if (this.currentInning._number % 1 == 0){
+        if (this.currentInning.number % 1 == 0){
             return this.awayTeam
         }
         else {
@@ -33,7 +33,7 @@ class Game {
     }
 
     get currentBatter(){
-        if (this.currentInning._number % 1 == 0){
+        if (this.currentInning.number % 1 == 0){
             let index = this.awayTeam.currentBatterIndex
             return this.awayTeam.players[index]
         }
@@ -142,7 +142,7 @@ class Game {
         awayTeamInnings.forEach(inning => {
             inning.atBats.forEach(atBat => {
                 const battingOrderIndex = this.awayTeam.players.findIndex(player => player == atBat._batter)
-                const target = document.getElementById(`away-team-batter-${battingOrderIndex}-inning-${inning._number}`)
+                const target = document.getElementById(`away-team-batter-${battingOrderIndex}-inning-${inning.number}`)
                 const atBatSquare = document.createElement('div')
                 atBatSquare.setAttribute('class', 'at-bat')
                 atBatSquare.innerHTML = atBat.htmlRepresentation()
@@ -159,7 +159,7 @@ class Game {
         homeTeamInnings.forEach(inning => {
             inning.atBats.forEach(atBat => {
                 const battingOrderIndex = this.homeTeam.players.findIndex(player => player == atBat._batter)
-                const target = document.getElementById(`home-team-batter-${battingOrderIndex}-inning-${Math.floor(inning._number)}`)
+                const target = document.getElementById(`home-team-batter-${battingOrderIndex}-inning-${Math.floor(inning.number)}`)
                 const atBatSquare = document.createElement('div')
                 atBatSquare.setAttribute('class', 'at-bat')
                 atBatSquare.innerHTML = atBat.htmlRepresentation()

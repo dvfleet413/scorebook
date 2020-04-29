@@ -57,7 +57,7 @@ class App {
     // DOM manipulation related to Inning Class
     static renderInningInterface(){
         App.clearMain()
-        App.assignH1AndTitle(`${this.currentInning.number} - ${this.currentInning.team.name}`, `Scorebook`)
+        App.assignH1AndTitle(`${this.currentInning.numberDescription} - ${this.currentInning.team.name}`, `Scorebook`)
         const table = document.createElement('table')
         table.setAttribute('class', 'at-bat')
         App.appendToMain(table)

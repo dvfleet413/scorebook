@@ -2,15 +2,15 @@ import { App } from './app.js';
 
 class Inning {
     constructor(number, team, atBats = [], outs = 0){
-        this._number = number;
+        this.number = number;
         this.team = team;
         this.atBats = atBats;
         this.outs = outs;
     }
 
-    get number(){
-        if(this._number % 1 === 0){ return `Top ${Math.floor(this._number)}` }
-        else{ return `Bottom ${Math.floor(this._number)}` }
+    get numberDescription(){
+        if(this.number % 1 === 0){ return `Top ${Math.floor(this.number)}` }
+        else{ return `Bottom ${Math.floor(this.number)}` }
     }
 
     async checkRunners(currentGame){

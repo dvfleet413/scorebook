@@ -8,7 +8,7 @@ class GamesController < ApplicationController
     end
 
     def create
-        # game = Game.new(home_team_runs: games_params[:_homeTeamRuns], away_team_runs: games_params[:_awayTeamRuns])
+        game = Game.new(games_params)
         binding.pry
     end
 
@@ -19,6 +19,7 @@ class GamesController < ApplicationController
         end
 
         def games_params
-            params.require(:game).permit(:home_team_runs, :away_team_runs)
+            params.require(:game).permit(:home_team_runs, :away_team_runs, 
+                                        innings_attributes: [:number])
         end
 end
