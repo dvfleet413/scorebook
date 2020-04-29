@@ -6,8 +6,8 @@ import { App } from './app.js';
 class Game {
     constructor(currentInning = 1.0, homeTeam, awayTeam, homeTeamRuns = 0, awayTeamRuns = 0, innings = [], isOver = false){
         this._currentInning = currentInning;
-        this.homeTeam = homeTeam;
-        this.awayTeam = awayTeam;
+        this.homeTeamAttributes = homeTeam
+        this.awayTeamAttributes = awayTeam
         this.homeTeamRuns = homeTeamRuns;
         this.awayTeamRuns = awayTeamRuns;
         this.inningsAttributes = innings;
@@ -16,6 +16,22 @@ class Game {
 
     get innings(){
         return this.inningsAttributes
+    }
+
+    get homeTeam(){
+        return this.homeTeamAttributes
+    }
+
+    set homeTeam(homeTeam){
+        this.homeTeamAttributes = homeTeam
+    }
+
+    get awayTeam(){
+        return this.awayTeamAttributes
+    }
+
+    set awayTeam(awayTeam){
+        this.awayTeamAttributes = awayTeam
     }
 
     get currentInning(){

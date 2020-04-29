@@ -21,6 +21,8 @@ class GamesController < ApplicationController
         def games_params
             params.require(:game).permit(:home_team_runs, :away_team_runs, 
                                         innings_attributes: [:number, 
-                                            at_bats_attributes: [:name, :result, :base_reached, :out_number, :out_code]])
+                                            at_bats_attributes: [:name, :result, :base_reached, :out_number, :out_code]],
+                                        home_team_attributes: [:name],
+                                        away_team_attributes: [:name])
         end
 end
