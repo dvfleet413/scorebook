@@ -7,7 +7,7 @@ class GamesController < ApplicationController
     def show 
         set_game 
         options = {
-            include: [:home_team, :away_team, :innings, :"innings.at_bats"]
+            include: [:home_team, :'home_team.players', :away_team, :'away_team.players', :innings, :"innings.at_bats"]
         }
         render json: GameSerializer.new(@game, options)
     end
