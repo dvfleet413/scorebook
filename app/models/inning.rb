@@ -1,6 +1,6 @@
 class Inning < ApplicationRecord
   belongs_to :game
-  has_many :at_bats
+  has_many :at_bats, dependent: :destroy
 
   accepts_nested_attributes_for :at_bats
 
