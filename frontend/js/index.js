@@ -21,6 +21,7 @@ run()
 Game.requestSavedGame(currentGame, 2)
     .then((response) => {
         currentGame = response
+        currentGame.summarize()
     })
     .catch((error) => {
         console.log(error.message)
