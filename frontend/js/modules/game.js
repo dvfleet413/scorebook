@@ -189,6 +189,17 @@ class Game {
                 target.appendChild(atBatSquare)
             })
         })
+
+        const cells = document.querySelectorAll('td.at-batt-cell')
+        cells.forEach(cell => {
+            if (cell.innerHTML == ""){
+                cell.setAttribute('class', 'empty-cell')
+                const atBatSquare = document.createElement('div')
+                atBatSquare.setAttribute('class', 'at-bat')
+                atBatSquare.innerHTML = AtBat.newHTML()
+                cell.appendChild(atBatSquare)
+            }
+        })
     }
 
     save(){

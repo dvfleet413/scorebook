@@ -20,14 +20,6 @@ class Inning {
             await App.renderCheckRunnerForm(runners[i])
         }
     }
-
-    // static renderInningInterface(){
-    //     App.clearMain()
-    //     App.assignH1AndTitle(`${this.currentInning.number} - ${this.currentInning.team.name}`, `Scorebook`)
-    //     const table = document.createElement('table')
-    //     table.setAttribute('class', 'at-bat')
-    //     App.appendToMain(table)
-    // }
 }
 
 export { Inning };

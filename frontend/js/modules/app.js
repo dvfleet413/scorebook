@@ -45,7 +45,7 @@ class App {
             for (let columnCounter = 0; columnCounter < 10; columnCounter++){
                 const cell = document.createElement('td')
                 if (columnCounter == 0){cell.setAttribute('class', 'batter-name')}
-                else {cell.setAttribute('class', `inning-${columnCounter}-at-bat`)}
+                else {cell.setAttribute('class', `inning-${columnCounter}-at-bat at-batt-cell`)}
                 cell.setAttribute('id', `${id}-batter-${rowCounter}-inning-${columnCounter}`)
                 row.appendChild(cell)
             }
