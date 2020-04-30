@@ -150,7 +150,6 @@ class Game {
     }
 
     summarize(){
-        // this.save()
         App.clearMain()
         App.assignH1AndTitle('Game is Over', 'Scorebook - Game Complete')
         App.renderGameSummaryTable('away-team', this.awayTeam.name)

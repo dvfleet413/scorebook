@@ -219,6 +219,7 @@ class App {
                 await currentGame.currentInning.checkRunners(currentGame)
             }
             if (currentGame.isOver){
+                currentGame.save()
                 currentGame.summarize()
             }
             else {
