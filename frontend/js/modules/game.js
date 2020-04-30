@@ -1,6 +1,7 @@
 import { Team } from './team.js'
 import { Inning } from './inning.js'
 import { AtBat } from './atBat.js'
+import { Player } from './player.js'
 import { App } from './app.js';
 
 class Game {
@@ -230,14 +231,25 @@ class Game {
                     console.log(json)
                     // Build blank Game Object
                     currentGame = new Game()
-                    // Build Team Objects to add to Game
+                    // Build Team and Player Objects to add to Game
                     const homeTeamId = json['data']['relationships']['home_team']['data']['id']
                     const homeTeamData = json['included'].find((element) => element.type == 'team' && element.id == homeTeamId)
-                    console.log(homeTeamData)
                     currentGame.homeTeam = new Team (homeTeamData['attributes']['name'])
+                    const homeTeamPlayerIds = homeTeamData['relationships']['players']['data'].map(element => element.id)
+                    const homeTeamPlayersArray = json['included'].filter(element => element.type == 'player' && homeTeamPlayerIds.includes(element.id))
+                    homeTeamPlayersArray.forEach(player => {
+                        const newPlayer = new Player(player.attributes.name, player.attributes.number, player.attributes.position)
+                        currentGame.homeTeam.players.push(newPlayer)
+                    })
                     const awayTeamId = json['data']['relationships']['away_team']['data']['id']
                     const awayTeamData = json['included'].find((element) => element.type == 'team' && element.id == awayTeamId)
                     currentGame.awayTeam = new Team (awayTeamData['attributes']['name'])
+                    const awayTeamPlayerIds = awayTeamData['relationships']['players']['data'].map(element => element.id)
+                    const awayTeamPlayersArray = json['included'].filter(element => element.type == 'player' && awayTeamPlayerIds.includes(element.id))
+                    awayTeamPlayersArray.forEach(player => {
+                        const newPlayer = new Player(player.attributes.name, player.attributes.number, player.attributes.position)
+                        currentGame.awayTeam.players.push(newPlayer)
+                    })
                     currentGame.homeTeamRuns = json['data']['attributes']['home_team_runs']
                     currentGame.awayTeamRuns = json['data']['attributes']['away_team_runs']
                     // Build Inning Objects to add to Game
@@ -249,7 +261,17 @@ class Game {
                         else {newInning.team = currentGame.homeTeam }
                         const atBatIds = inning['relationships']['at_bats']['data'].map(element => element.id)
                         const atBatsArray = json['included'].filter((element => element.type == 'at_bat' && atBatIds.includes(element.id)))
-                        atBatsArray.forEach(atBat => newInning.atBats.push(atBat))
+                        atBatsArray.forEach(atBat => {
+                            let batter
+                            if (newInning.number % 1 == 0){
+                                batter = currentGame.awayTeam.players.find(player => player._name == atBat.attributes.player.name)
+                            }
+                            else {
+                                batter = currentGame.homeTeam.players.find(player => player._name == atBat.attributes.player.name)
+                            }
+                            const newAtBat = new AtBat(batter, atBat.attributes.result, atBat.attributes.base_reached, atBat.attributes.out_number, atBat.attributes.out_code)
+                            newInning.atBats.push(newAtBat)
+                        })
                         currentGame.innings.push(newInning)
                     })
                     console.log(currentGame)
