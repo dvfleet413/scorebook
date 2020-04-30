@@ -32,7 +32,7 @@ const getGameList = function(){
                 const gameLi = document.createElement('li')
                 const gameLink = document.createElement('a')
                 gameLink.setAttribute('href', '#')
-                gameLink.setAttribute('id', `${game.id}-1`)
+                gameLink.setAttribute('id', `${game.id}-game`)
                 gameLink.addEventListener('click', handleClick)
                 gameLink.innerText = game['attributes']['created_at']
                 gameLi.appendChild(gameLink)
@@ -44,7 +44,16 @@ const getGameList = function(){
 
 const handleClick = (e) => {
     e.preventDefault()
-    console.log(e)
+    const id = parseInt(e.target.id, 10)
+    console.log(e.target)
+    Game.requestSavedGame(currentGame, id)
+        .then(response => {
+            currentGame = response
+            currentGame.summarize()
+        })
+        .catch(error => {
+            console.log(error.message)
+        })
 }
 
 
