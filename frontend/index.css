@@ -112,6 +112,10 @@ span.out-number {
     line-height: 6em;
 }
 
+.empty-cell {
+    opacity: 30%;
+}
+
 #new-game-button {
     margin: 0 auto;
     display: block;

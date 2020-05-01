@@ -1,13 +1,25 @@
 import { Game } from './modules/game.js'
 import { App } from './modules/app.js'
 
-// Create and Load elements for start of app
 let currentGame = new Game()
+let showAbout = false
 
 const newGameBtn = document.getElementById('new-game-button')
 newGameBtn.addEventListener('click', (e) => {
     e.preventDefault()
     currentGame.start()
+})
+
+const about = document.getElementById('about')
+about.addEventListener('click', (e) => {
+    const par = e.target.nextElementSibling
+    showAbout = !showAbout
+    if (showAbout){
+        par.style.display = 'block'
+    }
+    else {
+        par.style.display = 'none'
+    }
 })
 
 const getGameList = () => {
