@@ -170,7 +170,7 @@ class App {
         // Select element for hit
         const hitSelection = document.createElement('select')
         hitSelection.setAttribute('id', 'hit-options')
-        hitSelection.innerHTML = `<option value='1'>Single</option><option value='2'>Double</option><option value='3'>Triple</option><option value='4'>Home Run</option>`
+        hitSelection.innerHTML = AtBat.hitOptions()
         form.appendChild(hitSelection)
         // Submit Button
         const atBatSubmitBtn = document.createElement('input')
@@ -184,8 +184,15 @@ class App {
             else {
                 currentGame.teamAtBat.currentBatterIndex = 0;
             }
-            this.baseReached = parseInt(document.getElementById('hit-options').value, 10)
-            this.result = parseInt(document.getElementById('hit-options').value, 10)
+            const result = document.getElementById('hit-options').value
+            if (result == 'BB'){
+                this.baseReached = 1
+                this.result = 'BB'
+            }
+            else{
+                this.baseReached = parseInt(result, 10)
+                this.result = parseInt(result, 10)
+            }
             await currentGame.currentInning.checkRunners(currentGame)
             currentGame.currentInning.atBats.push(this)
             App.clearMain()
@@ -203,12 +210,11 @@ class App {
         // Build Form for AtBat Result
         const form = document.createElement('form')
         form.setAttribute('class', 'out-code-form')
-        // Text input for out code
-        const outCodeInput = document.createElement('input')
-        outCodeInput.setAttribute('type', 'text')
-        outCodeInput.setAttribute('id', 'out-code-text')
-        outCodeInput.value = 'Out Code'
-        form.appendChild(outCodeInput)
+        // Select input for out code
+        const outSelection = document.createElement('select')
+        outSelection.setAttribute('id', 'out-code-options')
+        outSelection.innerHTML = AtBat.outOptions()
+        form.appendChild(outSelection)
         // Submit Button
         const outSubmitBtn = document.createElement('input')
         outSubmitBtn.setAttribute('type', 'submit')
@@ -221,7 +227,7 @@ class App {
             else {
                 currentGame.teamAtBat.currentBatterIndex = 0;
             }
-            this.outCode = document.getElementById('out-code-text').value
+            this.outCode = document.getElementById('out-code-options').value
             currentGame.currentInning.outs += 1
             this.outNumber = currentGame.currentInning.outs
             currentGame.currentInning.atBats.push(this)

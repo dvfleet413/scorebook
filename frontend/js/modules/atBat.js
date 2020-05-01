@@ -29,7 +29,10 @@ class AtBat {
     }
 
     get hitDescription(){
-        if (this.result && this.result < 4){
+        if (this.result == 'BB'){
+            return `BB`
+        }
+        else if (this.result && this.result < 4){
             return `${this.result}B`
         }
         else if (this.result == 4){
@@ -47,6 +50,29 @@ class AtBat {
         App.renderAtBatButtons(currentGame)
         App.renderAtBatFormContainer()
         console.log(currentGame)
+    }
+
+    static hitOptions(){
+        return `
+        <option value='BB'>Walk</option>
+        <option value='1'>Single</option>
+        <option value='2'>Double</option>
+        <option value='3'>Triple</option>
+        <option value='4'>Home Run</option>
+        `
+    }
+
+    static outOptions(){
+        return `
+            <option value="U-3">Ground Out To First Baseman</option
+            <option value="4-3">Ground Out To Second Baseman</option>
+            <option value="6-3">Ground Out To Shortstop</option>
+            <option value="5-3">Ground Out To Third Baseman</option>
+            <option value="F-9">Flyout to Rightfielder</option>
+            <option value="F-8">Flyout to Centerfielder</option>
+            <option value="F-7">Flyout To Leftfielder</option>
+            <option value="K">Strikeout</option>
+        `
     }
 }
 

@@ -49,6 +49,10 @@ th {
     margin-top: -1.5em;
 }
 
+.at-bat .reach-BB {
+    border-right: 3px solid black;
+}
+
 .at-bat .reach-1 {
     border-right: 3px solid black;
 }
