@@ -4,18 +4,11 @@ import { App } from './modules/app.js'
 // Create and Load elements for start of app
 let currentGame = new Game()
 
-const run = function(){
-    const newGameBtn = document.createElement('button')
-    newGameBtn.setAttribute('id', 'new-game-button')
-    newGameBtn.setAttribute('type', 'button')
-    newGameBtn.innerText = 'New Scorebook'
-    newGameBtn.addEventListener('click', (e) => {
-        e.preventDefault()
-        currentGame.start()
-    })
-    App.appendToMain(newGameBtn)
-    getGameList()
-}
+const newGameBtn = document.getElementById('new-game-button')
+newGameBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+    currentGame.start()
+})
 
 const getGameList = function(){
     const url = 'http://localhost:3000/games'
@@ -24,9 +17,7 @@ const getGameList = function(){
             return response.json()
         })
         .then(json => {
-            const gameList = document.createElement('div')
-            gameList.setAttribute('id', 'game-list')
-            App.appendToMain(gameList)
+            const gameList = document.getElementById('game-list')
             console.log(json['data'])
             json['data'].forEach(game => {
                 const gameLi = document.createElement('li')
@@ -40,7 +31,7 @@ const getGameList = function(){
             })
             console.log(json)
         })
-}
+}()
 
 const handleClick = (e) => {
     e.preventDefault()
@@ -55,18 +46,3 @@ const handleClick = (e) => {
             console.log(error.message)
         })
 }
-
-
-
-run()
-
-// Game.requestSavedGame(currentGame, 2)
-//     .then((response) => {
-//         currentGame = response
-//         currentGame.summarize()
-//     })
-//     .catch((error) => {
-//         console.log(error.message)
-//     })
-
-
