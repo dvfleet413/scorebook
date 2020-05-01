@@ -111,3 +111,21 @@ span.out-number {
 .batter-row p {
     line-height: 6em;
 }
+
+#new-game-button {
+    margin: 0 auto;
+    display: block;
+}
+
+div#at-bat-submit {
+    text-align: center;
+}
+
+form.at-bat-form {
+    display: inline-block;
+    padding: 1em;
+}
+
+.row.result-row {
+    padding: 1em;
+}

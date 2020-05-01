@@ -121,6 +121,11 @@ class App {
     }
 
     static renderAtBatButtons(currentGame){
+        const row = document.createElement('div')
+        row.setAttribute('class', 'row result-row')
+        const colOne = document.createElement('div')
+        colOne.setAttribute('class', 'col-sm text-center')
+        row.appendChild(colOne)
         const hitBtn = document.createElement('input')
         hitBtn.setAttribute('type', 'submit')
         hitBtn.setAttribute('id', 'hit-btn')
@@ -132,8 +137,11 @@ class App {
             console.log(this)
             App.renderHitForm.call(new AtBat(currentGame.currentBatter), currentGame)
         })
-        App.appendToMain(hitBtn)
-
+        colOne.appendChild(hitBtn)
+        //App.appendToMain(hitBtn)
+        const colTwo = document.createElement('div')
+        colTwo.setAttribute('class', 'col-sm text-center')
+        row.appendChild(colTwo)
         const outBtn = document.createElement('input')
         outBtn.setAttribute('type', 'submit')
         outBtn.setAttribute('id', 'out-btn')
@@ -143,7 +151,8 @@ class App {
             e.preventDefault()
             App.renderOutForm.call(new AtBat(currentGame.currentBatter), currentGame)
         })
-        App.appendToMain(outBtn)
+        colTwo.appendChild(outBtn)
+        App.appendToMain(row)
     }
 
     static renderAtBatFormContainer(){
