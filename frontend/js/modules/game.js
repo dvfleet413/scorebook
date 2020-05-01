@@ -107,6 +107,7 @@ class Game {
         const submitBtn = document.createElement('input')
         submitBtn.setAttribute('type', 'submit')
         submitBtn.setAttribute('id', 'start-new-game-btn')
+        submitBtn.setAttribute('class', "btn btn-dark")
         
         submitBtn.addEventListener('click', async (e) => {
             e.preventDefault();

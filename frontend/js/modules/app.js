@@ -125,6 +125,7 @@ class App {
         hitBtn.setAttribute('type', 'submit')
         hitBtn.setAttribute('id', 'hit-btn')
         hitBtn.setAttribute('value', 'Record a Hit')
+        hitBtn.setAttribute('class', "btn btn-dark")
         hitBtn.addEventListener('click', (e) => {
             e.preventDefault()
             console.log(`what is this?`)
@@ -137,6 +138,7 @@ class App {
         outBtn.setAttribute('type', 'submit')
         outBtn.setAttribute('id', 'out-btn')
         outBtn.setAttribute('value', 'Record an Out')
+        outBtn.setAttribute('class', "btn btn-dark")
         outBtn.addEventListener('click', (e) => {
             e.preventDefault()
             App.renderOutForm.call(new AtBat(currentGame.currentBatter), currentGame)
@@ -164,6 +166,7 @@ class App {
         // Submit Button
         const atBatSubmitBtn = document.createElement('input')
         atBatSubmitBtn.setAttribute('type', 'submit')
+        atBatSubmitBtn.setAttribute('class', "btn btn-dark")
         atBatSubmitBtn.addEventListener('click', async (e) => {
             e.preventDefault()
             if (currentGame.teamAtBat.currentBatterIndex < 8){
@@ -200,6 +203,7 @@ class App {
         // Submit Button
         const outSubmitBtn = document.createElement('input')
         outSubmitBtn.setAttribute('type', 'submit')
+        outSubmitBtn.setAttribute('class', "btn btn-dark")
         outSubmitBtn.addEventListener('click', async (e) => {
             e.preventDefault()
             if (currentGame.teamAtBat.currentBatterIndex < 8){
