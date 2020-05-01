@@ -17,9 +17,19 @@ const getGameList = () => {
             return response.json()
         })
         .then(json => {
+            console.log(json)
             const gameList = document.getElementById('game-list')
-            json['data'].forEach(game => {
-                gameList.innerHTML += `<li><a href="#" id="${game.id}-game" onclick="handleClick()">${game['attributes']['createdAt']}</a></li>`
+            json.data.forEach(game => {
+                const homeTeamId = game.relationships.homeTeam.data.id
+                const homeTeamData = json.included.find(element => element.id == homeTeamId && element.type == "team")
+                console.log(homeTeamData)
+                const awayTeamId = game.relationships.awayTeam.data.id 
+                const awayTeamData = json.included.find(element => element.id == awayTeamId && element.type == "team")
+                console.log(awayTeamData)
+                gameList.innerHTML += `<li><a href="#" id="${game.id}-game" onclick="handleClick()">
+                    ${parseDate(game.attributes.createdAt)}:
+                    ${awayTeamData.attributes.name} ${game.attributes.awayTeamRuns} - ${homeTeamData.attributes.name} ${game.attributes.homeTeamRuns}
+                    </a></li>`
             })
         })
 }
@@ -39,3 +49,13 @@ const handleClick = () => {
         })
 }
 window.handleClick = handleClick;
+
+const parseDate = (string) => {
+    const elements = string.split('-')
+    console.log(elements)
+    const year = elements[0]
+    const month = elements[1]
+    const date = elements[2].slice(0, 2)
+    return `${month}/${date}/${year}`
+}
+window.parseDate = parseDate;
