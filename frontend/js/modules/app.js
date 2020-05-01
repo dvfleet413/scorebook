@@ -70,7 +70,24 @@ class App {
             formTitle.innerText = runner.runnerName
             form.appendChild(formTitle)
             const selectField = document.createElement('select')
-            selectField.innerHTML = `<option value='1'>First</option><option value='2'>Second</option><option value='3'>Third</option><option value='4'>Home</option>`
+            if (runner.baseReached == 1){
+                selectField.innerHTML =
+                    `<option value='1'>Didn't Advance</option>
+                    <option value='2'>Second</option>
+                    <option value='3'>Third</option>
+                    <option value='4'>Scored</option>`
+            }
+            else if (runner.baseReached == 2){
+                selectField.innerHTML =
+                    `<option value='2'>Didn't Advance</option>
+                    <option value='3'>Third</option>
+                    <option value='4'>Scored</option>`
+            }
+            else if (runner.baseReached == 3){
+                selectField.innerHTML =
+                    `<option value='3'>Didn't Advance</option>
+                    <option value='4'>Scored</option>`
+            }
             form.appendChild(selectField)
             const submitBtn = document.createElement('button')
             submitBtn.setAttribute('type', 'button')
