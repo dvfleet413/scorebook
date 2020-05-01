@@ -5,18 +5,18 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore bundler config.
-/.bundle
+scorebook-api/.bundle
 
 # Ignore all logfiles and tempfiles.
-/log/*
-/tmp/*
-!/log/.keep
-!/tmp/.keep
+scorebook-api/log/*
+scorebook-api/tmp/*
+!scorebook-api/log/.keep
+!scorebook-api/tmp/.keep
 
 # Ignore uploaded files in development.
-/storage/*
-!/storage/.keep
-.byebug_history
+scorebook-api/storage/*
+!scorebook-api/storage/.keep
+scorebook-api/.byebug_history
 
 # Ignore master key for decrypting credentials and more.
-/config/master.key
+scorebook-api/config/master.key
