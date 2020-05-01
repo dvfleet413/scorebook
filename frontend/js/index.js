@@ -18,14 +18,14 @@ const getGameList = function(){
         })
         .then(json => {
             const gameList = document.getElementById('game-list')
-            console.log(json['data'])
             json['data'].forEach(game => {
                 const gameLi = document.createElement('li')
                 const gameLink = document.createElement('a')
                 gameLink.setAttribute('href', '#')
                 gameLink.setAttribute('id', `${game.id}-game`)
                 gameLink.addEventListener('click', handleClick)
-                gameLink.innerText = game['attributes']['created_at']
+                console.log(game)
+                gameLink.innerText = game['attributes']['createdAt']
                 gameLi.appendChild(gameLink)
                 gameList.appendChild(gameLi)
             })
@@ -36,7 +36,6 @@ const getGameList = function(){
 const handleClick = (e) => {
     e.preventDefault()
     const id = parseInt(e.target.id, 10)
-    console.log(e.target)
     Game.requestSavedGame(currentGame, id)
         .then(response => {
             currentGame = response
