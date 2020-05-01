@@ -6,6 +6,7 @@
         <!-- Bootstrap -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <script src="https://kit.fontawesome.com/21e779e378.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" href="./index.css">
     </head>
@@ -33,11 +34,25 @@
               <button type='button' class = "btn btn-dark" id='new-game-button'>New Scorebook</button>
               <br />
               <br />
-              <h2>Reopen a saved scorebook</h2>
+              <h2>Reopen a Saved Scorebook</h2>
               <ul id='game-list'></ul>
               <br />
-              <h3 id="about">About</h3>
-              <p>Scorebook is a Vanilla JS SPA.  This project was created as a challenge in creating a Javascript frontend to consume a Rails API, while using OOP with complex associations.</p>
+              <h5><em>About</em></h5><i class="fas fa-caret-right" id="about"></i>
+              <div style="display: none">
+                <p>Scorebook is a Vanilla JS SPA with a RoR backend. This project was created as a challenge in creating a Javascript frontend to consume a Rails API, while using OOP with complex associations.</p>
+                <p>The purpose of this app is to score a baseball game using a traditional scorecard. For simplicity, the app makes several assumptions about the baseball game being scored. Features may be added soon to allow for these cases:</p>
+                <ul>
+                  <li>There are no double plays or fielder's choices</li>
+                  <li>In no half inning do more than 9 players have an at bat</li>
+                  <li>There are no player substitutions</li>
+                </ul>
+                <p>All other situations are accounted for, including:</p>
+                <ul>
+                  <li>At Bat squares are updated based on form submission</li>
+                  <li>Options to advance runners who are on base</li>
+                  <li>Games automatically go into extra innings if tied after bottom of ninth, tenth, etc.</li>
+                </ul>
+              </div> 
             </div>
         </div>
 

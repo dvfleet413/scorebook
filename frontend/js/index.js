@@ -16,9 +16,11 @@ about.addEventListener('click', (e) => {
     showAbout = !showAbout
     if (showAbout){
         par.style.display = 'block'
+        e.target.setAttribute('class', 'fas fa-caret-down')
     }
     else {
         par.style.display = 'none'
+        e.target.setAttribute('class', 'fas fa-caret-right')
     }
 })
 
