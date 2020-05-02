@@ -65,40 +65,92 @@ class App {
 
     static renderCheckRunnerForm(runner){
         return new Promise((resolve, reject) => {
-            const form = document.createElement('form')
-            const formTitle = document.createElement('h4')
-            formTitle.innerText = runner.runnerName
-            form.appendChild(formTitle)
-            const selectField = document.createElement('select')
+            // const form = document.createElement('form')
+            // const formTitle = document.createElement('h4')
+            // formTitle.innerText = runner.runnerName
+            // form.appendChild(formTitle)
+            // const selectField = document.createElement('select')
+            // if (runner.baseReached == 1){
+            //     selectField.innerHTML =
+            //         `<option value='1'>Didn't Advance</option>
+            //         <option value='2'>Second</option>
+            //         <option value='3'>Third</option>
+            //         <option value='4'>Scored</option>`
+            // }
+            // else if (runner.baseReached == 2){
+            //     selectField.innerHTML =
+            //         `<option value='2'>Didn't Advance</option>
+            //         <option value='3'>Third</option>
+            //         <option value='4'>Scored</option>`
+            // }
+            // else if (runner.baseReached == 3){
+            //     selectField.innerHTML =
+            //         `<option value='3'>Didn't Advance</option>
+            //         <option value='4'>Scored</option>`
+            // }
+            // form.appendChild(selectField)
+            // const submitBtn = document.createElement('button')
+            // submitBtn.setAttribute('type', 'button')
+            // submitBtn.innerText = "Advance Runner"
+            // form.appendChild(submitBtn)
+            // document.querySelector('.main').appendChild(form)
+            // submitBtn.addEventListener('click', (e) => {
+            //     e.preventDefault()
+            //     runner.baseReached = selectField.value;
+            //     resolve("Runner Updated")
+            // })
+            let selectFieldOptions
             if (runner.baseReached == 1){
-                selectField.innerHTML =
+                selectFieldOptions =
                     `<option value='1'>Didn't Advance</option>
                     <option value='2'>Second</option>
                     <option value='3'>Third</option>
                     <option value='4'>Scored</option>`
             }
             else if (runner.baseReached == 2){
-                selectField.innerHTML =
+                selectFieldOptions =
                     `<option value='2'>Didn't Advance</option>
                     <option value='3'>Third</option>
                     <option value='4'>Scored</option>`
             }
             else if (runner.baseReached == 3){
-                selectField.innerHTML =
+                selectFieldOptions =
                     `<option value='3'>Didn't Advance</option>
                     <option value='4'>Scored</option>`
             }
-            form.appendChild(selectField)
-            const submitBtn = document.createElement('button')
-            submitBtn.setAttribute('type', 'button')
-            submitBtn.innerText = "Advance Runner"
-            form.appendChild(submitBtn)
-            document.querySelector('.main').appendChild(form)
-            submitBtn.addEventListener('click', (e) => {
-                e.preventDefault()
-                runner.baseReached = selectField.value;
+
+            document.body.innerHTML += `
+            <div class="modal fade" id="checkRunnerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Did ${runner.runnerName} Advance?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <select id="runner-advance-select">
+                                ${selectFieldOptions}
+                            </select>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="advance-runner-btn">Move Runner</button>
+                    </div>
+                    </div>
+                </div>
+            </div>`
+
+            document.getElementById('advance-runner-btn').addEventListener('click', (e) => {
+                runner.baseReached = document.getElementById('runner-advance-select').value
+                document.getElementById('checkRunnerModal').remove()
+                $('.modal-backdrop').remove()
                 resolve("Runner Updated")
             })
+
+            $('#checkRunnerModal').modal()
         })
     }
 
@@ -155,7 +207,6 @@ class App {
             App.renderHitForm.call(new AtBat(currentGame.currentBatter), currentGame)
         })
         colOne.appendChild(hitBtn)
-        //App.appendToMain(hitBtn)
         const colTwo = document.createElement('div')
         colTwo.setAttribute('class', 'col-sm text-center')
         row.appendChild(colTwo)
