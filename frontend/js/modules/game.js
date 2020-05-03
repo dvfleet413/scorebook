@@ -95,13 +95,13 @@ class Game {
         const homeLabel = document.createElement('p')
         homeLabel.innerText = "Home Team"
         form.appendChild(homeLabel)
-        Team.renderTeamDatalist('home-team', homeLabel)
+        Team.renderTeamSelect('home-team', homeLabel)
     
         // Add away team datalist
         const awayLabel = document.createElement('p')
         awayLabel.innerText = "Away Team"
         form.appendChild(awayLabel)
-        Team.renderTeamDatalist('away-team', awayLabel)
+        Team.renderTeamSelect('away-team', awayLabel)
     
         // Add Start Button
         const submitBtn = document.createElement('input')
@@ -111,9 +111,9 @@ class Game {
         
         submitBtn.addEventListener('click', async (e) => {
             e.preventDefault();
-            const homeTeam = new Team(document.querySelector("input[name='home-team']").value)
+            const homeTeam = new Team(document.querySelector("select[name='home-team']").value)
             await homeTeam.getPlayers()
-            const awayTeam = new Team(document.querySelector("input[name='away-team']").value)
+            const awayTeam = new Team(document.querySelector("select[name='away-team']").value)
             await awayTeam.getPlayers()
             this.homeTeam = homeTeam;
             this.awayTeam = awayTeam;
