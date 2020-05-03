@@ -8,8 +8,8 @@
 scorebook-api/.bundle
 
 # Ignore all logfiles and tempfiles.
-scorebook-api/log/*
-scorebook-api/tmp/*
+*.log
+*.tmp
 !scorebook-api/log/.keep
 !scorebook-api/tmp/.keep
 
