@@ -12,7 +12,7 @@ newGameBtn.addEventListener('click', (e) => {
 
 const about = document.getElementById('about')
 about.addEventListener('click', (e) => {
-    const par = e.target.nextElementSibling
+    const par = document.getElementById('about-par')
     showAbout = !showAbout
     if (showAbout){
         par.style.display = 'block'
