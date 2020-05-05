@@ -8,7 +8,6 @@ class Team {
     }
 
     getPlayers(){
-        console.log('in getPlayers()')
         const url = 'http://localhost:3000/teams'
         return fetch(url)
             .then(response => {
@@ -22,8 +21,6 @@ class Team {
                         this.players.push(new Player(player.attributes.name, player.attributes.number, player.attributes.position))
                     }
                 })
-                console.log('in getPlayers() fetch')
-                console.log(this)
             })
     }
 

@@ -49,7 +49,6 @@ class AtBat {
         App.renderCurrentAtBatSquare(currentGame)
         App.renderAtBatButtons(currentGame)
         App.renderAtBatFormContainer()
-        console.log(currentGame)
     }
 
     static hitOptions(){

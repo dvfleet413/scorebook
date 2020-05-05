@@ -144,7 +144,6 @@ class Game {
         }
         // If none of above conditions are met, game is over
         else {
-            console.log(this)
             this.calculateAwayTeamRuns()
             this.calculateHomeTeamRuns()
             this.isOver = true;
@@ -221,7 +220,7 @@ class Game {
                 return response.json()
             })
             .then(function(json){
-                console.log(json)
+                console.log("Successful POST")
             })
             .catch(function(error){
                 console.log(error.message)
@@ -238,7 +237,6 @@ class Game {
                     return response.json()
                 })
                 .then((json) => {
-                    console.log(json)
                     // Build blank Game Object
                     currentGame = new Game()
                     // Build Team and Player Objects to add to Game
@@ -264,7 +262,6 @@ class Game {
                     currentGame.awayTeamRuns = json['data']['attributes']['awayTeamRuns']
                     // Build Inning Objects to add to Game
                     const inningsArray = json['included'].filter(element => element.type == 'inning')
-                    console.log(inningsArray)
                     inningsArray.forEach(inning => {
                         const newInning = new Inning(inning['attributes']['number'])
                         if (newInning.number % 1 == 0){newInning.team = currentGame.awayTeam}
@@ -284,7 +281,6 @@ class Game {
                         })
                         currentGame.innings.push(newInning)
                     })
-                    console.log(currentGame)
                     currentGame.isOver = true
                     resolve(currentGame)
                 })

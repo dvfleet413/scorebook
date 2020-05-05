@@ -168,8 +168,6 @@ class App {
         hitBtn.setAttribute('class', "btn btn-dark")
         hitBtn.addEventListener('click', (e) => {
             e.preventDefault()
-            console.log(`what is this?`)
-            console.log(this)
             App.renderHitForm.call(new AtBat(currentGame.currentBatter), currentGame)
         })
         colOne.appendChild(hitBtn)
