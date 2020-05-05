@@ -153,7 +153,7 @@ class Game {
 
     summarize(){
         App.clearMain()
-        App.assignH1AndTitle('Game is Over', 'Scorebook - Game Complete')
+        App.assignH1AndTitle(`Final: ${this.awayTeam.name} - ${this.awayTeamRuns}, ${this.homeTeam.name} - ${this.homeTeamRuns}`, 'Scorebook - Game Complete')
         App.renderGameSummaryTable('away-team', this.awayTeam.name)
         App.renderGameSummaryTable('home-team', this.homeTeam.name)
 
