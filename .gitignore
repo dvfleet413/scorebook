@@ -11,6 +11,7 @@ scorebook-api/.bundle
 logs
 *.log
 tmp
+scorebook-api/tmp
 *.tmp
 !scorebook-api/log/.keep
 !scorebook-api/tmp/.keep
