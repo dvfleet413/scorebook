@@ -228,10 +228,6 @@ class Game {
             })
     }
 
-    static requestGameIndex(){
-
-    }
-
     static requestSavedGame(currentGame, id){
         return new Promise((resolve, reject) => {
             // make AJAX GET call to get a game

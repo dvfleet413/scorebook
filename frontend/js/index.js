@@ -50,6 +50,7 @@ const getGameList = () => {
 
 getGameList()
 
+// Event Listener for clicking on <li> in saved game list
 const handleClick = () => {
     event.preventDefault()
     const id = parseInt(event.target.id, 10)
@@ -64,6 +65,8 @@ const handleClick = () => {
 }
 window.handleClick = handleClick;
 
+
+// Function to reformat 'createdAt' attribute from AJAX response for game list
 const parseDate = (string) => {
     const elements = string.split('-')
     console.log(elements)
