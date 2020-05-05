@@ -160,7 +160,8 @@ class Game {
         // Away Team
         const awayNameBoxes = document.querySelectorAll('#away-team td.batter-name')
         for (let i = 0; i < awayNameBoxes.length; i++){
-            awayNameBoxes[i].innerText = this.awayTeam.players[i]._name
+            // awayNameBoxes[i].innerText = this.awayTeam.players[i]._name
+            awayNameBoxes[i].innerHTML = `${this.awayTeam.players[i]._number} - <em>${this.awayTeam.players[i]._name}</em>`
         }
         const awayTeamInnings = this.innings.filter(inning => inning.team == this.awayTeam)
         awayTeamInnings.forEach(inning => {
@@ -177,7 +178,8 @@ class Game {
         // Home Team
         const homeNameBoxes = document.querySelectorAll('#home-team td.batter-name')
         for (let i = 0; i < homeNameBoxes.length; i++){
-            homeNameBoxes[i].innerText = this.homeTeam.players[i]._name
+            // homeNameBoxes[i].innerText = this.homeTeam.players[i]._name
+            homeNameBoxes[i].innerHTML = `${this.homeTeam.players[i]._number} - <em>${this.homeTeam.players[i]._name}</em>`
         }
         const homeTeamInnings = this.innings.filter(inning => inning.team == this.homeTeam)
         homeTeamInnings.forEach(inning => {
