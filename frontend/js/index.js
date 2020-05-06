@@ -31,6 +31,7 @@ const getGameList = () => {
             return response.json()
         })
         .then(json => {
+            document.getElementById('loader').remove()
             const gameList = document.getElementById('game-list')
             json.data.forEach(game => {
                 const homeTeamId = game.relationships.homeTeam.data.id
