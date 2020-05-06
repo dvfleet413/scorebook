@@ -63,7 +63,7 @@ class AtBat {
 
     static outOptions(){
         return `
-            <option value="U-3">Ground Out To First Baseman</option
+            <option value="U-3">Ground Out To First Baseman</option>
             <option value="4-3">Ground Out To Second Baseman</option>
             <option value="6-3">Ground Out To Shortstop</option>
             <option value="5-3">Ground Out To Third Baseman</option>
