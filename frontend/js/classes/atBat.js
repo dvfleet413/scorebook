@@ -1,6 +1,3 @@
-import { App } from "./app.js";
-
-
 class AtBat {
     constructor(batter, result, baseReached, outNumber, outCode){
         this.batter = batter;
@@ -74,5 +71,3 @@ class AtBat {
         `
     }
 }
-
-export { AtBat };

@@ -5,5 +5,3 @@ class Player {
         this._position = position;
     }
 }
-
-export { Player };

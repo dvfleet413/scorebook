@@ -1,5 +1,3 @@
-import { AtBat } from './atBat.js'
-
 // This Class contains the functions that primarily deal with DOM manipulation 
 // such as clearing pages, rendering tables, rendering forms and buttons, 
 // adding event listeners, etc.
@@ -283,5 +281,3 @@ class App {
         container.appendChild(form)
     }
 }
-
-export { App }

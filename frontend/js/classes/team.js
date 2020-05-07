@@ -1,5 +1,3 @@
-import { Player } from "./player.js";
-
 class Team {
     constructor(name, players = [], currentBatterIndex = 0){
         this.name = name;
@@ -48,5 +46,3 @@ class Team {
             })
     }
 }
-
-export { Team };

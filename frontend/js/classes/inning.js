@@ -1,5 +1,3 @@
-import { App } from './app.js';
-
 class Inning {
     constructor(number, team, atBats = [], outs = 0){
         this.number = number;
@@ -21,5 +19,3 @@ class Inning {
         }
     }
 }
-
-export { Inning };

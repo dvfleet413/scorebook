@@ -1,6 +1,3 @@
-import { Game } from './modules/game.js'
-import { App } from './modules/app.js'
-
 let currentGame = new Game()
 let showAbout = false
 
@@ -61,7 +58,6 @@ const handleClick = () => {
             console.log(error.message)
         })
 }
-window.handleClick = handleClick;
 
 
 // Function to reformat 'createdAt' attribute from AJAX response for game list
@@ -72,4 +68,3 @@ const parseDate = (string) => {
     const date = elements[2].slice(0, 2)
     return `${month}/${date}/${year}`
 }
-window.parseDate = parseDate;

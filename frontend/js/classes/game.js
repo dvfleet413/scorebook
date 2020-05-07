@@ -1,9 +1,3 @@
-import { Team } from './team.js'
-import { Inning } from './inning.js'
-import { AtBat } from './atBat.js'
-import { Player } from './player.js'
-import { App } from './app.js';
-
 class Game {
     constructor(currentInning = 1.0, homeTeam, awayTeam, homeTeamRuns = 0, awayTeamRuns = 0, innings = [], isOver = false){
         this._currentInning = currentInning;
@@ -291,5 +285,3 @@ class Game {
         })
     }
 }
-
-export { Game };
