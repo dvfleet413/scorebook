@@ -3,6 +3,10 @@
 // adding event listeners, etc.
 
 class App {
+    constructor(games = []){
+        this.games = games
+    }
+
 
     // General DOM Manipulation
     static assignH1AndTitle(heading, title = 'Scorebook'){
