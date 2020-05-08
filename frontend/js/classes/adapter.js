@@ -12,21 +12,58 @@ class Adapter {
             .then(json => {
                 // want to instantiate new Game objects for each game record fetched and add them to app.games
                 json.data.forEach(game => {
-                    const game = new Game()
-                    const homeTeamId = game.relationships.homeTeam.data.id
-                    const homeTeamData = json.included.find(element => element.id == homeTeamId && element.type == "team")
-                    // This is the code I want...
-                    // game.homeTeam = new Team(homeTeamData)
-                    const awayTeamId = game.relationships.awayTeam.data.id 
-                    const awayTeamData = json.included.find(element => element.id == awayTeamId && element.type == "team")
-                    // This is the code I want...
-                    // game.awayTeam = new Team(awayTeamData)
+                    debugger
+                    // // Build blank Game Object
+                    // let gameToAdd = new Game()
+                    // // Build Team and Player Objects to add to Game
+                    // const homeTeamId = json['data']['relationships']['homeTeam']['data']['id']
+                    // const homeTeamData = json['included'].find((element) => element.type == 'team' && element.id == homeTeamId)
+                    // gameToAdd.homeTeam = new Team (homeTeamData['attributes']['name'])
+                    // const homeTeamPlayerIds = homeTeamData['relationships']['players']['data'].map(element => element.id)
+                    // const homeTeamPlayersArray = json['included'].filter(element => element.type == 'player' && homeTeamPlayerIds.includes(element.id))
+                    // homeTeamPlayersArray.forEach(player => {
+                    //     const newPlayer = new Player(player.attributes.name, player.attributes.number, player.attributes.position)
+                    //     gameToAdd.homeTeam.players.push(newPlayer)
+                    // })
+                    // const awayTeamId = json['data']['relationships']['awayTeam']['data']['id']
+                    // const awayTeamData = json['included'].find((element) => element.type == 'team' && element.id == awayTeamId)
+                    // gameToAdd.awayTeam = new Team (awayTeamData['attributes']['name'])
+                    // const awayTeamPlayerIds = awayTeamData['relationships']['players']['data'].map(element => element.id)
+                    // const awayTeamPlayersArray = json['included'].filter(element => element.type == 'player' && awayTeamPlayerIds.includes(element.id))
+                    // awayTeamPlayersArray.forEach(player => {
+                    //     const newPlayer = new Player(player.attributes.name, player.attributes.number, player.attributes.position)
+                    //     gameToAdd.awayTeam.players.push(newPlayer)
+                    // })
+                    // gameToAdd.homeTeamRuns = json['data']['attributes']['homeTeamRuns']
+                    // gameToAdd.awayTeamRuns = json['data']['attributes']['awayTeamRuns']
+                    // // Build Inning Objects to add to Game
+                    // const inningsArray = json['included'].filter(element => element.type == 'inning')
+                    // inningsArray.forEach(inning => {
+                    //     const newInning = new Inning(inning['attributes']['number'])
+                    //     if (newInning.number % 1 == 0){newInning.team = currentGame.awayTeam}
+                    //     else {newInning.team = gameToAdd.homeTeam }
+                    //     const atBatIds = inning['relationships']['atBats']['data'].map(element => element.id)
+                    //     const atBatsArray = json['included'].filter((element => element.type == 'atBat' && atBatIds.includes(element.id)))
+                    //     atBatsArray.forEach(atBat => {
+                    //         let batter
+                    //         if (newInning.number % 1 == 0){
+                    //             batter = gameToAdd.awayTeam.players.find(player => player._name == atBat.attributes.player.name)
+                    //         }
+                    //         else {
+                    //             batter = gameToAdd.homeTeam.players.find(player => player._name == atBat.attributes.player.name)
+                    //         }
+                    //         const newAtBat = new AtBat(batter, atBat.attributes.result, atBat.attributes.baseReached, atBat.attributes.outNumber, atBat.attributes.outCode)
+                    //         newInning.atBats.push(newAtBat)
+                    //     })
+                    //     gameToAdd.innings.push(newInning)
+                    // })
+                    // gameToAdd.isOver = true
                 })
             })
     }
 
     postGame(){
-        
+
     }
 
 }
