@@ -113,7 +113,7 @@ class Game {
             this.awayTeam = awayTeam;
             let topFirst = new Inning(1.0, this.awayTeam)
             this.innings.push(topFirst)
-            App.renderInningInterface.call(this)
+            app.renderInningInterface()
             AtBat.renderAtBatInterface.call(new AtBat(this.currentBatter), this)
         })
         form.appendChild(submitBtn)

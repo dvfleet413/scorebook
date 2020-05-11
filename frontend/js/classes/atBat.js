@@ -41,10 +41,10 @@ class AtBat {
         return `<table id='current-at-bat'><tr><td></td><td></td><td></td></tr><tr><td></td><td class='out-code'></td><td></td></tr><tr><td class="out"><span></span></td><td></td><td class='result'></td></tr></table><div class='diamond'></div><div class='out-code'><span></span></div><br><br>`
     }
 
-    static renderAtBatInterface(currentGame){
-        App.renderAtBatSquares(currentGame.currentInning.atBats)
-        App.renderCurrentAtBatSquare(currentGame)
-        App.renderAtBatButtons(currentGame)
+    static renderAtBatInterface(){
+        app.renderAtBatSquares()
+        app.renderCurrentAtBatSquare()
+        app.renderAtBatButtons()
         App.renderAtBatFormContainer()
     }
 

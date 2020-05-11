@@ -1,4 +1,4 @@
-let currentGame = new Game()
+//let currentGame = new Game()
 let showAbout = false
 
 let app = new App()
@@ -9,7 +9,8 @@ adapter.fetchGames()
 const newGameBtn = document.getElementById('new-game-button')
 newGameBtn.addEventListener('click', (e) => {
     e.preventDefault()
-    currentGame.start()
+    app.addGame(new Game())
+    app.currentGame.start()
 })
 
 const about = document.getElementById('about')

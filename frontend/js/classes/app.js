@@ -11,6 +11,10 @@ class App {
         this.games.push(game)
     }
 
+    get currentGame(){
+        if (!this.games.slice(-1)[0].isOver) { return this.games.slice(-1)[0] }
+    }
+
 
     // General DOM Manipulation
     static assignH1AndTitle(heading, title = 'Scorebook'){
@@ -61,9 +65,9 @@ class App {
     }
 
     // DOM manipulation related to Inning Class
-    static renderInningInterface(){
+    renderInningInterface(){
         App.clearMain()
-        App.assignH1AndTitle(`${this.currentInning.numberDescription} - ${this.currentInning.team.name}`, `Scorebook`)
+        App.assignH1AndTitle(`${this.currentGame.currentInning.numberDescription} - ${this.currentGame.currentInning.team.name}`, `Scorebook`)
         const table = document.createElement('table')
         table.setAttribute('class', 'at-bat')
         App.appendToMain(table)
@@ -127,9 +131,9 @@ class App {
     }
 
     // DOM manipulation related to the AtBat Class
-    static renderAtBatSquares(atBats){
+    renderAtBatSquares(){
         const table = document.querySelector('table.at-bat')
-        atBats.forEach((atBat, index) => {
+        this.currentGame.currentInning.atBats.forEach((atBat, index) => {
             const atBatSquare = document.createElement('div')
             atBatSquare.setAttribute('class', 'at-bat')
             atBatSquare.innerHTML = atBat.htmlRepresentation()
@@ -145,7 +149,7 @@ class App {
         })
     }
 
-    static renderCurrentAtBatSquare(currentGame){
+    renderCurrentAtBatSquare(){
         const table = document.querySelector('table.at-bat')
         const atBatSquare = document.createElement('div')
         atBatSquare.setAttribute('class', 'at-bat')
@@ -153,7 +157,7 @@ class App {
         atBatSquare.innerHTML = AtBat.newHTML();
         const tableRow = document.createElement('tr')
         const nameTd = document.createElement('td')
-        nameTd.innerText = currentGame.currentBatter._name
+        nameTd.innerText = this.currentGame.currentBatter._name
         tableRow.appendChild(nameTd)
         const atBatTd = document.createElement('td')
         tableRow.appendChild(atBatTd)
@@ -161,7 +165,7 @@ class App {
         table.appendChild(tableRow)
     }
 
-    static renderAtBatButtons(currentGame){
+    renderAtBatButtons(){
         const row = document.createElement('div')
         row.setAttribute('class', 'row result-row')
         const colOne = document.createElement('div')
@@ -174,7 +178,7 @@ class App {
         hitBtn.setAttribute('class', "btn btn-dark")
         hitBtn.addEventListener('click', (e) => {
             e.preventDefault()
-            App.renderHitForm.call(new AtBat(currentGame.currentBatter), currentGame)
+            App.renderHitForm.call(new AtBat(this.currentGame.currentBatter), this.currentGame)
         })
         colOne.appendChild(hitBtn)
         const colTwo = document.createElement('div')
@@ -187,7 +191,7 @@ class App {
         outBtn.setAttribute('class', "btn btn-dark")
         outBtn.addEventListener('click', (e) => {
             e.preventDefault()
-            App.renderOutForm.call(new AtBat(currentGame.currentBatter), currentGame)
+            App.renderOutForm.call(new AtBat(this.currentGame.currentBatter), this.currentGame)
         })
         colTwo.appendChild(outBtn)
         App.appendToMain(row)
