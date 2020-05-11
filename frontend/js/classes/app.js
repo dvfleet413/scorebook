@@ -239,7 +239,7 @@ class App {
             await this.currentGame.currentInning.checkRunners(this.currentGame)
             this.currentGame.currentInning.atBats.push(newAtBat)
             App.clearMain()
-            App.renderInningInterface.call(this.currentGame)
+            app.renderInningInterface()
             AtBat.renderAtBatInterface()
         })
         form.appendChild(atBatSubmitBtn)
@@ -287,7 +287,7 @@ class App {
             }
             else {
                 App.clearMain()
-                app.renderInningInterface.call()
+                app.renderInningInterface()
                 AtBat.renderAtBatInterface()
             }
         })
