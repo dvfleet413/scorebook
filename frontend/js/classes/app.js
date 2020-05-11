@@ -7,12 +7,22 @@ class App {
         this.games = []
     }
 
+    get currentGame(){
+        if (!this.games.slice(-1)[0].isOver) { return this.games.slice(-1)[0] }
+    }
+
     addGame(game){
         this.games.push(game)
     }
 
-    get currentGame(){
-        if (!this.games.slice(-1)[0].isOver) { return this.games.slice(-1)[0] }
+    renderGameList(){
+        document.getElementById('loader').remove()
+            const gameList = document.getElementById('game-list')
+            this.games.forEach(game => {
+                gameList.innerHTML += `<li><a href="#" id="${game.id}-game" onclick="handleClick()">
+                    ${game.awayTeam.name} ${game.awayTeamRuns} - ${game.homeTeam.name} ${game.homeTeamRuns}
+                    </a></li>`
+            })
     }
 
 

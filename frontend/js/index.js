@@ -3,7 +3,13 @@ let showAbout = false
 
 let app = new App()
 let adapter = new Adapter("http://localhost:3000")
-adapter.fetchGames()
+
+async function getGames(){
+    await adapter.fetchGames()
+    app.renderGameList()
+}
+
+getGames()
 
 
 const newGameBtn = document.getElementById('new-game-button')
@@ -26,30 +32,6 @@ about.addEventListener('click', (e) => {
         e.target.setAttribute('class', 'fas fa-caret-right')
     }
 })
-
-const getGameList = () => {
-    const url = 'http://localhost:3000/games'
-    fetch(url)
-        .then(response => {
-            return response.json()
-        })
-        .then(json => {
-            document.getElementById('loader').remove()
-            const gameList = document.getElementById('game-list')
-            json.data.forEach(game => {
-                const homeTeamId = game.relationships.homeTeam.data.id
-                const homeTeamData = json.included.find(element => element.id == homeTeamId && element.type == "team")
-                const awayTeamId = game.relationships.awayTeam.data.id 
-                const awayTeamData = json.included.find(element => element.id == awayTeamId && element.type == "team")
-                gameList.innerHTML += `<li><a href="#" id="${game.id}-game" onclick="handleClick()">
-                    ${parseDate(game.attributes.createdAt)}:
-                    ${awayTeamData.attributes.name} ${game.attributes.awayTeamRuns} - ${homeTeamData.attributes.name} ${game.attributes.homeTeamRuns}
-                    </a></li>`
-            })
-        })
-}
-
-getGameList()
 
 // Event Listener for clicking on <li> in saved game list
 const handleClick = () => {
