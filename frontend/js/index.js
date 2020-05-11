@@ -37,14 +37,16 @@ about.addEventListener('click', (e) => {
 const handleClick = () => {
     event.preventDefault()
     const id = parseInt(event.target.id, 10)
-    Game.requestSavedGame(currentGame, id)
-        .then(response => {
-            currentGame = response
-            currentGame.summarize()
-        })
-        .catch(error => {
-            console.log(error.message)
-        })
+    // Game.requestSavedGame(currentGame, id)
+    //     .then(response => {
+    //         currentGame = response
+    //         currentGame.summarize()
+    //     })
+    //     .catch(error => {
+    //         console.log(error.message)
+    //     })
+    const game = app.games.find(game => game.id == id)
+    game.summarize()
 }
 
 
