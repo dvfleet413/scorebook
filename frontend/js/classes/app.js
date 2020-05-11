@@ -20,7 +20,7 @@ class App {
             const gameList = document.getElementById('game-list')
             this.games.forEach(game => {
                 gameList.innerHTML += `<li><a href="#" id="${game.id}-game" onclick="handleClick()">
-                    ${game.awayTeam.name} ${game.awayTeamRuns} - ${game.homeTeam.name} ${game.homeTeamRuns}
+                ${game.date} - ${game.awayTeam.name} ${game.awayTeamRuns} - ${game.homeTeam.name} ${game.homeTeamRuns}
                     </a></li>`
             })
     }

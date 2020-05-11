@@ -59,6 +59,8 @@ class Adapter {
                         })
                         gameToAdd.isOver = true
                         gameToAdd._currentInning = gameToAdd.innings.slice(-1)[0].number
+                        gameToAdd.date = parseDate(json['data'][i]['attributes']['createdAt'])
+                        gameToAdd.id = json['data'][i]['id']
                         app.addGame(gameToAdd)
                     }
                     resolve("Games Fetched")
