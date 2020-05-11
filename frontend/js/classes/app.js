@@ -3,8 +3,12 @@
 // adding event listeners, etc.
 
 class App {
-    constructor(games = []){
-        this.games = games
+    constructor(){
+        this.games = []
+    }
+
+    addGame(game){
+        this.games.push(game)
     }
 
 

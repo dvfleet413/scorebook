@@ -1,6 +1,11 @@
 let currentGame = new Game()
 let showAbout = false
 
+let app = new App()
+let adapter = new Adapter("http://localhost:3000")
+adapter.fetchGames()
+
+
 const newGameBtn = document.getElementById('new-game-button')
 newGameBtn.addEventListener('click', (e) => {
     e.preventDefault()

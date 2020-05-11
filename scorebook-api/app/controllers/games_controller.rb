@@ -2,7 +2,7 @@ class GamesController < ApplicationController
     def index
         games = Game.all
         options = {
-            include: [:home_team, :away_team]
+            include: [:home_team, :'home_team.players', :away_team, :'away_team.players', :innings, :"innings.at_bats"]
         }
         render json: GameSerializer.new(games, options)
     end
