@@ -273,13 +273,13 @@ class App {
             const newAtBat = new AtBat(this.currentGame.currentBatter)
             newAtBat.outCode = document.getElementById('out-code-options').value
             this.currentGame.currentInning.outs += 1
-            newAtBat.outNumber = currentGame.currentInning.outs
-            this.currentGame.currentInning.atBats.push(this)
+            newAtBat.outNumber = this.currentGame.currentInning.outs
+            this.currentGame.currentInning.atBats.push(newAtBat)
             if (this.currentGame.currentInning.outs == 3){ 
                 this.currentGame.changeSides()
             }
             else{ 
-                await currentGame.currentInning.checkRunners(currentGame)
+                await this.currentGame.currentInning.checkRunners(this.currentGame)
             }
             if (this.currentGame.isOver){
                 this.currentGame.save()
