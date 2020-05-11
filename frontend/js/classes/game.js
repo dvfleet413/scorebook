@@ -199,26 +199,7 @@ class Game {
     }
 
     save(){
-        // make AJAX POST call with current game to save it to the database, along with all associated records
-        const url = 'http://localhost:3000/games'
-        const configObj = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accepts': 'application/json'
-            },
-            body: JSON.stringify({game: this})
-        }
-        fetch(url, configObj)
-            .then(function(response){
-                return response.json()
-            })
-            .then(function(json){
-                console.log("Successful POST")
-            })
-            .catch(function(error){
-                console.log(error.message)
-            })
+        adapter.postGame(this)
     }
 
     static requestSavedGame(currentGame, id){

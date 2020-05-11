@@ -63,8 +63,26 @@ class Adapter {
             })
     }
 
-    postGame(){
-
+    postGame(game){
+        // make AJAX POST call with current game to save it to the database, along with all associated records
+        const configObj = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accepts': 'application/json'
+            },
+            body: JSON.stringify({game})
+        }
+        fetch(`${this.url}/games`, configObj)
+            .then(function(response){
+                return response.json()
+            })
+            .then(function(json){
+                console.log("Successful POST")
+            })
+            .catch(function(error){
+                console.log(error.message)
+            })
     }
 
 }
