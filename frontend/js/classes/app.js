@@ -178,7 +178,7 @@ class App {
         hitBtn.setAttribute('class', "btn btn-dark")
         hitBtn.addEventListener('click', (e) => {
             e.preventDefault()
-            App.renderHitForm.call(new AtBat(this.currentGame.currentBatter), this.currentGame)
+            this.renderHitForm()
         })
         colOne.appendChild(hitBtn)
         const colTwo = document.createElement('div')
@@ -191,19 +191,19 @@ class App {
         outBtn.setAttribute('class', "btn btn-dark")
         outBtn.addEventListener('click', (e) => {
             e.preventDefault()
-            App.renderOutForm.call(new AtBat(this.currentGame.currentBatter), this.currentGame)
+            this.renderOutForm()
         })
         colTwo.appendChild(outBtn)
         App.appendToMain(row)
     }
 
-    static renderAtBatFormContainer(){
+    renderAtBatFormContainer(){
         const atBatFormContainer = document.createElement('div')
         atBatFormContainer.setAttribute('id', 'at-bat-submit')
         App.appendToMain(atBatFormContainer)
     }
 
-    static renderHitForm(currentGame){
+    renderHitForm(){
         const container = document.getElementById('at-bat-submit')
         container.innerHTML = ''
         // Build Form for AtBat Result
@@ -220,33 +220,34 @@ class App {
         atBatSubmitBtn.setAttribute('class', "btn btn-dark")
         atBatSubmitBtn.addEventListener('click', async (e) => {
             e.preventDefault()
-            if (currentGame.teamAtBat.currentBatterIndex < 8){
-                currentGame.teamAtBat.currentBatterIndex += 1;
+            if (this.currentGame.teamAtBat.currentBatterIndex < 8){
+                this.currentGame.teamAtBat.currentBatterIndex += 1;
             }
             else {
-                currentGame.teamAtBat.currentBatterIndex = 0;
+                this.currentGame.teamAtBat.currentBatterIndex = 0;
             }
             const result = document.getElementById('hit-options').value
+            const newAtBat = new AtBat(this.currentGame.currentBatter)
             if (result == 'BB'){
-                this.baseReached = 1
-                this.result = 'BB'
+                newAtBat.baseReached = 1
+                newAtBat.result = 'BB'
             }
             else{
-                this.baseReached = parseInt(result, 10)
-                this.result = parseInt(result, 10)
+                newAtBat.baseReached = parseInt(result, 10)
+                newAtBat.result = parseInt(result, 10)
             }
-            await currentGame.currentInning.checkRunners(currentGame)
-            currentGame.currentInning.atBats.push(this)
+            await this.currentGame.currentInning.checkRunners(this.currentGame)
+            this.currentGame.currentInning.atBats.push(newAtBat)
             App.clearMain()
-            App.renderInningInterface.call(currentGame)
-            AtBat.renderAtBatInterface.call(new AtBat(currentGame.currentBatter), currentGame)
+            App.renderInningInterface.call(this.currentGame)
+            AtBat.renderAtBatInterface()
         })
         form.appendChild(atBatSubmitBtn)
     
         container.appendChild(form)
     }
 
-    static renderOutForm(currentGame){
+    renderOutForm(){
         const container = document.getElementById('at-bat-submit')
         container.innerHTML = ''
         // Build Form for AtBat Result
@@ -263,30 +264,31 @@ class App {
         outSubmitBtn.setAttribute('class', "btn btn-dark")
         outSubmitBtn.addEventListener('click', async (e) => {
             e.preventDefault()
-            if (currentGame.teamAtBat.currentBatterIndex < 8){
-                currentGame.teamAtBat.currentBatterIndex += 1;
+            if (this.currentGame.teamAtBat.currentBatterIndex < 8){
+                this.currentGame.teamAtBat.currentBatterIndex += 1;
             }
             else {
-                currentGame.teamAtBat.currentBatterIndex = 0;
+                this.currentGame.teamAtBat.currentBatterIndex = 0;
             }
-            this.outCode = document.getElementById('out-code-options').value
-            currentGame.currentInning.outs += 1
-            this.outNumber = currentGame.currentInning.outs
-            currentGame.currentInning.atBats.push(this)
-            if (currentGame.currentInning.outs == 3){ 
-                currentGame.changeSides()
+            const newAtBat = new AtBat(this.currentGame.currentBatter)
+            newAtBat.outCode = document.getElementById('out-code-options').value
+            this.currentGame.currentInning.outs += 1
+            newAtBat.outNumber = currentGame.currentInning.outs
+            this.currentGame.currentInning.atBats.push(this)
+            if (this.currentGame.currentInning.outs == 3){ 
+                this.currentGame.changeSides()
             }
             else{ 
                 await currentGame.currentInning.checkRunners(currentGame)
             }
-            if (currentGame.isOver){
-                currentGame.save()
-                currentGame.summarize()
+            if (this.currentGame.isOver){
+                this.currentGame.save()
+                this.currentGame.summarize()
             }
             else {
                 App.clearMain()
-                App.renderInningInterface.call(currentGame)
-                AtBat.renderAtBatInterface.call(new AtBat(currentGame.currentBatter), currentGame)
+                app.renderInningInterface.call()
+                AtBat.renderAtBatInterface()
             }
         })
         form.appendChild(outSubmitBtn)

@@ -45,7 +45,7 @@ class AtBat {
         app.renderAtBatSquares()
         app.renderCurrentAtBatSquare()
         app.renderAtBatButtons()
-        App.renderAtBatFormContainer()
+        app.renderAtBatFormContainer()
     }
 
     static hitOptions(){
