@@ -57,6 +57,7 @@ class Adapter {
                         gameToAdd.innings.push(newInning)
                     })
                     gameToAdd.isOver = true
+                    gameToAdd._currentInning = gameToAdd.innings.slice(-1)[0].number
                     app.addGame(gameToAdd)
                 }
             })
