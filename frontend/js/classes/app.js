@@ -33,12 +33,12 @@ class App {
     }
 
     clearMain(){
-        const main = document.querySelector('div.main')
+        const main = document.querySelector('main')
         main.innerHTML = ''
     }
 
     appendToMain(element){
-        const main = document.querySelector('div.main')
+        const main = document.querySelector('main')
         main.appendChild(element)
     }
 
