@@ -79,8 +79,8 @@ class Game {
     }
 
     start(){
-        App.assignH1AndTitle('Start a New Game', 'Scorebook - New Game')
-        App.clearMain()
+        app.assignH1AndTitle('Start a New Game', 'Scorebook - New Game')
+        app.clearMain()
     
         //Set up form
         const form = document.createElement('form')
@@ -114,12 +114,12 @@ class Game {
             let topFirst = new Inning(1.0, this.awayTeam)
             this.innings.push(topFirst)
             app.renderInningInterface()
-            AtBat.renderAtBatInterface()
+            app.renderAtBatInterface()
         })
         form.appendChild(submitBtn)
     
         // Render form
-        App.appendToMain(form)
+        app.appendToMain(form)
     }
 
     changeSides(){
@@ -145,10 +145,10 @@ class Game {
     }
 
     summarize(){
-        App.clearMain()
-        App.assignH1AndTitle(`Final: ${this.awayTeam.name} - ${this.awayTeamRuns}, ${this.homeTeam.name} - ${this.homeTeamRuns}`, 'Scorebook - Game Complete')
-        App.renderGameSummaryTable('away-team', this.awayTeam.name)
-        App.renderGameSummaryTable('home-team', this.homeTeam.name)
+        app.clearMain()
+        app.assignH1AndTitle(`Final: ${this.awayTeam.name} - ${this.awayTeamRuns}, ${this.homeTeam.name} - ${this.homeTeamRuns}`, 'Scorebook - Game Complete')
+        app.renderGameSummaryTable('away-team', this.awayTeam.name)
+        app.renderGameSummaryTable('home-team', this.homeTeam.name)
 
         // Away Team
         const awayNameBoxes = document.querySelectorAll('#away-team td.batter-name')

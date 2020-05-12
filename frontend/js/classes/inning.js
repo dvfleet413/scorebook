@@ -15,7 +15,7 @@ class Inning {
     async checkRunners(currentGame){
         const runners = currentGame.currentInning.atBats.filter(runner => runner.baseReached > 0 && runner.baseReached < 4)
         for (let i = 0; i < runners.length; i++){
-            await App.renderCheckRunnerForm(runners[i])
+            await app.renderCheckRunnerForm(runners[i])
         }
     }
 }

@@ -25,28 +25,27 @@ class App {
             })
     }
 
-
     // General DOM Manipulation
-    static assignH1AndTitle(heading, title = 'Scorebook'){
+    assignH1AndTitle(heading, title = 'Scorebook'){
         document.getElementById('title').innerHTML = `<h1>${heading}</h1>`
         document.querySelector('title').innerText = title
     }
 
-    static clearMain(){
+    clearMain(){
         const main = document.querySelector('div.main')
         main.innerHTML = ''
     }
 
-    static appendToMain(element){
+    appendToMain(element){
         const main = document.querySelector('div.main')
         main.appendChild(element)
     }
 
     //DOM manipulation related to Game Class
-    static renderGameSummaryTable(id, title){
+    renderGameSummaryTable(id, title){
         const tableTitle = document.createElement('h2')
         tableTitle.innerText = title;
-        App.appendToMain(tableTitle)
+        app.appendToMain(tableTitle)
         const table = document.createElement('table')
         table.setAttribute('id', id)
         table.setAttribute('class', 'at-bat')
@@ -71,19 +70,19 @@ class App {
             }
             table.appendChild(row)
         }
-        App.appendToMain(table)
+        app.appendToMain(table)
     }
 
     // DOM manipulation related to Inning Class
     renderInningInterface(){
-        App.clearMain()
-        App.assignH1AndTitle(`${this.currentGame.currentInning.numberDescription} - ${this.currentGame.currentInning.team.name}`, `Scorebook`)
+        app.clearMain()
+        app.assignH1AndTitle(`${this.currentGame.currentInning.numberDescription} - ${this.currentGame.currentInning.team.name}`, `Scorebook`)
         const table = document.createElement('table')
         table.setAttribute('class', 'at-bat')
-        App.appendToMain(table)
+        app.appendToMain(table)
     }
 
-    static renderCheckRunnerForm(runner){
+    renderCheckRunnerForm(runner){
         return new Promise((resolve, reject) => {
             let selectFieldOptions
             if (runner.baseReached == 1){
@@ -141,6 +140,13 @@ class App {
     }
 
     // DOM manipulation related to the AtBat Class
+    renderAtBatInterface(){
+        app.renderAtBatSquares()
+        app.renderCurrentAtBatSquare()
+        app.renderAtBatButtons()
+        app.renderAtBatFormContainer()
+    }
+
     renderAtBatSquares(){
         const table = document.querySelector('table.at-bat')
         this.currentGame.currentInning.atBats.forEach((atBat, index) => {
@@ -204,13 +210,13 @@ class App {
             this.renderOutForm()
         })
         colTwo.appendChild(outBtn)
-        App.appendToMain(row)
+        app.appendToMain(row)
     }
 
     renderAtBatFormContainer(){
         const atBatFormContainer = document.createElement('div')
         atBatFormContainer.setAttribute('id', 'at-bat-submit')
-        App.appendToMain(atBatFormContainer)
+        app.appendToMain(atBatFormContainer)
     }
 
     renderHitForm(){
@@ -248,9 +254,9 @@ class App {
             }
             await this.currentGame.currentInning.checkRunners(this.currentGame)
             this.currentGame.currentInning.atBats.push(newAtBat)
-            App.clearMain()
+            app.clearMain()
             app.renderInningInterface()
-            AtBat.renderAtBatInterface()
+            app.renderAtBatInterface()
         })
         form.appendChild(atBatSubmitBtn)
     
@@ -296,9 +302,9 @@ class App {
                 this.currentGame.summarize()
             }
             else {
-                App.clearMain()
+                app.clearMain()
                 app.renderInningInterface()
-                AtBat.renderAtBatInterface()
+                app.renderAtBatInterface()
             }
         })
         form.appendChild(outSubmitBtn)
