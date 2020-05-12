@@ -255,12 +255,6 @@ class App {
         atBatSubmitBtn.setAttribute('class', "btn btn-dark")
         atBatSubmitBtn.addEventListener('click', async (e) => {
             e.preventDefault()
-            if (this.currentGame.teamAtBat.currentBatterIndex < 8){
-                this.currentGame.teamAtBat.currentBatterIndex += 1;
-            }
-            else {
-                this.currentGame.teamAtBat.currentBatterIndex = 0;
-            }
             const result = document.getElementById('hit-options').value
             const newAtBat = new AtBat(this.currentGame.currentBatter)
             if (result == 'BB'){
@@ -273,6 +267,12 @@ class App {
             }
             await this.currentGame.currentInning.checkRunners(this.currentGame)
             this.currentGame.currentInning.atBats.push(newAtBat)
+            if (this.currentGame.teamAtBat.currentBatterIndex < 8){
+                this.currentGame.teamAtBat.currentBatterIndex += 1;
+            }
+            else {
+                this.currentGame.teamAtBat.currentBatterIndex = 0;
+            }
             app.clearMain()
             app.renderInningInterface()
             app.renderAtBatInterface()
@@ -299,17 +299,17 @@ class App {
         outSubmitBtn.setAttribute('class', "btn btn-dark")
         outSubmitBtn.addEventListener('click', async (e) => {
             e.preventDefault()
+            const newAtBat = new AtBat(this.currentGame.currentBatter)
+            newAtBat.outCode = document.getElementById('out-code-options').value
+            this.currentGame.currentInning.outs += 1
+            newAtBat.outNumber = this.currentGame.currentInning.outs
+            this.currentGame.currentInning.atBats.push(newAtBat)
             if (this.currentGame.teamAtBat.currentBatterIndex < 8){
                 this.currentGame.teamAtBat.currentBatterIndex += 1;
             }
             else {
                 this.currentGame.teamAtBat.currentBatterIndex = 0;
             }
-            const newAtBat = new AtBat(this.currentGame.currentBatter)
-            newAtBat.outCode = document.getElementById('out-code-options').value
-            this.currentGame.currentInning.outs += 1
-            newAtBat.outNumber = this.currentGame.currentInning.outs
-            this.currentGame.currentInning.atBats.push(newAtBat)
             if (this.currentGame.currentInning.outs == 3){ 
                 this.currentGame.changeSides()
             }
