@@ -5,21 +5,8 @@ class Team {
         this.currentBatterIndex = currentBatterIndex
     }
 
-    getPlayers(){
-        const url = 'http://localhost:3000/teams'
-        return fetch(url)
-            .then(response => {
-                return response.json()
-            })
-            .then(json => {
-                const team = json.data.filter(element => element.attributes.name == this.name)[0]
-                const playerIds = team.relationships.players.data.map(element => element.id)
-                json.included.forEach(player => {
-                    if (playerIds.includes(player.id)){
-                        this.players.push(new Player(player.attributes.name, player.attributes.number, player.attributes.position))
-                    }
-                })
-            })
+    async getPlayers(){
+        await adapter.getPlayers(this)
     }
 
     static renderTeamSelect(name, target){
