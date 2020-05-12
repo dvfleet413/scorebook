@@ -89,13 +89,13 @@ class Game {
         const homeLabel = document.createElement('p')
         homeLabel.innerText = "Home Team"
         form.appendChild(homeLabel)
-        Team.renderTeamSelect('home-team', homeLabel)
+        app.renderTeamSelect('home-team', homeLabel)
     
         // Add away team datalist
         const awayLabel = document.createElement('p')
         awayLabel.innerText = "Away Team"
         form.appendChild(awayLabel)
-        Team.renderTeamSelect('away-team', awayLabel)
+        app.renderTeamSelect('away-team', awayLabel)
     
         // Add Start Button
         const submitBtn = document.createElement('input')
