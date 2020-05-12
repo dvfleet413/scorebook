@@ -4,7 +4,7 @@ let app = new App()
 let adapter = new Adapter("http://localhost:3000")
 
 async function getGames(){
-    await adapter.fetchGames()
+    await adapter.getGames()
     app.renderGameList()
 }
 

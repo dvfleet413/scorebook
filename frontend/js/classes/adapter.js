@@ -3,7 +3,7 @@ class Adapter {
         this.url = url
     }
 
-    fetchGames(){
+    getGames(){
         return new Promise((resolve, reject) => {
             const url = `${this.url}/games`
             fetch(url)
@@ -92,6 +92,7 @@ class Adapter {
             })
     }
 
+    // Need to refactor Team.renderTeamSelect...these can probably be combined uning app.teams attribute
     getPlayers(team){
         const url = `${this.url}/teams`
         return fetch(url)
