@@ -105,12 +105,8 @@ class Game {
         
         submitBtn.addEventListener('click', async (e) => {
             e.preventDefault();
-            const homeTeam = new Team(document.querySelector("select[name='home-team']").value)
-            await homeTeam.getPlayers()
-            const awayTeam = new Team(document.querySelector("select[name='away-team']").value)
-            await awayTeam.getPlayers()
-            this.homeTeam = homeTeam;
-            this.awayTeam = awayTeam;
+            this.homeTeam = app.teams.find(team => team.name == document.querySelector("select[name='home-team']").value)
+            this.awayTeam = app.teams.find(team => team.name == document.querySelector("select[name='away-team']").value)
             let topFirst = new Inning(1.0, this.awayTeam)
             this.innings.push(topFirst)
             app.renderInningInterface()
