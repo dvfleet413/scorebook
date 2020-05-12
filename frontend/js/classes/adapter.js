@@ -11,8 +11,7 @@ class Adapter {
                     return response.json()
                 })
                 .then(json => {
-                    // want to instantiate new Game objects for each game record fetched and add them to app.games
-                    // Build blank Game Object
+                    // Build empty Game object
                     let gameToAdd = new Game()
                     // Build Team and Player Objects to add to Game
                     for(let i = 0; i < json.data.length; i++){
