@@ -5,6 +5,7 @@
 class App {
     constructor(){
         this.games = []
+        this.teams = []
     }
 
     get currentGame(){

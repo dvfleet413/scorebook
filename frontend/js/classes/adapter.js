@@ -93,6 +93,25 @@ class Adapter {
     }
 
     // Need to refactor Team.renderTeamSelect...these can probably be combined uning app.teams attribute
+    getTeams(){
+        const url = `${this.url}/teams`
+        fetch(url)
+            .then(response => {
+                return response.json()
+            })
+            .then(json => {
+                json.data.forEach(team =>{
+                    const teamToAdd = new Team(team.attributes.name)
+                    const playerIds = team.relationships.players.data.map(element => element.id)
+                    json.included.forEach(player => {
+                        if (playerIds.includes(player.id)){
+                            teamToAdd.players.push(new Player(player.attributes.name, player.attributes.number, player.attributes.position))
+                        }
+                    })
+                    app.teams.push(teamToAdd)
+                })
+            })
+    }
     getPlayers(team){
         const url = `${this.url}/teams`
         return fetch(url)
