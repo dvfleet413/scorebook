@@ -46,7 +46,7 @@ class App {
     renderGameSummaryTable(id, title){
         const tableTitle = document.createElement('h2')
         tableTitle.innerText = title;
-        app.appendToMain(tableTitle)
+        this.appendToMain(tableTitle)
         const table = document.createElement('table')
         table.setAttribute('id', id)
         table.setAttribute('class', 'at-bat')
@@ -71,7 +71,7 @@ class App {
             }
             table.appendChild(row)
         }
-        app.appendToMain(table)
+        this.appendToMain(table)
     }
 
     // DOM manipulation related to Team Class
@@ -94,11 +94,11 @@ class App {
 
     // DOM manipulation related to Inning Class
     renderInningInterface(){
-        app.clearMain()
-        app.assignH1AndTitle(`${this.currentGame.currentInning.numberDescription} - ${this.currentGame.currentInning.team.name}`, `Scorebook`)
+        this.clearMain()
+        this.assignH1AndTitle(`${this.currentGame.currentInning.numberDescription} - ${this.currentGame.currentInning.team.name}`, `Scorebook`)
         const table = document.createElement('table')
         table.setAttribute('class', 'at-bat')
-        app.appendToMain(table)
+        this.appendToMain(table)
     }
 
     renderCheckRunnerForm(runner){
@@ -160,10 +160,10 @@ class App {
 
     // DOM manipulation related to the AtBat Class
     renderAtBatInterface(){
-        app.renderAtBatSquares()
-        app.renderCurrentAtBatSquare()
-        app.renderAtBatButtons()
-        app.renderAtBatFormContainer()
+        this.renderAtBatSquares()
+        this.renderCurrentAtBatSquare()
+        this.renderAtBatButtons()
+        this.renderAtBatFormContainer()
     }
 
     renderAtBatSquares(){
@@ -229,13 +229,13 @@ class App {
             this.renderOutForm()
         })
         colTwo.appendChild(outBtn)
-        app.appendToMain(row)
+        this.appendToMain(row)
     }
 
     renderAtBatFormContainer(){
         const atBatFormContainer = document.createElement('div')
         atBatFormContainer.setAttribute('id', 'at-bat-submit')
-        app.appendToMain(atBatFormContainer)
+        this.appendToMain(atBatFormContainer)
     }
 
     renderHitForm(){
