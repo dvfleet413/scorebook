@@ -10,6 +10,12 @@ async function getGames(){
 
 getGames()
 
+async function getTeams(){
+    await adapter.getTeams()
+}
+
+getTeams()
+
 
 const newGameBtn = document.getElementById('new-game-button')
 newGameBtn.addEventListener('click', (e) => {

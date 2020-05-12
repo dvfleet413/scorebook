@@ -16,20 +16,13 @@ class Team {
         const teamInput = document.createElement('select')
         teamInput.setAttribute('id', 'team-names')
         teamInput.setAttribute('name', name)
-    
-        // GET /teams, use Promise to add option elements to datalist, then add entire input to DOM
-        fetch(url)
-            .then(function(response){
-                return response.json()
-            })
-            .then(function(json){
-                json.data.forEach(function(element){
-                    let option = document.createElement('option')
-                    option.setAttribute('value', element.attributes.name)
-                    option.innerText = element.attributes.name
-                    teamInput.append(option)
-                })
-                target.appendChild(teamInput)
-            })
+        // Create option elements for input field
+        app.teams.forEach(team => {
+            let option = document.createElement('option')
+            option.setAttribute('value', team.name)
+            option.innerText = team.name
+            teamInput.append(option)
+        })
+        target.appendChild(teamInput)
     }
 }
