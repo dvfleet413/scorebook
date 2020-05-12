@@ -12,7 +12,7 @@ class AtBat {
         return this.batter._name
     }
 
-    htmlRepresentation(){
+    get htmlRepresentation(){
         let result = `<table><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td class="out">`
         if (this.outNumber){ result += `<span class='out-number'>${this.outNumber}</span>`}
         result += `</td><td></td><td class='result'>`
@@ -40,13 +40,6 @@ class AtBat {
     static newHTML(){
         return `<table id='current-at-bat'><tr><td></td><td></td><td></td></tr><tr><td></td><td class='out-code'></td><td></td></tr><tr><td class="out"><span></span></td><td></td><td class='result'></td></tr></table><div class='diamond'></div><div class='out-code'><span></span></div><br><br>`
     }
-
-    // static renderAtBatInterface(){
-    //     app.renderAtBatSquares()
-    //     app.renderCurrentAtBatSquare()
-    //     app.renderAtBatButtons()
-    //     app.renderAtBatFormContainer()
-    // }
 
     static hitOptions(){
         return `

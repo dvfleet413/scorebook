@@ -152,7 +152,7 @@ class App {
         this.currentGame.currentInning.atBats.forEach((atBat, index) => {
             const atBatSquare = document.createElement('div')
             atBatSquare.setAttribute('class', 'at-bat')
-            atBatSquare.innerHTML = atBat.htmlRepresentation()
+            atBatSquare.innerHTML = atBat.htmlRepresentation
             const tableRow = document.createElement('tr')
             tableRow.setAttribute('id', `batter-${index}`)
             const nameTd = document.createElement('td')

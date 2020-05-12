@@ -162,7 +162,7 @@ class Game {
                 const target = document.getElementById(`away-team-batter-${battingOrderIndex}-inning-${inning.number}`)
                 const atBatSquare = document.createElement('div')
                 atBatSquare.setAttribute('class', 'at-bat')
-                atBatSquare.innerHTML = atBat.htmlRepresentation()
+                atBatSquare.innerHTML = atBat.htmlRepresentation
                 target.appendChild(atBatSquare)
             })
         })
@@ -179,7 +179,7 @@ class Game {
                 const target = document.getElementById(`home-team-batter-${battingOrderIndex}-inning-${Math.floor(inning.number)}`)
                 const atBatSquare = document.createElement('div')
                 atBatSquare.setAttribute('class', 'at-bat')
-                atBatSquare.innerHTML = atBat.htmlRepresentation()
+                atBatSquare.innerHTML = atBat.htmlRepresentation
                 target.appendChild(atBatSquare)
             })
         })
