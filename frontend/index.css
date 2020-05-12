@@ -18,6 +18,16 @@
     background-color: white !important;
 }
 
+div.hidden {
+    opacity: 0;
+    transition: opacity .6s;
+}
+
+div.visible {
+    opacity: 1;
+    transition: opacity .6s;
+}
+
 .at-bat {
     width: 6em;
     height: 6em;
@@ -135,8 +145,6 @@ span.out-number {
 .empty-cell {
     opacity: 30%;
 }
-
-
 
 div#at-bat-submit {
     text-align: center;

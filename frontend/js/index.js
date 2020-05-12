@@ -29,11 +29,11 @@ about.addEventListener('click', (e) => {
     const par = document.getElementById('about-par')
     showAbout = !showAbout
     if (showAbout){
-        par.style.display = 'block'
+        par.setAttribute('class', 'visible')
         e.target.setAttribute('class', 'fas fa-caret-down')
     }
     else {
-        par.style.display = 'none'
+        par.setAttribute('class', 'hidden')
         e.target.setAttribute('class', 'fas fa-caret-right')
     }
 })
