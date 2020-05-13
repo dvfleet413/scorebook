@@ -78,9 +78,9 @@ class Game {
         return result
     }
 
-    start(){
+    async start(){
         app.assignH1AndTitle('Start a New Game', 'Scorebook - New Game')
-        app.clearMain()
+        await app.clearMain()
     
         //Set up form
         const form = document.createElement('form')
@@ -109,7 +109,7 @@ class Game {
             this.awayTeam = app.teams.find(team => team.name == document.querySelector("select[name='away-team']").value)
             let topFirst = new Inning(1.0, this.awayTeam)
             this.innings.push(topFirst)
-            app.renderInningInterface()
+            await app.renderInningInterface()
             app.renderAtBatInterface()
         })
         form.appendChild(submitBtn)
@@ -140,8 +140,8 @@ class Game {
         }
     }
 
-    summarize(){
-        app.clearMain()
+    async summarize(){
+        await app.clearMain()
         app.assignH1AndTitle(`Final: ${this.awayTeam.name} - ${this.awayTeamRuns}, ${this.homeTeam.name} - ${this.homeTeamRuns}`, 'Scorebook - Game Complete')
         app.renderGameSummaryTable('away-team', this.awayTeam.name)
         app.renderGameSummaryTable('home-team', this.homeTeam.name)

@@ -33,8 +33,14 @@ class App {
     }
 
     clearMain(){
-        const main = document.querySelector('main')
-        main.innerHTML = ''
+        return new Promise((resolve) => {
+            const main = document.querySelector('main')
+            main.style.opacity = 0;
+            setTimeout(() => {
+                main.innerHTML = ''
+                main.style.opacity = 1
+                resolve()}, 600)
+            })
     }
 
     appendToMain(element){
@@ -93,8 +99,8 @@ class App {
     }
 
     // DOM manipulation related to Inning Class
-    renderInningInterface(){
-        this.clearMain()
+    async renderInningInterface(){
+        await this.clearMain()
         this.assignH1AndTitle(`${this.currentGame.currentInning.numberDescription} - ${this.currentGame.currentInning.team.name}`, `Scorebook`)
         const table = document.createElement('table')
         table.setAttribute('class', 'at-bat')
@@ -238,7 +244,7 @@ class App {
         this.appendToMain(atBatFormContainer)
     }
 
-    renderHitForm(){
+    async renderHitForm(){
         const container = document.getElementById('at-bat-submit')
         container.innerHTML = ''
         // Build Form for AtBat Result
@@ -273,8 +279,7 @@ class App {
             else {
                 this.currentGame.teamAtBat.currentBatterIndex = 0;
             }
-            app.clearMain()
-            app.renderInningInterface()
+            await app.renderInningInterface()
             app.renderAtBatInterface()
         })
         form.appendChild(atBatSubmitBtn)
@@ -282,7 +287,7 @@ class App {
         container.appendChild(form)
     }
 
-    renderOutForm(){
+    async renderOutForm(){
         const container = document.getElementById('at-bat-submit')
         container.innerHTML = ''
         // Build Form for AtBat Result
@@ -321,8 +326,7 @@ class App {
                 this.currentGame.summarize()
             }
             else {
-                app.clearMain()
-                app.renderInningInterface()
+                await app.renderInningInterface()
                 app.renderAtBatInterface()
             }
         })

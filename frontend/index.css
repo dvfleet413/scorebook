@@ -18,6 +18,10 @@
     background-color: white !important;
 }
 
+main {
+    transition: opacity .6s;
+}
+
 div.hidden {
     opacity: 0;
     transition: opacity .6s;
@@ -26,6 +30,10 @@ div.hidden {
 div.visible {
     opacity: 1;
     transition: opacity .6s;
+}
+
+.fa-caret-right {
+    transition: transform .6s;
 }
 
 .at-bat {
