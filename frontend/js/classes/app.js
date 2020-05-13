@@ -9,7 +9,7 @@ class App {
     }
 
     get currentGame(){
-        if (!this.games.slice(-1)[0].isOver) { return this.games.slice(-1)[0] }
+        return this.games.slice(-1)[0]
     }
 
     addGame(game){

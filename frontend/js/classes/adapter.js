@@ -11,28 +11,31 @@ class Adapter {
                     return response.json()
                 })
                 .then(json => {
+                    console.log(json)
                     // Build empty Game object
                     let gameToAdd = new Game()
                     // Build Team and Player Objects to add to Game
                     for(let i = 0; i < json.data.length; i++){
                         const homeTeamId = json['data'][i]['relationships']['homeTeam']['data']['id']
                         const homeTeamData = json['included'].find((element) => element.type == 'team' && element.id == homeTeamId)
-                        gameToAdd.homeTeam = new Team (homeTeamData['attributes']['name'])
-                        const homeTeamPlayerIds = homeTeamData['relationships']['players']['data'].map(element => element.id)
-                        const homeTeamPlayersArray = json['included'].filter(element => element.type == 'player' && homeTeamPlayerIds.includes(element.id))
-                        homeTeamPlayersArray.forEach(player => {
-                            const newPlayer = new Player(player.attributes.name, player.attributes.number, player.attributes.position)
-                            gameToAdd.homeTeam.players.push(newPlayer)
-                        })
+                        // gameToAdd.homeTeam = new Team (homeTeamData['attributes']['name'])
+                        gameToAdd.homeTeam = app.teams.find(team => team.name == homeTeamData['attributes']['name'])
+                        // const homeTeamPlayerIds = homeTeamData['relationships']['players']['data'].map(element => element.id)
+                        // const homeTeamPlayersArray = json['included'].filter(element => element.type == 'player' && homeTeamPlayerIds.includes(element.id))
+                        // homeTeamPlayersArray.forEach(player => {
+                        //     const newPlayer = new Player(player.attributes.name, player.attributes.number, player.attributes.position)
+                        //     gameToAdd.homeTeam.players.push(newPlayer)
+                        // })
                         const awayTeamId = json['data'][i]['relationships']['awayTeam']['data']['id']
                         const awayTeamData = json['included'].find((element) => element.type == 'team' && element.id == awayTeamId)
-                        gameToAdd.awayTeam = new Team (awayTeamData['attributes']['name'])
-                        const awayTeamPlayerIds = awayTeamData['relationships']['players']['data'].map(element => element.id)
-                        const awayTeamPlayersArray = json['included'].filter(element => element.type == 'player' && awayTeamPlayerIds.includes(element.id))
-                        awayTeamPlayersArray.forEach(player => {
-                            const newPlayer = new Player(player.attributes.name, player.attributes.number, player.attributes.position)
-                            gameToAdd.awayTeam.players.push(newPlayer)
-                        })
+                        // gameToAdd.awayTeam = new Team (awayTeamData['attributes']['name'])
+                        gameToAdd.awayTeam = app.teams.find(team => team.name == awayTeamData['attributes']['name'])
+                        // const awayTeamPlayerIds = awayTeamData['relationships']['players']['data'].map(element => element.id)
+                        // const awayTeamPlayersArray = json['included'].filter(element => element.type == 'player' && awayTeamPlayerIds.includes(element.id))
+                        // awayTeamPlayersArray.forEach(player => {
+                        //     const newPlayer = new Player(player.attributes.name, player.attributes.number, player.attributes.position)
+                        //     gameToAdd.awayTeam.players.push(newPlayer)
+                        // })
                         gameToAdd.homeTeamRuns = json['data'][i]['attributes']['homeTeamRuns']
                         gameToAdd.awayTeamRuns = json['data'][i]['attributes']['awayTeamRuns']
                         // Build Inning Objects to add to Game

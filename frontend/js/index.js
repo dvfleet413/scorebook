@@ -3,19 +3,18 @@ let showAbout = false
 let app = new App()
 let adapter = new Adapter("http://localhost:3000")
 
-async function getGames(){
-    await adapter.getGames()
-    app.renderGameList()
-}
-
-getGames()
-
 async function getTeams(){
     await adapter.getTeams()
 }
 
 getTeams()
 
+async function getGames(){
+    await adapter.getGames()
+    app.renderGameList()
+}
+
+getGames()
 
 const newGameBtn = document.getElementById('new-game-button')
 newGameBtn.addEventListener('click', (e) => {
