@@ -12,6 +12,7 @@ class Adapter {
                 })
                 .then(json => {
                     json.data.forEach(game => {
+                        // Create emply Game object to work with
                         let gameToAdd = new Game()
                         const homeTeamId = game['relationships']['homeTeam']['data']['id']
                         const homeTeamData = json['included'].find((element) => element.type == 'team' && element.id == homeTeamId)
@@ -24,6 +25,7 @@ class Adapter {
                         // Build Inning Objects to add to Game
                         const inningIds = game['relationships']['innings']['data'].map(inning => inning.id)
                         const inningsArray = json['included'].filter(element => element.type == 'inning' && inningIds.includes(element.id))
+                        // Add associated AtBats to Inning, then add completed Inning to Game
                         inningsArray.forEach(inning => {
                             const newInning = new Inning(inning['attributes']['number'])
                             if (newInning.number % 1 == 0){newInning.team = gameToAdd.awayTeam}
@@ -72,7 +74,6 @@ class Adapter {
                 return response.json()
             })
             .then(function(json){
-                console.log("Successful POST")
             })
             .catch(function(error){
                 console.log(error.message)

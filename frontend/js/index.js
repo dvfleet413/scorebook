@@ -1,5 +1,4 @@
 let showAbout = false
-
 let app = new App()
 let adapter = new Adapter("http://localhost:3000")
 
