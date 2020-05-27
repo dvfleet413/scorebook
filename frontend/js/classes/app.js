@@ -26,6 +26,31 @@ class App {
             })
     }
 
+    renderFilterTextForm(){
+        const filterForm = document.createElement('form')
+        filterForm.innerHTML = `<input type='text' /><input type='submit' value='Filter Teams' />`
+        filterForm.addEventListener('submit', handleFilterSubmit)
+        document.querySelector('#saved-games').appendChild(filterForm)
+    }
+
+    renderFilterSelectForm(){
+        const filterForm = document.createElement('form')
+        app.renderTeamSelect('team-filter', filterForm)
+        filterForm.innerHTML += `<input type='submit' value='Filter Teams' />`
+        filterForm.addEventListener('submit', handleFilterSubmit)
+        document.querySelector('#saved-games').appendChild(filterForm)
+    }
+
+    filteredGameList(games){
+            const gameList = document.getElementById('game-list')
+            gameList.innerHTML = ''
+            games.forEach(game => {
+                gameList.innerHTML += `<li><a href="#" id="${game.id}-game" onclick="handleClick()">
+                ${game.date} - ${game.awayTeam.name} ${game.awayTeamRuns} - ${game.homeTeam.name} ${game.homeTeamRuns}
+                    </a></li>`
+            })
+    }
+
     // General DOM Manipulation
     assignH1AndTitle(heading, title = 'Scorebook'){
         document.getElementById('title').innerHTML = `<h1>${heading}</h1>`

@@ -1,6 +1,6 @@
 let showAbout = false
 let app = new App()
-let adapter = new Adapter("http://localhost:3000")
+let adapter = new Adapter("http://scorebook-api.herokuapp.com")
 
 async function getTeams(){
     await adapter.getTeams()
@@ -8,9 +8,17 @@ async function getTeams(){
 
 getTeams()
 
+const handleFilterSubmit = (event) => {
+    event.preventDefault()
+    const games = app.games.filter(game => game.homeTeam.name.toLowerCase().includes(event.target[0].value.toLowerCase()) || game.awayTeam.name.toLowerCase().includes(event.target[0].value.toLowerCase()))
+    app.filteredGameList(games)
+}
+
 async function getGames(){
     await adapter.getGames()
     app.renderGameList()
+    app.renderFilterTextForm()
+    app.renderFilterSelectForm()
 }
 
 getGames()
